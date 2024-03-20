@@ -1383,6 +1383,12 @@ Name = Scientist
 Gender = Male
 BaseMoney = 32
 #-------------------------------
+[SELFINSERTLUNA]
+Name = Modder
+Gender = Female
+BaseMoney = 100
+BattleBGM = Battle luna
+#-------------------------------
 [SHADOWMAVIS]
 Name = Shadow
 Gender = Female

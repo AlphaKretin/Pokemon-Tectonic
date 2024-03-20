@@ -7950,3 +7950,17 @@ Pokemon = TOUCANNON,70
 Pokemon = MILTANK,70
     AbilityIndex = 0 # Thick Fat
     Item = LEFTOVERS
+#-------------------------------
+[SELFINSERTLUNA,Luna]
+Policies = HAIL_TEAM
+Flags = NoPerfect
+Pokemon = MNOCTOWL,70
+    Name = Mineru
+    Gender = female
+    AbilityIndex = 1 # Winter Insulation
+    Item = LIGHTCLAY
+Pokemon = HDECIDUEYE,70
+    Name = Yuki
+    Gender = female
+    AbilityIndex = 0 # Taiga Trekker
+    Item = GRASSGEM
