@@ -2966,3 +2966,9 @@ Bicycle = false
 Outdoor = false
 ShowArea = false
 Bicycle = false
+#-------------------------------
+[424]
+# Simulated House
+Outdoor = false
+ShowArea = false
+Bicycle = false
