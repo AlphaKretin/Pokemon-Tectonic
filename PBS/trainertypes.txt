@@ -1389,6 +1389,11 @@ Gender = Female
 BaseMoney = 100
 BattleBGM = Battle luna
 #-------------------------------
+[SELFINSERTJOAN]
+Name = Friend
+Gender = Female
+BaseMoney = 100
+#-------------------------------
 [SHADOWMAVIS]
 Name = Shadow
 Gender = Female
