@@ -8160,6 +8160,12 @@ Pokemon = RUNERIGUS,70
     Item = ICYROCK
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 20,0,10,0,0,20
+Pokemon = ABSOLUS,70
+    Moves = FUTURESIGHT,LOOMINGWINTER,DOOMDESIRE,DIVINATION
+    AbilityIndex = 0 # Bad Omen
+    Item = BABIRIBERRY
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,20,5,0,20,5
 Pokemon = CRYOGONAL,70
     Moves = BLIZZARD,SIGNALBEAM,DIAMONDFORCE,ICENINEWALL
     AbilityIndex = 0 # Levitate
@@ -8173,12 +8179,6 @@ Pokemon = SPIRITOMB,70
     Item = LEFTOVERS
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 20,0,20,0,0,10
-Pokemon = ABSOLUS,70
-    Moves = FUTURESIGHT,LOOMINGWINTER,DOOMDESIRE,DIVINATION
-    AbilityIndex = 0 # Bad Omen
-    Item = BABIRIBERRY
-    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
-    EV = 20,20,5,0,20,5
 Pokemon = CURSOLA,70
     Moves = COLDSHOULDER,LEECHLIFE,TRAMPLE,HAIL
     AbilityIndex = 0 # Ecto-Particles
@@ -8191,6 +8191,6 @@ Pokemon = MZANGOOSE,70
     Moves = COLDSHOULDER,BRICKBREAK,POISONJAB,ROCKSLIDE
     AbilityIndex = 0 # Served Cold
     Item = CRYSTALVEIL
-    ItemType = GHOST
+    ItemType = GRASS
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,20,0,20,20,0
