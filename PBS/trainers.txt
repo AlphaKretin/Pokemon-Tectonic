@@ -8194,3 +8194,42 @@ Pokemon = MZANGOOSE,70
     ItemType = GRASS
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,20,0,20,20,0
+#-------------------------------
+[SELFINSERTVICE,Vice]
+Flags = NoPerfect
+Pokemon = EXCADRILL,70
+    Moves = EARTHQUAKE,METEORMASH,ROCKSLIDE,SWORDSDANCE
+    AbilityIndex = 1 # Juggernaut
+    Item = SHELLBELL
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = NOIVERN,70
+    Moves = SCOUR,AIRSLASH,HEATWAVE,GIGADRAIN
+    AbilityIndex = 0 # Terrorize
+    Item = LUCKHERB
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = SNEASLER,70
+    Moves = DIRECLAW,DRAINPUNCH,INFERNOIMPACT,BULKUP
+    AbilityIndex = 1 # Frustrate
+    Item = PROXYFIST
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = ZANGOOSE,70
+    Moves = PALEBLADE,PSYCHOSCISSION,NIGHTSLASH,DEEPBREATHING
+    AbilityIndex = 1 # Rending Claws
+    Item = SCOPELENS
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = LEAVANNY,70
+    Moves = LEECHLIFE,LEAFBLADE,INFERNOIMPACT,ELECTROSLASH
+    AbilityIndex = 0 # Cold Reception
+    Item = WHETSTONE
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = GRIMMSNARL,70
+    Moves = FALSESURRENDER,PLAYROUGH,STOMPINGTANTRUM,FAKEOUT
+    AbilityIndex = 1 # Ruinous
+    Item = FOCUSSASH
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
