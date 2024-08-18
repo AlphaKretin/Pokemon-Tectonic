@@ -1,0 +1,7 @@
+#-------------------------------
+[931]
+# Illusory Paradise
+Outdoor = true
+ShowArea = false
+Bicycle = true
+#-------------------------------
