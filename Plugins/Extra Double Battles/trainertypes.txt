@@ -23,3 +23,9 @@ Gender = Female
 BaseMoney = 100
 BattleBGM = Battle cynthia
 #-------------------------------
+[LEGACYSTONE]
+Name = Champion
+Gender = Male
+BaseMoney = 100
+BattleBGM = Battle stone
+#-------------------------------

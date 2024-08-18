@@ -326,3 +326,42 @@ Pokemon = GARCHOMP,70
     Item = YACHEBERRY
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,20,0,20,20,0
+#-------------------------------
+[LEGACYSTONE,Steven]
+Flags = NoPerfect
+Pokemon = SKARMORY,70
+    Moves = FEATHERWARD,TAILWIND,ROOST,DRILLPECK
+    AbilityIndex = 0 # Mental Block
+    Item = LEFTOVERS
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,0,20,0,0,20
+Pokemon = CLAYDOL,70
+    Moves = LEYLINEBURST,REFLECT,LIGHTSCREEN,EXPLOSION
+    AbilityIndex = 1 # Magic Bounce
+    Item = LIGHTCLAY
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,0,20,0,0,20
+Pokemon = AGGRON,70
+    Moves = PLANETCRACKER,HEAVYSLAM,STOMPINGTANTRUM,REND
+    AbilityIndex = 0 # Rock Head
+    Item = SKILLHERB
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,10,0,20,10
+Pokemon = CRADILY,70
+    Moves = LEECHSEED,GIGADRAIN,DIAMONDFORCE,SYNTHESIS
+    AbilityIndex = 0 # Rooted
+    Item = BIGROOT
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,0,20,0,0,20
+Pokemon = ARMALDO,70
+    Moves = UTURN,ROCKSLIDE,LUNGE,KNOCKOFF
+    AbilityIndex = 0 # Selective Scutes
+    Item = SHELLBELL
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 0,20,10,10,20,10
+Pokemon = METAGROSS,70
+    Moves = HEAVYSLAM,OMNISCIENTBLOW,BULLETPUNCH,BRICKBREAK
+    AbilityIndex = 1 # Optimized Alloy
+    Item = LIFEORB
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,10,0,20,10
