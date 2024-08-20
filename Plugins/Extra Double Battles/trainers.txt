@@ -249,6 +249,94 @@ Pokemon = MZANGOOSE,70
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,20,0,20,20,0
 #-------------------------------
+[SELFINSERTJOAN,Testuda]
+Flags = NoPerfect
+Pokemon = TANGROWTH,70
+    Shiny = yes
+    Moves = POWERWHIP,EARTHQUAKE,SMACKDOWN,AERIALACE
+    AbilityIndex = 0 # Late Bloomer
+    Item = ASSAULTVEST
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,20,0,0,20,10
+Pokemon = HOOPA,70
+	Form = 1 # Unbound Form
+    Moves = HYPERSPACEFURY,DREAMABSORB,DRAINPUNCH,ODDROOM
+    AbilityIndex = 0 # Subspace Schism
+    Item = REINFORCINGROD
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,20,10,0,20,0
+Pokemon = RUBARIOR,70
+    Moves = PROFANE,PAINSPLIT,GEMSEAL,DESTINYBOND
+    AbilityIndex = 1 # Prankster
+    Item = SKILLHERB
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,0,20,0,0,20
+Pokemon = WISHIWASHI,70
+    Moves = RUPTURESPRING,EBBFLOW,HYDROCANNON,RAINSTORM
+    AbilityIndex = 0 # Schooling
+    Item = WATERBALLOON
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,10,15,0,10,5
+Pokemon = EELEKTROSS,70
+    Moves = STORMDRIVE,DEVOURWHOLE,LEECHLIFE,UTURN
+    AbilityIndex = 0 # Levitate
+    Item = STRIKEVEST
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,15,0,0,15,15
+Pokemon = GARDEVOIR,70
+	Shiny = yes
+    Gender = female
+    Moves = DAZZLINGGLEAM,FACADE,OCCULTATION,DISCHARGE
+    AbilityIndex = 0 # Arcane Finale
+    Item = CRYSTALVEIL
+    ItemType = NORMAL
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,15,5,20,15,0
+#-------------------------------
+[SELFINSERTJOAN,Ensisa]
+Flags = NoPerfect
+Policies = SANDSTORM_TEAM
+Pokemon = PIDGEOT,70
+    Moves = DUSTMACHPULSE,HEATWAVE,HALTINGCOLD,TAILWIND
+    AbilityIndex = 1 # Aeroshell
+    Item = REDCARD
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 15,20,5,5,20,5
+Pokemon = FLYGON,70
+    Moves = DEVOURINGDUST,GIGADRAIN,UTURN,SANDSTORM
+    AbilityIndex = 0 # Desert Spirit
+    Item = SMOOTHROCK
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,5,10,20,5
+Pokemon = MTANGROWTH,70
+    Moves = WAVEOFJADE,MIASMA,FOCUSBLAST,GRASSKNOT
+    AbilityIndex = 1 # Rock Body
+    Item = AIRBALLOON
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = PTEROFLYTE,70
+    Moves = ROCKWRECKER,PSYCHICFANGS,TAILWIND,SANDSTORM
+    AbilityIndex = 1 # Scoured Silhouette
+    Item = EJECTBUTTON
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = FLORGES,70
+	Form = 0 # Red Flower
+	Shiny = yes
+    Moves = LIGHTOFRUIN,MISTBURST,TERADRAIN,ENDEAVOR
+    AbilityIndex = 0 # Clover Song
+    Item = SKILLHERB
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 15,5,15,15,5,0
+Pokemon = GALLADE,70
+	Shiny = yes
+    Gender = female
+    Moves = HUMBLE,DRAINPUNCH,XSCISSOR,EARTHQUAKE
+    AbilityIndex = 0 # Heroic Finale
+    Item = STRIKEVEST
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+#-------------------------------
 [SELFINSERTVICE,Vice]
 Flags = NoPerfect
 Pokemon = EXCADRILL,70
