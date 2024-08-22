@@ -249,7 +249,7 @@ Pokemon = MZANGOOSE,70
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,20,0,20,20,0
 #-------------------------------
-[SELFINSERTJOAN,Testuda]
+[SELFINSERTTESTUDA,Testuda]
 Flags = NoPerfect
 Pokemon = TANGROWTH,70
     Shiny = yes
@@ -293,7 +293,7 @@ Pokemon = GARDEVOIR,70
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,15,5,20,15,0
 #-------------------------------
-[SELFINSERTJOAN,Ensisa]
+[SELFINSERTENSISA,Ensisa]
 Flags = NoPerfect
 Policies = SANDSTORM_TEAM
 Pokemon = PIDGEOT,70

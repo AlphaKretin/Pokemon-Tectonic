@@ -17,6 +17,18 @@ Gender = Unknown
 BaseMoney = 100
 BattleBGM = Battle vice
 #-------------------------------
+[SELFINSERTTESTUDA]
+Name = Lighthouse Keeper
+Gender = Female
+BaseMoney = 100
+BattleBGM = Battle testuda
+#-------------------------------
+[SELFINSERTENSISA]
+Name = Storm Chaser
+Gender = Female
+BaseMoney = 100
+BattleBGM = Battle joan
+#-------------------------------
 [LEGACYCYNTHIA]
 Name = Champion
 Gender = Female
