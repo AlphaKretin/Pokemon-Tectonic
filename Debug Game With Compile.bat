@@ -1,1 +1,0 @@
-start "" Game.exe debug compile

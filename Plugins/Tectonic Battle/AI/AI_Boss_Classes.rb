@@ -224,6 +224,18 @@ class PokeBattle_AI_DEOXYS < PokeBattle_AI_Boss
 end
 
 ##################################################
+# Calyrex and Mounts
+##################################################
+class PokeBattle_AI_SPECTRIER < PokeBattle_AI_Boss
+end
+
+class PokeBattle_AI_GLASTRIER < PokeBattle_AI_Boss
+end
+
+class PokeBattle_AI_CALYREX < PokeBattle_AI_Boss
+end
+
+##################################################
 # Other Legends
 ##################################################
 class PokeBattle_AI_GENESECT < PokeBattle_AI_Boss
@@ -892,10 +904,10 @@ class PokeBattle_AI_GARDEVOIR < PokeBattle_AI_Boss
     end
 end
 
-class PokeBattle_AI_Druddigon < PokeBattle_AI_Boss
+class PokeBattle_AI_DRUDDIGON < PokeBattle_AI_Boss
     def initialize(user, battle)
         super
-        @wholeRound += :OCCULTATION
+        @wholeRound.push(:OCCULTATION)
 
         @warnedIFFMove.add(:OCCULTATION, {
             :condition => proc { |_move, _user, _target, battle|
@@ -905,5 +917,13 @@ class PokeBattle_AI_Druddigon < PokeBattle_AI_Boss
                 _INTL("{1} is haloed in Dragon Energy!",user.pbThis)
             },
         })
+    end
+end
+
+class PokeBattle_AI_BELLOSSOM < PokeBattle_AI_Boss
+    def initialize(user, battle)
+        super
+        @firstTurnOnly.push(:HELPINGHAND)
+        @requiredMoves.push(:HELPINGHAND)
     end
 end

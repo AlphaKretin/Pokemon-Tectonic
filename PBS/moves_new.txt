@@ -1013,7 +1013,7 @@ TotalPP = 10
 Target = NearOther
 FunctionCode = TwoTurnAttackInvulnerableInSky
 Flags = CanProtect,CanMirrorMove
-Description = The user soars up high, then strikes on the second turn by dive bombing the target.
+Description = The user soars up high, becoming invulnerable, then strikes on the second turn by dive bombing the target.
 Animation = FLY
 #-------------------------------
 [DRAFT]
@@ -1481,7 +1481,7 @@ TotalPP = 10
 Target = NearOther
 FunctionCode = HealUserByThirdOfDamageDone
 Flags = CanProtect,CanMirrorMove,Biting
-Description = The user chomps with venomous teeth. The user's HP is restored by a third of the damage dealt.
+Description = The user chomps with venomous teeth. The user's HP is restored by 33% of the damage dealt.
 #-------------------------------
 [TRASHTREASURE]
 Name = Trash Treasure
@@ -1834,7 +1834,7 @@ TotalPP = 10
 Target = NearOther
 FunctionCode = TwoTurnAttackInvulnerableUnderground
 Flags = CanProtect,CanMirrorMove
-Description = The user burrows deep, then attacks with devastating power on the second turn.
+Description = The user burrows deep, becoming invulnerable, then attacks with devastating power on the second turn.
 #-------------------------------
 #		ROCK MOVES
 #-------------------------------
@@ -2238,7 +2238,7 @@ TotalPP = 20
 Target = NearOther
 FunctionCode = HealUserByHalfOfDamageDone
 Flags = CanProtect,CanMirrorMove
-Description = The user consumes a bit of the target's blood. The user's HP is restored by half the damage dealt.
+Description = The user consumes a bit of the target's blood. The user's HP is restored by 50% the damage dealt.
 Animation = LEECHLIFE
 #-------------------------------
 [GUIDINGAROMA]
@@ -2323,7 +2323,7 @@ Accuracy = 100
 TotalPP = 12
 Target = NearOther
 FunctionCode = Dizzy
-Flags = CanProtect,CanMirrorMove
+Flags = CanProtect,CanMirrorMove,Sound
 EffectChance = 100
 Description = The user calls out its underlings to annoy the target with buzzing sounds, dizzying it.
 Animation = BUGBUZZ
@@ -2454,7 +2454,7 @@ TotalPP = 20
 Target = NearOther
 FunctionCode = HealUserByHalfOfDamageDone
 Flags = CanProtect,CanMirrorMove
-Description = The user leeches the target's life. The user's HP is restored by half the damage taken by the target.
+Description = The user leeches the target's life. The user's HP is restored by 50% the damage dealt.
 Animation = LEECHLIFE
 #-------------------------------
 [SWARMBURST]
@@ -3255,6 +3255,7 @@ Target = NearOther
 FunctionCode = HitsTargetInSkyGroundsTarget
 Flags = CanProtect,CanMirrorMove
 Description = The user chains its heavy anchor to the target. A flying Pokémon will fall to the ground when hit.
+Animation = ANCHORSHOT
 #-------------------------------
 [WELD]
 Name = Weld
@@ -3280,7 +3281,7 @@ TotalPP = 5
 Target = NearOther
 FunctionCode = TwoTurnAttackChargeStartSunshine5
 Flags = CanProtect,CanMirrorMove
-Description = Summons sun for five turns on the first turn, then overwhelms the foe with fiery light on the second.
+Description = Summons Sunshine for five turns on the first turn, then overwhelms the foe with fiery light on the second.
 Animation = FIREBLAST
 #-------------------------------
 [BLAZINGSPEED]
@@ -3499,7 +3500,7 @@ TotalPP = 10
 Target = NearOther
 FunctionCode = TwoTurnAttackInvulnerableInSkyRecoilQuarterOfDamageDealt
 Flags = CanProtect,CanMirrorMove
-Description = The user launches up high, then explodes down on the second turn, taking 25% recoil.
+Description = The user launches up high, becoming invulnerable, then explodes down on the second turn, taking 25% recoil.
 Animation = FLY
 #-------------------------------
 [LIKEWILDFIRE]
@@ -3735,7 +3736,7 @@ TotalPP = 10
 Target = NearOther
 FunctionCode = TwoTurnAttackInvulnerableUnderwater
 Flags = CanProtect,CanMirrorMove
-Description = Diving deep on the first turn, the user rises and strikes with explosive strength on second.
+Description = The user dives deep on the first turn, becoming invulnerable, then rises and strikes with explosive strength on the second turn.
 Animation = DIVE
 #-------------------------------
 [DRAGBENEATH]
@@ -4468,7 +4469,7 @@ TotalPP = 12
 Target = NearOther
 FunctionCode = HealUserByThreeQuartersOfDamageDone
 Flags = CanProtect,CanMirrorMove
-Description = A nutrient-draining attack. The user's HP is restored by 75% of the damage taken by the target.
+Description = A nutrient-draining attack. The user's HP is restored by 75% of the damage dealt.
 Animation = GIGADRAIN
 #-------------------------------
 [THORNRATTLE]
@@ -4495,7 +4496,7 @@ TotalPP = 12
 Target = NearOther
 FunctionCode = HealUserByTwoThirdsOfDamageDoneIfTargetHurtUserThisTurn
 Flags = CanProtect,CanMirrorMove,Biting
-Description = Lures an enemy into its jaws, draining 2/3 of damage dealt if they hit the user this turn.
+Description = Lures an enemy into its jaws. If they hit the user this turn, the user's HP is restored by 66% the damage dealt.
 #-------------------------------
 [VINEBIND]
 Name = Vinebind
@@ -4829,7 +4830,7 @@ Category = Physical
 Power = 200
 Accuracy = 100
 TotalPP = 10
-Target = AllNearFoes
+Target = NearOther
 FunctionCode = RecoilFullDamageDealt
 Flags = CanProtect,CanMirrorMove
 Description = The user takes an entire grid of power into its belly to slam the target. The user takes 100% recoil.
@@ -4939,7 +4940,7 @@ TotalPP = 3
 Target = NearOther
 FunctionCode = SleepTargetUserLosesHalfMaxHP
 Flags = CanProtect,CanMagicCoat,CanMirrorMove
-Description = By sacrificing half its HP, the user jinxes the target with a kiss, making it fall asleep.
+Description = By sacrificing half its total HP, the user jinxes the target with a kiss, making it fall asleep.
 Animation = LOVELYKISS
 #-------------------------------
 [DISCOVEREDPOWER]
@@ -4964,7 +4965,7 @@ TotalPP = 12
 Target = NearOther
 FunctionCode = HealUserByHalfOfDamageDoneDoubleDamageIfTargetAsleepCanOverheal
 Flags = CanProtect,CanMirrorMove
-Description = Doubles in power if the foe is asleep. User heals for half of damage dealt. This can overheal.
+Description = Doubles in power if the foe is asleep. The user's HP is restored by 50% the damage dealt. This can overheal.
 #-------------------------------
 [ECLIPSE]
 Name = Eclipse
@@ -5635,7 +5636,7 @@ TotalPP = 10
 Target = NearOther
 FunctionCode = HealUserByHalfOfDamageDone
 Flags = CanProtect,CanMirrorMove
-Description = Drains the heat from the target, restoring HP by half the damage taken by the target.
+Description = Drains the heat from the target. The user's HP is restored by 50% the damage dealt.
 #-------------------------------
 [WINTEROPS]
 Name = Winter Ops
@@ -6188,7 +6189,7 @@ TotalPP = 10
 Target = NearOther
 FunctionCode = FixedDamageHalfTargetHealUserByHalfOfDamageDone
 Flags = CanProtect,CanMirrorMove
-Description = The user chomps hard, cutting the target's HP by half, and healing for half of that.
+Description = The user chomps hard, cutting the target's HP by 50%, and the user's HP is restored by 50% of that.
 Animation = SUPERFANG
 #-------------------------------
 [NIGHTCHILL]
