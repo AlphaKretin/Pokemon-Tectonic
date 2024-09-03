@@ -29,15 +29,21 @@ Gender = Female
 BaseMoney = 100
 BattleBGM = Battle ensisa
 #-------------------------------
-[LEGACYCYNTHIA]
-Name = Champion
-Gender = Female
-BaseMoney = 100
-BattleBGM = Battle cynthia
-#-------------------------------
 [LEGACYSTONE]
 Name = Champion
 Gender = Male
 BaseMoney = 100
 BattleBGM = Battle stone
+#-------------------------------
+[LEGACYCYRUS]
+Name = Galactic Boss
+Gender = Male
+BaseMoney = 100
+BattleBGM = Battle sang
+#-------------------------------
+[LEGACYCYNTHIA]
+Name = Champion
+Gender = Female
+BaseMoney = 100
+BattleBGM = Battle cynthia
 #-------------------------------

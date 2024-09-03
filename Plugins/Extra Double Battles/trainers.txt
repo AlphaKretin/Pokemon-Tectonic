@@ -504,3 +504,42 @@ Pokemon = METAGROSS,70
     Item = LIFEORB
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,20,10,0,20,10
+	#-------------------------------
+[LEGACYCYRUS,Cyrus]
+Flags = NoPerfect
+Pokemon = HOUNDOMINUS,70
+    Moves = MASSDESTRUCTION,HEATWAVE,SLUDGEBOMB,DARKPULSE
+    AbilityIndex = 1 # Berserk
+    Item = FOCUSSASH
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 0,20,0,20,20,10
+Pokemon = HONCHKROW,70
+    Moves = NIGHTCHILL,VOLLEY,ICYWIND,SWEETSELENE
+    AbilityIndex = 1 # Moon Gaze
+    Item = MIRROREDROCK
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,0,20,0,0,20
+Pokemon = CROBAT,70
+    Moves = EXSANGUINATE,HUNTDOWN,UTURN,TAILWIND
+    AbilityIndex = 0 # Inner Focus
+    Item = LIFEORB
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = GYARADOS,70
+    Moves = WATERFALL,OUTRAGE,EARTHQUAKE,DRAGONDANCE
+    AbilityIndex = 1 # City Razer
+    Item = WATERGEM
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = WEAVILE,70
+    Moves = NIGHTFELLING,WINTEROPS,XSCISSOR,SWORDSDANCE
+    AbilityIndex = 1 # Lunatic
+    Item = DARKGEM
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = MNINETALES,70
+    Moves = SOULEATER,FLASHCANNON,SCORCHINGSANDS,MOONGLOW
+    AbilityIndex = 1 # Luxury Taste
+    Item = UTILITYUMBRELLA
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,0,20,0,0,20
