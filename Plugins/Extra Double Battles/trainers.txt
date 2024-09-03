@@ -205,6 +205,57 @@ Pokemon = BLASFEMMIE,70
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 20,0,10,0,0,20
 #-------------------------------
+[SELFINSERTLUNA,Luna,4]
+Flags = NoPerfect
+Pokemon = NOIVERN,70
+    Name = Melody
+    Gender = male
+    Moves = AIRSLASH,SCOUR,HEATWAVE,GIGADRAIN
+    AbilityIndex = 0 # Terrorize
+    Item = LUCKHERB
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = SEISMITOAD,70
+    Name = Pewter
+    Gender = male
+    Moves = HYPERVOICE,SLUDGEWAVE,MUDSLIDE,ICYWIND
+    AbilityIndex = 1 # Resonant
+    Item = THROATSPRAY
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,10,0,20,10
+Pokemon = MNINETALES,70
+    Name = Ayame
+    Gender = female
+    Moves = FLASHCANNON,SHADOWBALL,DREAMABSORB,ENERGYBALL
+    AbilityIndex = 1 # Luxury Taste
+    Item = ROCKYHELMET
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,20,0,20,0
+Pokemon = RIBOMBEE,70
+    Name = Layla
+    Gender = female
+    Moves = MOONBLAST,POLLENPUFF,QUIVERDANCE,PSYCHIC
+    AbilityIndex = 1 # Impulsive
+    Item = FLAMEORB
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = WALREIN,70
+    Name = Snowball
+    Gender = male
+    Moves = BUBBLEBLASTER,ICEBEAM,POWERGEM,EBBFLOW
+    AbilityIndex = 0 # Full Blubber
+    Item = WILDCARD
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,0,20,0,10,0
+Pokemon = OBSTAGOON,70
+    Name = Kevin
+    Gender = male
+    Moves = MASSDESTRUCTION,HYPERVOICE,OBSTRUCT,SUBMISSION
+    AbilityIndex = 0 # Hooligan
+    Item = SHELLBELL
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+#-------------------------------
 [SELFINSERTJOAN,Joan]
 Policies = HAIL_TEAM
 Flags = NoPerfect
