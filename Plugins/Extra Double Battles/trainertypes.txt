@@ -27,7 +27,7 @@ BattleBGM = Battle testuda
 Name = Storm Chaser
 Gender = Female
 BaseMoney = 100
-BattleBGM = Battle joan
+BattleBGM = Battle ensisa
 #-------------------------------
 [LEGACYCYNTHIA]
 Name = Champion
