@@ -544,7 +544,7 @@ Pokemon = MNINETALES,70
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,0,20,0,0,20
 #-------------------------------
-[LEADER_Lambert,Lambert]
+[LEADER_Lambert,Lambert,4]
 Policies = LAMBERT
 Flags = NoPerfect
 Pokemon = ZOROARK,70
