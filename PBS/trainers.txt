@@ -141,37 +141,6 @@ Pokemon = NICKIT,15
     Moves = PILFER,HONECLAWS,QUICKATTACK,ENCORE
     AbilityIndex = 1 # Sentry
 #-------------------------------
-[LEADER_Lambert,Lambert]
-Policies = LAMBERT
-Flags = NoPerfect
-Pokemon = ZORUA,15
-    Moves = HARSHVOICE,GRASSKNOT,SHOUT,EMBER
-    AbilityIndex = 0 # Illusion
-    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
-    EV = 1,20,10,19,20,0
-Pokemon = PANCHAM,15
-    Moves = SMASH,TAUNT,LEER,BITE
-    AbilityIndex = 1 # Juggernaut
-    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
-    EV = 10,10,11,15,10,4
-Pokemon = BINACLE,15
-    Moves = ROCKTHROW,KARATECHOP,RUMBLE,GLARE
-    AbilityIndex = 1 # Steel Absorb
-    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
-    EV = 18,10,11,0,10,11
-Pokemon = RIOLU,15
-    Name = Sangfroid
-    Gender = female
-    Moves = MAGNETWAVE,NERVEBLOCK,VALORBOLT,VANGUARD
-    AbilityIndex = 1 # Inner Focus
-    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
-    EV = 10,20,0,20,20,0
-Pokemon = CROAGUNK,15
-    Moves = FAKEOUT,NASTYNIP,KARATECHOP,NERVEBLOCK
-    AbilityIndex = 0 # Prankster
-    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
-    EV = 20,10,5,0,10,15
-#-------------------------------
 [LEADER_Lambert,Lambert,1]
 ExtendsVersion = 0
 Policies = CURSE_TORMENTED
