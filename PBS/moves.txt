@@ -1607,6 +1607,7 @@ Category = Status
 Accuracy = 0
 TotalPP = 3
 Target = UserSide
+Priority = 4
 FunctionCode = ProtectUserSideFromDamagingMovesIfUserFirstTurn
 Flags = CanSnatch
 Description = The user protects itself and allies from damaging moves. It only works the first turn the user is in battle.
@@ -2508,18 +2509,6 @@ TotalPP = 5
 Target = BothSides
 FunctionCode = StartGravity5
 Description = Gravity is intensified for five turns, forcing Pokemon down from the air and doubling all move accuracy.
-#-------------------------------
-[HIGHHORSEPOWER]
-Name = High Horsepower
-Type = GROUND
-Category = Physical
-Power = 95
-Accuracy = 100
-TotalPP = 10
-Target = NearOther
-FunctionCode = Basic
-Flags = CanProtect,CanMirrorMove
-Description = The user fiercely attacks the target using its entire body.
 #-------------------------------
 [LANDSWRATH]
 Name = Land's Wrath
@@ -4122,7 +4111,7 @@ Power = 150
 Accuracy = 100
 TotalPP = 5
 Target = AllNearOthers
-FunctionCode = UserLosesHalfOfTotalHPExplosive
+FunctionCode = UserLosesHalfOfTotalHP
 Flags = CanProtect,CanMirrorMove
 Description = The user attacks everything by causing its own head to explode. This also damages the user.
 #-------------------------------
