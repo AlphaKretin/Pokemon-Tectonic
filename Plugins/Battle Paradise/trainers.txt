@@ -712,3 +712,201 @@ Pokemon = WHIMSICOTT,70
     Item = LEFTOVERS
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,20,0,20,20,0
+#-------------------------------
+[LEADER_Zoe,Zoé,4]
+Policies = ZOE
+Flags = NoPerfect
+Pokemon = MTANGROWTH,70
+    Moves = STAREDOWN,MIASMA,PETRIFY,GRASSKNOT
+    AbilityIndex = 0 # Petrifying
+    Item = LUCKHERB
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,0,18,0,0,12
+Pokemon = MANTINE,70
+    Name = 1 Second
+    Gender = male
+    Moves = WARDPRESS,COLDFRONT,SCALD,WIDEGUARD
+    Item = SITRUSBERRY
+    AbilityIndex = 1 # Free Ride
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,10,0,0,10,20
+Pokemon = GLISCOR,70
+    Moves = KNOCKOFF,ACROBATICS,UTURN,UNDERMINE
+    AbilityIndex = 0 # Grotesque Vitals
+    Item = POWERHERB
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,20,0,10,20,0
+Pokemon = SUDOWOODO,70
+    Moves = POWERGEM,NERVEBLOCK,STRENGTHSAP,EARTHPOWER
+    AbilityIndex = 1 # Prankster
+    Item = FOCUSSASH
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,10,10,0,10,10
+Pokemon = BASTIODON,70
+    Moves = DIAMONDFIELD,BODYPRESS,STOMPINGTANTRUM,WIDEGUARD
+    AbilityIndex = 1 # Battle-Hardened
+    Item = AIRBALLOON
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,0,20,0,0,10
+##-------------------------------
+[LEADER_Bence,Bence,4]
+Policies = BENCE
+Flags = NoPerfect
+Pokemon = JUMPLUFF,70
+    Moves = LEECHSEED,AIRSLASH,ENERGYBALL,MOONBLAST
+    AbilityIndex = 0 # Aerodynamic
+    Item = LIFEORB
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = STONJOURNER,70
+    Name = Agnes
+    Gender = female
+    Moves = BODYPRESS,ROCKSLIDE,EARTHQUAKE,HEATCRASH
+    AbilityIndex = 0 # Power Spot
+    Item = ASSAULTVEST
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,0,20,0,0,10
+Pokemon = AGOLEM,70
+    Moves = DOUBLEEDGE,ROCKSLIDE,SUPERPOWER,GLACIALRAM
+    Item = STRIKEVEST
+    AbilityIndex = 0 # Galvanize
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,20,10,0,20,0
+Pokemon = STARAPTOR,70
+    Moves = DUALWINGBEAT,CLOSECOMBAT,UTURN,INFERNOIMPACT
+    AbilityIndex = 0 # Intimidate
+    Item = EXPERTBELT
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 0,20,0,20,20,10
+Pokemon = PTEROFLYTE,70
+    Moves = HARDPLACE,ROCKSLIDE,BRAVEBIRD,WATERFALL
+    AbilityIndex = 0 # Armor Piercing
+    Item = SITRUSBERRY
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+#-------------------------------
+[LEADER_Noel,Noel,4]
+Policies = NOEL
+Flags = NoPerfect
+Pokemon = MRRIME,70
+    Moves = ZENHEADBUTT,FROSTSPIKES,TAUNT,DISABLE
+    AbilityIndex = 0 # Slapstick
+    Item = FOCUSSASH
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,0,10,20,0,10
+Pokemon = METAGROSS,70
+    Name = Armiger
+    Shiny = yes
+    Moves = METEORMASH,TRAMPLE,GLIMMERPULSE,SEERSTRIKE
+    AbilityIndex = 0 # Brute Force
+    Item = STEELGEM
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,20,10,0,20,0
+Pokemon = MPOLTEAGEIST,70
+    Moves = FROSTBREATH,SEANCE,BUBBLEBARRAGE,FROSTSPIKES
+    AbilityIndex = 1 # Chill Out
+    Item = LOADEDDICE
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = CRABOMINABLE,70
+    Moves = STORMTHROW,ICEHAMMER,ADAMANTINEPRESS,KNOCKOFF
+    AbilityIndex = 0 # Survivalist
+    Item = CUSTAPBERRY
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,0,20,20
+Pokemon = BRUXISH,70
+    Moves = CRUNCH,PSYCHICFANGS,FIREFANG,POISONFANG
+    AbilityIndex = 1 # Strong Jaw
+    Item = EXPERTBELT
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 0,20,5,20,20,5
+Pokemon = GDARMANITAN,70
+    Form = 1 # Zen Form
+    Moves = BURNUP,SUBLIMATE,SOLARBEAM,BODYPRESS
+    Item = POWERHERB
+    AbilityIndex = 0 # Phase Shift
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 0,20,20,0,20,10
+#-------------------------------
+[LEADER_Victoire,Victoire,4]
+Policies = VICTOIRE
+Flags = NoPerfect
+Pokemon = BLASTOISE,70
+    Moves = FLASHCANNON,RAPIDSPIN,SURF,AURASPHERE
+    AbilityIndex = 0 # Stormbringer
+    Item = DAMPROCK
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,10,10,0,10,10
+Pokemon = MISMAGIUS,70
+    Name = Cherchez
+    Moves = FROSTBREATH,DEATHKNELL,ENCHANTINGSONG,THUNDER
+    AbilityIndex = 1 # Ear-Splitting
+    Item = ASSAULTVEST
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 5,20,0,20,20,5
+Pokemon = DECEAT,70
+    Moves = METEORMASH,HUMBLE,SUCKERPUNCH,SWORDSDANCE
+    AbilityIndex = 0 # Pure Force
+    Item = UTILITYUMBRELLA
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,20,10,0,20,0
+Pokemon = HYMNUS,70
+    Moves = DRACOMETEOR,PLAYROUGH,RAINSTORM,FIREBLAST
+    AbilityIndex = 1 # Rain Prism
+    Item = WHITEHERB
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,20,5,0,20,5
+Pokemon = BRONZONG,70
+    Moves = WEATHERBURST,THUNDER,TAKESHELTER,KINETICGRIP
+    AbilityIndex = 0 # Levitate
+    Item = HIVISJACKET
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,20,0,0,20,10
+Pokemon = SEAKING,70
+    Moves = STORMDRIVE,FLIPTURN,DRILLRUN,PLAYROUGH
+    AbilityIndex = 1 # Volt Absorb
+    Item = STRIKEVEST
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 0,20,10,20,20,0
+#-------------------------------
+[LEADER_Samorn,Samorn,4]
+Policies = SAMORN
+Flags = NoPerfect
+Pokemon = FLYGON,70
+    Moves = PULVERIZERCHORD,SIGNALOVERLOAD,GUTTURALROAR,ERODE
+    AbilityIndex = 0 # Desert Spirit
+    Item = WIDELENS
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = TOWERPODA,70
+    Moves = DRACOMETEOR,FLASHCANNON,BODYPRESS,ICEBEAM
+    AbilityIndex = 0 # Stubborn
+    Item = DRAGONGEM
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,20,0,20,0
+Pokemon = GARCHOMP,70
+    Moves = REND,POISONJAB,TRAMPLE,ROCKSLIDE
+    AbilityIndex = 0 # Rough Skin
+    Item = ASSAULTVEST
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,20,0,0,20,10
+Pokemon = VOLCARONA,70
+    Moves = PSYCHIC,GIGADRAIN,BUGBUZZ,HEATWAVE
+    AbilityIndex = 1 # Dawnfall
+    Item = FIREGEM
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 12,20,0,18,20,0
+Pokemon = SAURENAID,70
+    Name = Maxie
+    Gender = male
+    Moves = HYPERVOICE,DRAGONPULSE,BUBBLEBLASTER,PSYCHIC
+    AbilityIndex = 0 # Arctic Ariette
+    Item = LEFTOVERS
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 0,20,10,0,20,20
+Pokemon = REAVOR,70
+    Moves = BULLETPUNCH,PSYCHOSCISSION,UTURN,SHATTERVISE
+    AbilityIndex = 0 # Technician
+    Item = LIFEORB
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,20,0,0,20,10
