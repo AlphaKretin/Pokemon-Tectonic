@@ -587,7 +587,7 @@ Pokemon = TOXICROAK,70
     EV = 20,10,5,0,10,15
 #-------------------------------
 [LEADER_Eko,Eko,4]
-Policies = PRIORITIZEDOTS
+Policies = PRIORITIZEDOTS,EKO
 Flags = NoPerfect
 Pokemon = SALAZZLE,70
     Moves = POISONJAB,FIRELASH,KNOCKOFF,LEECHLIFE
@@ -629,7 +629,7 @@ Pokemon = DROMERUPT,70
     EV = 20,15,15,0,15,0
 #-------------------------------
 [LEADER_Helena,Helena,4]
-Policies = PRIORITIZEUTURN
+Policies = PRIORITIZEUTURN,HELENA
 Flags = NoPerfect
 Pokemon = LANTURN,70
     Moves = VOLTSWITCH,EBBFLOW,SCALD,MOONBLAST
@@ -671,6 +671,7 @@ Pokemon = KLAWSAR,70
     EV = 11,20,8,11,20,0
 #-------------------------------
 [LEADER_Rafael,Rafael,4]
+Policies = RAFAEL
 Flags = NoPerfect
 Pokemon = BELLOSSOM,70
     Moves = PETALDANCE,SMOLDERRAVE,HEARTHFIREHULA,POLLENPUFF
