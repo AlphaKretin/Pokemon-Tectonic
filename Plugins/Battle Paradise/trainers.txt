@@ -669,3 +669,45 @@ Pokemon = KLAWSAR,70
     Item = EJECTBUTTON
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 11,20,8,11,20,0
+#-------------------------------
+[LEADER_Rafael,Rafael,4]
+Flags = NoPerfect
+Pokemon = BELLOSSOM,70
+    Moves = PETALDANCE,SMOLDERRAVE,HEARTHFIREHULA,POLLENPUFF
+    AbilityIndex = 1 # Choreography
+    Item = MENTALHERB
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,20,6,0,20,4
+Pokemon = MNINETALES,70
+    Moves = DREAMDANCE,SOULEATER,SLAG,SCORCHINGSANDS
+    AbilityIndex = 1 # Luxury Taste
+    Item = HIVISJACKET
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = DHELMISE,70
+    Moves = ROCKSLIDE,POWERWHIP,GYROBALL,SHADOWSNEAK
+    AbilityIndex = 0 # Rust & Wrack
+    Item = OCCABERRY
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,20,10,0,20,0
+Pokemon = AMAROWAK,70
+    Name = Apotropaia
+    Gender = female
+    Moves = BONECLUB,SHADOWBONE,FIRELASH,BREAKDANCE
+    AbilityIndex = 1 # Ancestral Dance
+    Item = STRIKEVEST
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,12,9,0,12,9
+Pokemon = ORICORIO,70
+    Form = 3 # Sensu Style Form
+    Moves = FEATHERDANCE,STARDANCE,AIRSLASH,SMOLDERRAVE
+    AbilityIndex = 1 # Dancer
+    Item = CHARCOAL
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = WHIMSICOTT,70
+    Moves = STARDANCE,KNOCKOFF,LEAFBLADE,PLAYROUGH
+    AbilityIndex = 0 # Cotton Decoy
+    Item = LEFTOVERS
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
