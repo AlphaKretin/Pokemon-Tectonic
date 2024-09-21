@@ -1,6 +1,6 @@
 #-------------------------------
 [931]
-# Illusory Paradise
+# Battle Paradise
 Outdoor = true
 ShowArea = false
 Bicycle = true
