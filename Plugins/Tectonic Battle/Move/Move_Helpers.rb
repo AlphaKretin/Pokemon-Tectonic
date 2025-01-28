@@ -16,6 +16,7 @@ class PokeBattle_Move
     end
 
     def shouldShade?(user, target)
+        return true if @pp == 0
         return true if pbMoveFailed?(user, [target], false)
         return true if pbFailsAgainstTargetAI?(user, target)
         return false
@@ -113,15 +114,15 @@ class PokeBattle_Move
         end
         oldVictimItemName = getItemName(item)
         victim.removeItem(item)
-        if @battle.curseActive?(:CURSE_SUPER_ITEMS) || GameData::Item.get(item).super
+        if @battle.stolenItemTurnsToDust?(item)
             @battle.pbDisplay(_INTL("{1}'s {2} turned to dust.", victim.pbThis, oldVictimItemName))
             @battle.pbHideAbilitySplash(stealer) if ability
         else
             @battle.pbDisplay(_INTL("{1} stole {2}'s {3}!", stealer.pbThis,
               victim.pbThis(true), oldVictimItemName))
             # Permanently steal items from wild pokemon
-            if @battle.wildBattle? && victim.opposes? && !@battle.bossBattle?
-                victim.setInitialItem(nil)
+            if victim.shouldStoreStolenItem?(item)
+                victim.setInitialItems(nil)
                 pbReceiveItem(item)
                 @battle.pbHideAbilitySplash(stealer) if ability
             else

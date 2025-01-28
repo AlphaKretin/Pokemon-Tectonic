@@ -100,6 +100,7 @@ class PokeBattle_Battler
         multiplier *= 0.66 if hasTribeBonus?(:ANIMATED)
         multiplier *= 0.5 if pbOwnSide.effectActive?(:NaturalProtection)
         multiplier /= 2 if shouldAbilityApply?(:UNBREAKABLE, checkingForAI)
+        multiplier /= 2 if shouldAbilityApply?(:STONEMANE, checkingForAI)
         multiplier *= 2 if shouldAbilityApply?(:LINEBACKER, checkingForAI)
         return multiplier
     end
@@ -138,7 +139,7 @@ class PokeBattle_Battler
         end
     end
 
-    def pbRecoverHP(amt, anim = true, anyAnim = true, showMessage = true, customMessage = nil, canOverheal: false, aiCheck: false)
+    def pbRecoverHP(amt, anim = true, anyAnim = true, showMessage = true, customMessage = nil, canOverheal: false, items_to_skip: [], aiCheck: false)
         if @battle.autoTesting
             anim = false
             anyAnim = false
@@ -182,7 +183,7 @@ class PokeBattle_Battler
             end
 
             if amt.negative?
-                pbItemHPHealCheck
+                pbItemHPHealCheck(items_to_skip: items_to_skip)
                 pbAbilitiesOnDamageTaken(oldHP)
                 pbFaint if fainted?
             end
@@ -242,7 +243,7 @@ class PokeBattle_Battler
         hideMyAbilitySplash if ability
     end
 
-    def applyFractionalHealing(fraction, ability: nil, anim: true, anyAnim: true, showMessage: true, customMessage: nil, item: nil, canOverheal: false, aiCheck: false)
+    def applyFractionalHealing(fraction, ability: nil, anim: true, anyAnim: true, showMessage: true, customMessage: nil, item: nil, canOverheal: false, items_to_skip: [], aiCheck: false)
         return 0 unless canHeal?(canOverheal)
         if item && !aiCheck
             @battle.pbCommonAnimation("UseItem", self) unless @battle.autoTesting
@@ -256,7 +257,7 @@ class PokeBattle_Battler
         end
         battle.pbShowAbilitySplash(self, ability) if ability && !aiCheck
         healAmount = getFractionalHealingAmount(fraction, canOverheal)
-        actuallyHealed = pbRecoverHP(healAmount, anim, anyAnim, showMessage, customMessage, canOverheal: canOverheal, aiCheck: aiCheck)
+        actuallyHealed = pbRecoverHP(healAmount, anim, anyAnim, showMessage, customMessage, canOverheal: canOverheal, items_to_skip: items_to_skip, aiCheck: aiCheck)
         battle.pbHideAbilitySplash(self) if ability && !aiCheck
         if aiCheck
             return getHealingEffectScore(actuallyHealed)
@@ -364,6 +365,9 @@ class PokeBattle_Battler
 
             # Check for end of primordial weather
             @battle.pbEndPrimordialWeather
+
+            # Trigger avatar AI
+            @bossAI.onDestroyed(self, battle) if boss?
         end
     end
 

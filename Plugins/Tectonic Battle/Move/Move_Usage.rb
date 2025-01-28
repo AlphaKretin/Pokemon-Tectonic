@@ -31,10 +31,18 @@ class PokeBattle_Move
         end
     end
 
-    def calculateCategory(user, targets)
+    def calculateUsageOverrides(user, targets)
+        # Calculate the move's category during this usage
+        @category_override = calculateCategoryOverride(user, targets)
+        # Calculate the move's type during this usage
+        @calcType = pbCalcType(user)
+    end
+
+    def calculateCategoryOverride(user, targets)
         return selectBestCategory(user, targets[0]) if punchingMove? && user.hasActiveAbility?(:MYSTICFIST)
+        return selectBestCategory(user, targets[0]) if rampagingMove? && user.hasActiveAbility?(:WREAKHAVOC)
         return selectBestCategory(user) if adaptiveMove?
-        return -1
+        return nil
     end
 
     def resolutionChoice(user); end
@@ -62,13 +70,13 @@ class PokeBattle_Move
         @battle.pbDisplay(_INTL("{1} unleashed its full force Z-Move!", user.pbThis))
     end
 
-    def displayDamagingMoveMessages(user, calcType, calcCategory, targets = [])
+    def displayDamagingMoveMessages(user, move, targets = [])
         if $PokemonSystem.move_clarifying_messages == 0
             displayBPAdjustmentMessage(user, targets) unless multiHitMove?
-            displayCategoryChangeMessage(calcCategory) unless calcCategory == -1
+            displayCategoryChangeMessage(move.category_override) if move.category_override
         end
         # Display messages letting the player know that weather is debuffing a move (if it is)
-        displayWeatherDebuffMessages(user, calcType) if $PokemonSystem.weather_messages == 0
+        displayWeatherDebuffMessages(user, move.calcType) if $PokemonSystem.weather_messages == 0
     end
 
     def displayBPAdjustmentMessage(user, targets)
@@ -292,6 +300,11 @@ target.pbThis(true)))
             target.damageState.disguise = true
             return
         end
+        # Thief's Diversion will take the damage
+        if target.hasActiveAbility?(:THIEFSDIVERSION) && target.hasAnyItem? && target.itemActive? && target.hasNonInitialItem? && !@battle.moldBreaker
+            target.damageState.thiefsDiversion = true
+            return
+        end 
     end
 
     def pbReduceDamage(user, target)
@@ -317,6 +330,11 @@ target.pbThis(true)))
         if target.damageState.disguise
             target.damageState.displayedDamage = 0
             return
+        end
+
+        # Thief's diversion negates all damage
+        if target.damageState.thiefsDiversion
+            target.damageState.displayedDamage = 0  
         end
 
         # Target takes the damage
@@ -442,6 +460,7 @@ target.pbThis(true)))
     #=============================================================================
     def pbEffectivenessMessage(_user, target, numTargets = 1)
         return if target.damageState.disguise
+        return if target.damageState.thiefsDiversion
         return if target.effectActive?(:LastGasp)
         return if defined?($PokemonSystem.effectiveness_messages) && $PokemonSystem.effectiveness_messages == 1
         if Effectiveness.hyper_effective?(target.damageState.typeMod)
@@ -482,6 +501,7 @@ target.pbThis(true)))
 
     def pbHitEffectivenessMessages(user, target, numTargets = 1)
         return if target.damageState.disguise
+        return if target.damageState.thiefsDiversion
         if target.damageState.substitute
             @battle.pbDisplay(_INTL("The substitute took damage for {1}!", target.pbThis(true)))
         end
@@ -540,7 +560,12 @@ target.pbThis(true)))
             @battle.pbShowAbilitySplash(user,:ARCHVILLAIN)
             @battle.pbDisplay(_INTL("{1} lets out an arrogant laugh!", user.pbThis))
             @battle.pbHideAbilitySplash(user)
-        end
+        elsif target.damageState.thiefsDiversion
+            @battle.pbShowAbilitySplash(target, :THIEFSDIVERSION)
+            @battle.pbDisplay(_INTL("{1} blocked the hit with its item!", target.pbThis))
+            target.removeNonInitialItems
+            @battle.pbHideAbilitySplash(target)
+        end        
     end
 
     # Used by Counter/Mirror Coat/Metal Burst/Revenge/Focus Punch/Bide/Assurance.
@@ -560,7 +585,7 @@ target.pbThis(true)))
             target.pointAt(:MirrorCoatTarget, user)
         end
         if target.effectActive?(:Bide)
-            target.effects[:BideDamage] += damage
+            target.effects[:BideDamage] += damage * 2
             target.pointAt(:BideTarget, user) if user.index != target.index
         end
         target.damageState.fainted = true if target.fainted? || target.damageState.fear

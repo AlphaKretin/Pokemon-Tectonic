@@ -428,9 +428,16 @@ class PokeBattle_Move_SwapItems < PokeBattle_Move
         oldTargetItemName = getItemName(target.firstItem)
         user.removeItem(oldUserItem)
         target.removeItem(oldTargetItem)
-        if @battle.curseActive?(:CURSE_SUPER_ITEMS)
+        if @battle.stolenItemTurnsToDust?
             @battle.pbDisplay(_INTL("{1}'s {2} turned to dust.", user.pbThis, oldUserItemName)) if oldUserItem
             @battle.pbDisplay(_INTL("{1}'s {2} turned to dust.", target.pbThis, oldTargetItemName)) if oldTargetItem
+        elsif !user.opposes? && target.shouldStoreStolenItem?(oldTargetItem)
+            @battle.pbDisplay(_INTL("{1} switched items with its opponent!", user.pbThis))
+            target.setInitialItems(nil)
+            pbReceiveItem(oldTargetItem)
+            target.giveItem(oldUserItem)
+            @battle.pbDisplay(_INTL("{1} obtained {2}.", target.pbThis, oldUserItemName)) if oldUserItem
+            target.pbHeldItemTriggerCheck
         else
             user.giveItem(oldTargetItem)
             target.giveItem(oldUserItem)

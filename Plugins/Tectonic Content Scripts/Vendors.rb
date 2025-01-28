@@ -1,18 +1,34 @@
 ######################################################
 # Mart vendors
 ######################################################
-BASIC_MART_STOCK = [
-	:POKEBALL,
-	:ABILITYCAPSULE,
-	:REPEL,
-]
+BASIC_MART_STOCK = %i[POKEBALL ABILITYCAPSULE REPEL]
+
+VIP_CARD_EXTRA_STOCK = %i[REPEATBALL ROYALBALL LUXURYBALL SITRUSBERRY EXPCANDYXS]
+
+def vipCardActive?
+    return false unless $PokemonBag
+    return pbHasItem?(:VIPCARD)
+end
+
+def martStock
+    stock = BASIC_MART_STOCK.clone
+    stock += VIP_CARD_EXTRA_STOCK.clone if vipCardActive?
+    return stock
+end
 
 def basicPokeMart
-    pbPokemonMart(BASIC_MART_STOCK)
+    setPrice(:SITRUSBERRY,2000)
+    pbPokemonMart(martStock)
 end
 
 def rangerMart
-    pbPokemonMart(BASIC_MART_STOCK,_INTL("Get your supplies here!"))
+    setPrice(:SITRUSBERRY,2000)
+    if vipCardActive?
+        message = _INTL("You a big shot, huh? Well, we're here to supply you.")
+    else
+        message = _INTL("Get your supplies here!")
+    end
+    pbPokemonMart(martStock,message)
 end
 
 ######################################################
@@ -429,7 +445,6 @@ def eastEndExclusives
 		GRASSTOKEN WATERTOKEN FIRETOKEN
 		DIAMONDTIARA
 		RUSTEDSHIELD RUSTEDSWORD
-		REINSOFUNITY
 	]
 
 	setPrice(:RUSTEDSWORD,20_000)
@@ -667,29 +682,21 @@ def weirdBallsVendor
 	)
 end
 
-def evoStoneVendor(expanded = false)
+def evoStoneVendor
 	stock = %i[
 		FIRESTONE
 		THUNDERSTONE
 		WATERSTONE
 		LEAFSTONE
+		ICESTONE
 		DAWNSTONE
 		DUSKSTONE
-		MOONSTONE
-		SUNSTONE
-		ICESTONE
-	]
-
-	expandedStock = %i[
 		SHINYSTONE
+		SUNSTONE
+		MOONSTONE
 	]
-	stock = expandedStock.concat(stock) if expanded
 
-	if expanded
-		message = _INTL("How can we help to empower your Pokemon?")
-	else
-		message = _INTL("Regrettably, you are restricted from purchasing any Shiny Stones. Otherwise, how may I serve you?")
-	end
+	message = _INTL("How can we help to empower your Pokemon?")
 
 	pbPokemonMart(
 		stock,
@@ -709,6 +716,7 @@ def berryVendor
 	setPrice(:PECHABERRY,500)
 	setPrice(:PERSIMBERRY,500)
 	setPrice(:CHERIBERRY,500)
+	setPrice(:BELUEBERRY,500)
 	setPrice(:CHESTOBERRY,500)
 	setPrice(:SPELONBERRY,500)
 
@@ -719,7 +727,7 @@ def berryVendor
 		RAWSTBERRY ASPEARBERRY
 		PECHABERRY
 		PERSIMBERRY
-		CHERIBERRY
+		CHERIBERRY BELUEBERRY
 		CHESTOBERRY
 		SPELONBERRY
 	]
@@ -836,6 +844,7 @@ def statusTMVendor()
 		TMIGNITE
 		TMCHILL
 		TMNUMB
+		TMWATERLOG
 		TMLEECHSEED
 		TMCONFUSERAY
 	]

@@ -28,7 +28,8 @@ lichenprincess<s>Enigma
 princessroxie<s>Joaquín Arellano
 M1ntyFr3shD4n<s>pechapanda
 zombygoast<s>Riptidecord
-LunaFlare
+LunaFlare<s>elusivestowaway
+Kei<s>
 
 {INSERTS_PLUGIN_CREDITS_DO_NOT_REMOVE}
 
