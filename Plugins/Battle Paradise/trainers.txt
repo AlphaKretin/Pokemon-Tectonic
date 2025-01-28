@@ -5,7 +5,7 @@ Flags = NoPerfect
 Pokemon = MNOCTOWL,70
     Name = Mineru
     Gender = female
-    Moves = SILVERSTORM,BLIZZARD,AURORAVEIL,COLDFRONT
+    Moves = HAIL,BLIZZARD,AURORAVEIL,COLDFRONT
     AbilityIndex = 1 # Winter Insulation
     Item = LIGHTCLAY
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
@@ -250,8 +250,8 @@ Pokemon = WALREIN,70
 Pokemon = OBSTAGOON,70
     Name = Kevin
     Gender = male
-    Moves = MASSDESTRUCTION,HYPERVOICE,OBSTRUCT,SUBMISSION
-    AbilityIndex = 0 # Hooligan
+    Moves = MASSDESTRUCTION,THRASH,OBSTRUCT,OUTRAGE
+    AbilityIndex = 0 # Wreack Havoc
     Item = SHELLBELL
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,20,0,20,20,0
@@ -293,7 +293,7 @@ Pokemon = CURSOLA,70
 Pokemon = MZANGOOSE,70
     Name = 512
     Gender = female
-    Moves = COLDSHOULDER,BRICKBREAK,POISONJAB,ROCKSLIDE
+    Moves = COLDSHOULDER,BRICKBREAK,POISONJAB,ADAMANTINEPRESS
     AbilityIndex = 0 # Served Cold
     Item = CRYSTALVEIL
     ItemType = GRASS
@@ -304,14 +304,14 @@ Pokemon = MZANGOOSE,70
 Flags = NoPerfect
 Pokemon = TANGROWTH,70
     Shiny = yes
-    Moves = POWERWHIP,EARTHQUAKE,SMACKDOWN,AERIALACE
+    Moves = POWERWHIP,EARTHQUAKE,ROCKALANCHE,AERIALACE
     AbilityIndex = 0 # Late Bloomer
     Item = ASSAULTVEST
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 20,20,0,0,20,10
 Pokemon = HOOPA,70
 	Form = 1 # Unbound Form
-    Moves = HYPERSPACEFURY,DREAMABSORB,DRAINPUNCH,ODDROOM
+    Moves = HYPERSPACEFURY,DREAMABSORB,DRAINPUNCH,LIGHTSCREEN
     AbilityIndex = 0 # Subspace Schism
     Item = REINFORCINGROD
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
@@ -323,7 +323,7 @@ Pokemon = RUBARIOR,70
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,0,20,0,0,20
 Pokemon = WISHIWASHI,70
-    Moves = RUPTURESPRING,EBBFLOW,HYDROCANNON,RAINSTORM
+    Moves = LIFEDEW,EBBFLOW,HYDROCANNON,RAINSTORM
     AbilityIndex = 0 # Schooling
     Item = WATERBALLOON
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
@@ -391,7 +391,7 @@ Pokemon = GALLADE,70
 [SELFINSERTVICE,Vice]
 Flags = NoPerfect
 Pokemon = EXCADRILL,70
-    Moves = EARTHQUAKE,METEORMASH,ROCKSLIDE,SWORDSDANCE
+    Moves = EARTHQUAKE,METEORMASH,ADAMANTINEPRESS,SWORDSDANCE
     AbilityIndex = 1 # Juggernaut
     Item = SHELLBELL
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
@@ -493,7 +493,7 @@ Pokemon = CRADILY,70
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,0,20,0,0,20
 Pokemon = ARMALDO,70
-    Moves = UTURN,ROCKSLIDE,LUNGE,KNOCKOFF
+    Moves = UTURN,ROCKALANCHE,LUNGE,KNOCKOFF
     AbilityIndex = 0 # Selective Scutes
     Item = SHELLBELL
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
@@ -686,7 +686,7 @@ Pokemon = MNINETALES,70
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,20,0,20,20,0
 Pokemon = DHELMISE,70
-    Moves = ROCKSLIDE,POWERWHIP,GYROBALL,SHADOWSNEAK
+    Moves = ADAMANTINEPRESS,POWERWHIP,GYROBALL,SHADOWSNEAK
     AbilityIndex = 0 # Rust & Wrack
     Item = OCCABERRY
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
@@ -694,7 +694,7 @@ Pokemon = DHELMISE,70
 Pokemon = AMAROWAK,70
     Name = Apotropaia
     Gender = female
-    Moves = BONECLUB,SHADOWBONE,FIRELASH,BREAKDANCE
+    Moves = BULLDOZE,SHADOWBONE,FIRELASH,BREAKDANCE
     AbilityIndex = 1 # Ancestral Dance
     Item = STRIKEVEST
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
@@ -761,13 +761,13 @@ Pokemon = JUMPLUFF,70
 Pokemon = STONJOURNER,70
     Name = Agnes
     Gender = female
-    Moves = BODYPRESS,ROCKSLIDE,EARTHQUAKE,HEATCRASH
+    Moves = BODYPRESS,ROCKALANCHE,EARTHQUAKE,HEATCRASH
     AbilityIndex = 0 # Power Spot
     Item = ASSAULTVEST
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 20,0,20,0,0,10
 Pokemon = AGOLEM,70
-    Moves = DOUBLEEDGE,ROCKSLIDE,SUPERPOWER,GLACIALRAM
+    Moves = DOUBLEEDGE,ROCKALANCHE,SUPERPOWER,GLACIALRAM
     Item = STRIKEVEST
     AbilityIndex = 0 # Galvanize
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
@@ -779,7 +779,7 @@ Pokemon = STARAPTOR,70
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 0,20,0,20,20,10
 Pokemon = PTEROFLYTE,70
-    Moves = HARDPLACE,ROCKSLIDE,BRAVEBIRD,WATERFALL
+    Moves = HARDPLACE,ROCKALANCHE,BRAVEBIRD,WATERFALL
     AbilityIndex = 0 # Armor Piercing
     Item = SITRUSBERRY
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
@@ -873,7 +873,7 @@ Pokemon = SEAKING,70
 Policies = SAMORN
 Flags = NoPerfect
 Pokemon = FLYGON,70
-    Moves = PULVERIZERCHORD,SIGNALOVERLOAD,GUTTURALROAR,ERODE
+    Moves = PULVERIZERCHORD,SCALESTORM,GUTTURALROAR,ERODE
     AbilityIndex = 0 # Desert Spirit
     Item = WIDELENS
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
@@ -885,7 +885,7 @@ Pokemon = TOWERPODA,70
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,20,20,0,20,0
 Pokemon = GARCHOMP,70
-    Moves = REND,POISONJAB,TRAMPLE,ROCKSLIDE
+    Moves = REND,POISONJAB,TRAMPLE,ADAMANTINEPRESS
     AbilityIndex = 0 # Rough Skin
     Item = ASSAULTVEST
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
