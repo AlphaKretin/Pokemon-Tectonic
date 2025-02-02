@@ -1,7 +1,8 @@
 #-------------------------------
 [931]
 # Battle Paradise
+ImportName = Battle Paradise
 Outdoor = true
-ShowArea = false
+ShowArea = true
 Bicycle = true
 #-------------------------------
