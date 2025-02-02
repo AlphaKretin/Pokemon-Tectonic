@@ -307,6 +307,57 @@ Pokemon = PERRSERKER,70
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,20,10,0,20,10
 #-------------------------------
+[SELFINSERTLUNA,Luna,6]
+Flags = NoPerfect
+Pokemon = MALAMAR,70
+    Name = Clyde
+    Gender = female
+    Moves = SEVER,SUPERPOWER,OMNISCIENTBLOW,TOPSYTURVY
+    AbilityIndex = 0 # Contrary
+    Item = SHELLBELL
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = DECEAT,70
+    Name = Binato
+    Gender = male
+    Moves = MISADVENTURE,INNOCENTMASQUE,CRUNCH,METEORMASH
+    AbilityIndex = 1 # Intimidate
+    Item = LEFTOVERS
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,0,20,0,0,20
+Pokemon = VICTREEBEL,70
+    Name = Mir
+    Gender = female
+    Moves = EARTHQUAKE,STRAFE,LEAFBLADE,POISONJAB
+    AbilityIndex = 1 # Flytrap
+    Item = ASSAULTVEST
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 20,20,0,0,20,10
+Pokemon = DRAGAPULT,70
+    Name = Hitomi
+    Gender = female
+    Moves = WAILINGBLOW,DRAGONDARTS,DRAGONDANCE,UTURN
+    AbilityIndex = 1 # Infiltrator
+    Item = FOCUSSASH
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = MDRAGALGE,70
+    Name = Alfie
+    Gender = female
+    Moves = WHIPKICK,DEPTHCHARGE,HIGHJUMPKICK,RIPTIDE
+    AbilityIndex = 0 # Sinking Feeling
+    Item = SKILLHERB
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = ZANGOOSE,70
+    Name = Vice
+    Gender = male
+    Moves = PSYCHOSCISSION,KNOCKOFF,ADAMANTINEPRESS,PALEBLADE
+    AbilityIndex = 0 # Venomdetta
+    Item = SCOPELENS
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+#-------------------------------
 [SELFINSERTJOAN,Joan]
 Policies = HAIL_TEAM
 Flags = NoPerfect
