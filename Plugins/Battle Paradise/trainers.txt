@@ -256,6 +256,57 @@ Pokemon = OBSTAGOON,70
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,20,0,20,20,0
 #-------------------------------
+[SELFINSERTLUNA,Luna,5]
+Flags = NoPerfect
+Pokemon = CHIMECHO,70
+    Name = Yuka
+    Gender = female
+    Moves = OMINOUSWIND,LIGHTSCREEN,REFLECT,REVERBWARD
+    AbilityIndex = 0 # Brisk
+    Item = LIGHTCLAY
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,10,0,20,10,10
+Pokemon = DUDUDUNSPARCE,70
+    Name = Ronka
+    Gender = female
+    Moves = MOONBLAST,RUIN,SCORCHINGSANDS,PROTECT
+    AbilityIndex = 0 # Serene Grace
+    Item = HIVISJACKET
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,10,0,20,10
+Pokemon = MTANGROWTH,70
+    Name = Emil
+    Gender = male
+    Moves = SLUDGEWAVE,GRASSKNOT,WAVEOFJADE,PROTECT
+    AbilityIndex = 0 # Petrifying
+    Item = LEFTOVERS
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,10,0,20,10,10
+Pokemon = HONCHKROW,70
+    Name = Moma
+    Gender = male
+    Moves = DARKPULSE,ICYWIND,PROTECT,AIRSLASH
+    AbilityIndex = 0 # Rattle 'Em
+    Item = SHELLBELL
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,20,20,0
+Pokemon = HELIOLISK,70
+    Name = Brenner
+    Gender = male
+    Moves = RUIN,HEATWAVE,THUNDERBOLT,PROTECT
+    AbilityIndex = 1 # Water Absorb
+    Item = WILDCARD
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,0,10,20,10,10
+Pokemon = PERRSERKER,70
+    Name = Juro
+    Gender = male
+    Moves = CLOSECOMBAT,POISONJAB,ADAMANTINEPRESS,BULLETTRAIN
+    AbilityIndex = 1 # Steely Spirit
+    Item = LUMBERAXE
+    # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+    EV = 10,20,10,0,20,10
+#-------------------------------
 [SELFINSERTJOAN,Joan]
 Policies = HAIL_TEAM
 Flags = NoPerfect
