@@ -1,5 +1,5 @@
 #-------------------------------
-[SELFINSERTLUNA,Luna]
+[SELFINSERTLUNA,Luna (First)]
 Policies = HAIL_TEAM
 Flags = NoPerfect
 Pokemon = MNOCTOWL,70
@@ -51,7 +51,7 @@ Pokemon = ARCLAMOR,70
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,20,0,20,20,0
 #-------------------------------
-[SELFINSERTLUNA,Luna,1]
+[SELFINSERTLUNA,Luna (Charmer)]
 Flags = NoPerfect
 Pokemon = ESPEON,70
     Name = Chloe
@@ -102,7 +102,7 @@ Pokemon = DELCATTY,70
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,0,20,0,0,20
 #-------------------------------
-[SELFINSERTLUNA,Luna,2]
+[SELFINSERTLUNA,Luna (Noble)]
 Flags = NoPerfect
 Pokemon = VESPIQUEN,70
     Name = Leah
@@ -153,7 +153,7 @@ Pokemon = LUXRAY,70
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 0,20,5,20,20,5
 #-------------------------------
-[SELFINSERTLUNA,Luna,3]
+[SELFINSERTLUNA,Luna (Sun)]
 Policies = SUN_TEAM
 Flags = NoPerfect
 Pokemon = DELPHOX,70
@@ -205,7 +205,7 @@ Pokemon = BLASFEMMIE,70
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 20,0,10,0,0,20
 #-------------------------------
-[SELFINSERTLUNA,Luna,4]
+[SELFINSERTLUNA,Luna (Harmonic)]
 Flags = NoPerfect
 Pokemon = NOIVERN,70
     Name = Melody
@@ -256,7 +256,7 @@ Pokemon = OBSTAGOON,70
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,20,0,20,20,0
 #-------------------------------
-[SELFINSERTLUNA,Luna,5]
+[SELFINSERTLUNA,Luna (Fortune)]
 Flags = NoPerfect
 Pokemon = CHIMECHO,70
     Name = Yuka
@@ -307,7 +307,7 @@ Pokemon = PERRSERKER,70
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,20,10,0,20,10
 #-------------------------------
-[SELFINSERTLUNA,Luna,6]
+[SELFINSERTLUNA,Luna (3.3.0)]
 Flags = NoPerfect
 Pokemon = MALAMAR,70
     Name = Clyde
