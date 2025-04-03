@@ -45,7 +45,7 @@ Pokemon = MGIGALITH,70
 Pokemon = ARCLAMOR,70
     Name = Shogo
     Gender = male
-    Moves = MIASMA,GRUNGE,LIGHTNINGDANCE,SNARL
+    Moves = MIASMA,DIELECTRICBREAKDOWN,LIGHTNINGDANCE,SNARL
     AbilityIndex = 1 # Thunderstruck
     Item = ELECTRICGEM
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
@@ -250,8 +250,8 @@ Pokemon = WALREIN,70
 Pokemon = OBSTAGOON,70
     Name = Kevin
     Gender = male
-    Moves = MASSDESTRUCTION,THRASH,OBSTRUCT,OUTRAGE
-    AbilityIndex = 0 # Wreack Havoc
+    Moves = MASSDESTRUCTION,HYPERVOICE,OBSTRUCT,SUBMISSION
+    AbilityIndex = 0 # Hooligan
     Item = SHELLBELL
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
     EV = 10,20,0,20,20,0
