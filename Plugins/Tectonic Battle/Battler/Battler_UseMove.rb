@@ -534,7 +534,7 @@ class PokeBattle_Battler
             if move.damagingMove?
                 targets.each do |b|
                     next unless b.damageState.fear
-                    @battle.pbDisplay(_INTL("#{user.pbThis} showed mercy on #{b.pbThis(true)}!", realNumHits)) if $Options.avatar_mechanics_messages == 0
+                    @battle.pbDisplay(_INTL("{1} showed mercy on {2}!", user.pbThis, b.pbThis(true))) if $Options.avatar_mechanics_messages == 0
                     b.pokemon.becomeAfraid
                 end
             end
@@ -701,7 +701,7 @@ class PokeBattle_Battler
                 end
             end
             # Echo
-            if !effectActive?(:Echo) && move.soundMove?
+            if !effectActive?(:Echo) && (move.soundMove? || move.pulseMove?)
                 echoers = []
                 @battle.pbPriority(true).each do |b|
                     echoers.push(b) if b.index != user.index && b.hasActiveAbility?(:ECHO)
@@ -711,6 +711,19 @@ class PokeBattle_Battler
                     preTarget = choice[3]
                     preTarget = user.index if nextUser.opposes?(user) || !nextUser.opposes?(preTarget)
                     @battle.forceUseMove(nextUser, move.id, preTarget, moveUsageEffect: :Echo, ability: :ECHO)
+                end
+            end
+            # Martial Discipline
+            if !effectActive?(:MartialDiscipline) && (move.punchingMove? || move.kickingMove?)
+                discipliners = []
+                @battle.pbPriority(true).each do |b|
+                    discipliners.push(b) if b.index != user.index && b.hasActiveAbility?(:MARTIALDISCIPLINE)
+                end
+                while discipliners.length > 0
+                    nextUser = discipliners.pop
+                    preTarget = choice[3]
+                    preTarget = user.index if nextUser.opposes?(user) || !nextUser.opposes?(preTarget)
+                    @battle.forceUseMove(nextUser, move.id, preTarget, moveUsageEffect: :MartialDiscipline, ability: :MARTIALDISCIPLINE)
                 end
             end
         end

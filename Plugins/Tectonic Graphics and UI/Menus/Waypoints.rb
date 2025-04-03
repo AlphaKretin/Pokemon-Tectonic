@@ -66,7 +66,7 @@ class WaypointsTracker
 	def summonPokemonFromWaypoint(avatarSpecies,waypointEvent)
 		$PokemonGlobal.respawnPoint = waypointEvent.id
 		speciesDisplayName = GameData::Species.get(avatarSpecies).name
-		pbMessage(_INTL("By the power of the Primal Clay, a #{speciesDisplayName} was created!"))
+		pbMessage(_INTL("By the power of the Primal Clay, a {1} was created!", speciesDisplayName))
 		level = [50,getLevelCap].min
 		if pbWildBattleCore(avatarSpecies, level) == 4 # Caught
 			$PokemonGlobal.respawnPoint = nil
@@ -264,7 +264,7 @@ def waypointAccessMessageAlternative
 end
 
 def waypointRegisterMessage
-    return _INTL("\\i[SPANNINGBAND]The Spanning Band glows in sync with the totem. You sense that some sort of connection has been created.")
+    return _INTL("\\i[SPANNINGBAND]The Spanning Bands glow in sync with the totem. You sense that some sort of connection has been created.")
 end
 
 def waypointUnableMessage

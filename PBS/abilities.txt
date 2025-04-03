@@ -61,7 +61,7 @@ Flags = SunshineSynergy
 #-------------------------------
 [CLEARBODY]
 Name = Clear Body
-Description = Prevents the Pokémon's stat steps from being lowered (except when self-inflicted).
+Description = Prevents stat steps from being lowered (except when self-inflicted).
 Flags = OtherStatDropImmunity
 #-------------------------------
 [COMATOSE]
@@ -191,7 +191,7 @@ Description = Reduces damage done to allies by 25%.
 #-------------------------------
 [FULLMETALBODY]
 Name = Full Metal Body
-Description = Prevents the Pokémon's stat steps from being lowered (except when self-inflicted).
+Description = Prevents stat steps from being lowered (except when self-inflicted).
 Flags = OtherStatDropImmunity
 #-------------------------------
 [FURCOAT]
@@ -581,10 +581,6 @@ Description = Boosts Sp. Atk each time a Pokémon faints.
 Name = Speed Boost
 Description = Speed is raised by two steps at the end of each of its turns.
 #-------------------------------
-[STALWART]
-Name = Stalwart
-Description = Ignores effects changing the target of a move.
-#-------------------------------
 [STAMINA]
 Name = Stamina
 Description = Boosts Defense by two steps when hit by an attack.
@@ -665,7 +661,7 @@ Description = Every other turn, the Pokémon can't use any move but Slack Off.
 #-------------------------------
 [UNAWARE]
 Name = Unaware
-Description = Ignores defensive stat changes in opponents it's hitting, and offensive stat stages in foes hitting it.
+Description = Ignores defensive stat changes in opponents it's hitting, and offensive stat steps in foes hitting it.
 #-------------------------------
 [UNBURDEN]
 Name = Unburden
@@ -677,7 +673,7 @@ Description = Physical moves negate all protection effects.
 #-------------------------------
 [VICTORYSTAR]
 Name = Victory Star
-Description = Doubles the Accuracy of its allies and itself.
+Description = Doubles the Accuracy, critical hit rate, and chance to activate random added effects for its allies and itself.
 #-------------------------------
 [VITALSPIRIT]
 Name = Vital Spirit
@@ -705,7 +701,7 @@ Description = Physical attacks against the Pokémon raise its Speed by two steps
 #-------------------------------
 [WHITESMOKE]
 Name = White Smoke
-Description = Prevents the Pokémon's stat steps from being lowered (except when self-inflicted).
+Description = Prevents stat steps from being lowered (except when self-inflicted).
 Flags = OtherStatDropImmunity
 #-------------------------------
 [WIMPOUT]

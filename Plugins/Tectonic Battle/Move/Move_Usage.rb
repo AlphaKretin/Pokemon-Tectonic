@@ -42,6 +42,8 @@ class PokeBattle_Move
         return selectBestCategory(user, targets[0]) if punchingMove? && user.hasActiveAbility?(:MYSTICFIST)
         return selectBestCategory(user, targets[0]) if rampagingMove? && user.hasActiveAbility?(:WREAKHAVOC)
         return selectBestCategory(user) if adaptiveMove?
+        return 0 if @category == 1 && user.hasActiveAbility?(:BRUTEFORCE)
+        return 1 if @category == 0 && user.hasActiveAbility?(%i[TIMEINTERLOPER SPACEINTERLOPER])
         return nil
     end
 
@@ -254,11 +256,11 @@ target.pbThis(true)))
     def pbMoveFailedTargetAlreadyMoved?(target, showMessage = true)
         if (@battle.choices[target.index][0] != :UseMove &&
            @battle.choices[target.index][0] != :Shift)
-            @battle.pbDisplay(_INTL("But it failed, since #{target.pbThis(true)} didn't choose to use a move!")) if showMessage
+            @battle.pbDisplay(_INTL("But it failed, since {1} didn't choose to use a move!", target.pbThis(true))) if showMessage
             return true
         end
         if target.movedThisRound?
-             @battle.pbDisplay(_INTL("But it failed, since #{target.pbThis(true)} already move this turn!")) if showMessage
+             @battle.pbDisplay(_INTL("But it failed, since {1} already move this turn!", target.pbThis(true))) if showMessage
              return true
         end
         return false
@@ -307,13 +309,19 @@ target.pbThis(true)))
         end 
     end
 
+    def damageNegated?(user, target, aiCheck = false)
+        return true if target.effectActive?(:LastGasp)
+        return false if aiCheck
+        return true if target.damageState.disguise
+        return true if target.damageState.thiefsDiversion
+    end
+
     def pbReduceDamage(user, target)
         damage = target.damageState.calcDamage
 
         target.damageState.displayedDamage = damage
 
-        # Last Gasp prevents all damage
-        if target.effectActive?(:LastGasp)
+        if damageNegated?(user, target)
             target.damageState.displayedDamage = 0
             return
         end
@@ -326,16 +334,6 @@ target.pbThis(true)))
             target.damageState.totalHPLostCritical += damage if target.damageState.critical
             target.damageState.displayedDamage = damage
             return
-        end
-        # Disguise takes the damage
-        if target.damageState.disguise
-            target.damageState.displayedDamage = 0
-            return
-        end
-
-        # Thief's diversion negates all damage
-        if target.damageState.thiefsDiversion
-            target.damageState.displayedDamage = 0  
         end
 
         # Target takes the damage
@@ -508,11 +506,11 @@ target.pbThis(true)))
             @battle.pbDisplay(_INTL("The substitute took damage for {1}!", target.pbThis(true)))
         end
         if target.damageState.critical
-            onAddendum = numTargets > 1 ? " on #{target.pbThis(true)}" : ""
+            onAddendum = numTargets > 1 ? _INTL(" on {1}", target.pbThis(true)) : ""
             if target.damageState.forced_critical
-                @battle.pbDisplay(_INTL("It was a guaranteed critical hit#{onAddendum}!"))
+                @battle.pbDisplay(_INTL("It was a guaranteed critical hit{1}!", onAddendum))
             else
-                @battle.pbDisplay(_INTL("A critical hit#{onAddendum}!"))
+                @battle.pbDisplay(_INTL("A critical hit{1}!", onAddendum))
             end
         end
         # Effectiveness message, for moves with 1 hit

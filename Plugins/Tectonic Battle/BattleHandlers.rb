@@ -11,6 +11,11 @@ module BattleHandlers
     LoadDataDependentAbilityHandlers    = Event.new
     LoadDataDependentItemHandlers    = Event.new
 
+    def self.loadDataDependentHandlers
+        BattleHandlers::LoadDataDependentAbilityHandlers.trigger
+        BattleHandlers::LoadDataDependentItemHandlers.trigger  
+    end
+
     # Battler's type calculation
     TypeCalcAbility                     = AbilityHandlerHash.new
     # Battler's speed calculation
@@ -142,6 +147,7 @@ module BattleHandlers
     # Added effects
     CertainAddedEffectUserAbility           = AbilityHandlerHash.new
     AddedEffectChanceModifierUserAbility    = AbilityHandlerHash.new
+    AddedEffectChanceModifierUserAllyAbility    = AbilityHandlerHash.new
     PreventAddedEffectTargetAbility         = AbilityHandlerHash.new
     AddedEffectChanceModifierTargetAbility  = AbilityHandlerHash.new
     # Start of move
@@ -693,6 +699,11 @@ module BattleHandlers
 
     def self.triggerAddedEffectChanceModifierUserAbility(ability, user, target, move, chance)
         ret = AddedEffectChanceModifierUserAbility.trigger(ability, user, target, move, chance)
+        return !ret.nil? ? ret : chance
+    end
+
+    def self.triggerAddedEffectChanceModifierUserAllyAbility(ability, user, target, move, chance)
+        ret = AddedEffectChanceModifierUserAllyAbility.trigger(ability, user, target, move, chance)
         return !ret.nil? ? ret : chance
     end
 

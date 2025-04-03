@@ -66,8 +66,6 @@ module Compiler
         MessageTypes.setMessagesAsHash(MessageTypes::Abilities, ability_names)
         MessageTypes.setMessagesAsHash(MessageTypes::AbilityDescs, ability_descriptions)
         Graphics.update
-
-        BattleHandlers::LoadDataDependentAbilityHandlers.trigger
     end
 
     #=============================================================================
@@ -217,6 +215,10 @@ module GameData
 
         def is_flinch_immunity_ability?
             return @flags.include?("FlinchImmunity")
+        end
+
+        def is_redirection_immunity_ability?
+            return @flags.include?("RedirectionImmunity")
         end
 
         def is_uncopyable_ability?

@@ -64,10 +64,6 @@ Flags = EclipseSynergy
 Name = Apricorn Armor
 Description = Takes 40% less damage from attacks by Pokémon who have a status condition.
 #-------------------------------
-[ARCANE]
-Name = Arcane
-Description = Increases Sp. Atk by 30%.
-#-------------------------------
 [ARCANEFINALE]
 Name = Arcane Finale
 Description = Turns to Finale Form when only unfainted on team. Ability becomes Synchronize.
@@ -100,6 +96,11 @@ Description = Doubles Sp. Def, but the Pokémon can't use status moves.
 [ASSISTANT]
 Name = Assistant
 Description = Uses Assist upon entry, using a random move known by a party member.
+#-------------------------------
+[ASTRALHARVEST]
+Name = Astral Harvest
+Description = During eclipse, it restores its HP by half the damage it deals with attacks.
+Flags = EclipseSynergy
 #-------------------------------
 [AURORAPRISM]
 Name = Aurora Prism
@@ -183,6 +184,10 @@ Flags = HailSynergy
 [BIZARRE]
 Name = Bizarre
 Description = Its special attacks reduce the target's Sp. Def.
+#-------------------------------
+[BLADEBRAINED]
+Name = Bladebrained
+Description = Boosts the power of blade moves by 30%. Blade moves ignore the target's defensive stat changes.
 #-------------------------------
 [BLINDINGLIGHT]
 Name = Blinding Light
@@ -307,7 +312,7 @@ Description = Immune to Ice-type moves, and raises both attacking stats if hit b
 #-------------------------------
 [CONSTRICTOR]
 Name = Constrictor
-Description = When hit with a physical move, hits back instantly with Bind.
+Description = When hit with a physical move, traps and damages the attacker for three turns.
 #-------------------------------
 [COREPROVENANCE]
 Name = Core Provenance
@@ -316,6 +321,10 @@ Description = Using or being hit by a physical move leaves a rock on the field. 
 [COSMICCONTACT]
 Name = Cosmic Contact
 Description = After using a status move, raises both of the Pokémon's defensive stats.
+#-------------------------------
+[COSTUMECHANGE]
+Name = Costume Change
+Description = Changes to the form of your choosing after switching out.
 #-------------------------------
 [COTTONDECOY]
 Name = Cotton Decoy
@@ -408,6 +417,10 @@ Description = At the end of each turn, its Sp. Atk is lowered. Then, you choose 
 Name = Dire Diversion
 Description = It can avoid being knocked out by sacrificing its held item.
 #-------------------------------
+[DISCONNECTION]
+Name = Disconnection
+Description = On the first turn, its attacks numb the target.
+#-------------------------------
 [DISORIENTING]
 Name = Disorienting
 Description = Physical attacks against the Pokémon have a 30% chance to dizzy the attacker.
@@ -478,7 +491,7 @@ Description = If its stats would be changed, instead they're changed half as muc
 #-------------------------------
 [ECHO]
 Name = Echo
-Description = Repeats another Pokémon's sound moves immediately at 75% power.
+Description = Repeats another Pokémon's sound and pulse moves immediately at 75% power.
 #-------------------------------
 [ECTOPARTICLES]
 Name = Ecto-Particles
@@ -613,7 +626,7 @@ Description = Heals by 1/8th HP whenever any Pokémon uses a dance or sound move
 #-------------------------------
 [FIGHTINGVIGOR]
 Name = Fighting Vigor
-Description = Heals 1/12th HP every turn. Protected from being numbed or waterlogged.
+Description = Heals 1/16th HP every turn. Protected from being numbed or waterlogged.
 #-------------------------------
 [FILTHY]
 Name = Filthy
@@ -803,7 +816,7 @@ Description = Raises Attack whenever any Pokémon uses a dance move.
 #-------------------------------
 [GROTESQUEVITALS]
 Name = Grotesque Vitals
-Description = Heals 1/12th HP every turn. Protected from being poisoned.
+Description = Heals 1/16th HP every turn. Protected from being poisoned.
 #-------------------------------
 [GYRESPINNER]
 Name = Gyre Spinner
@@ -856,15 +869,14 @@ Name = Heat Veil
 Description = Doubles Sp. Def in sunshine.
 Flags = SunshineSynergy
 #-------------------------------
-[HEAVENSCROWN]
-Name = Heaven's Crown
-Description = If the Pokémon witnesses a total eclipse, it gets to move twice that turn.
-Flags = EclipseSynergy
-#-------------------------------
 [HEAVYDUTYHOOVES]
 Name = Heavy Duty Hooves
 Description = Boosts the power of kicking moves by 30%. Immune to hazards.
 Flags = HazardImmunity
+#-------------------------------
+[HELIOCENTRISM]
+Name = Heliocentrism
+Description = Prevents the foe from escaping during gravity.
 #-------------------------------
 [HERBALIST]
 Name = Herbalist
@@ -891,6 +903,10 @@ Description = When entering battle, heals self and allies for 25% of their max h
 [HONORABLE]
 Name = Honorable
 Description = Lowers priority of status moves used by any Pokémon.
+#-------------------------------
+[HOOLIGAN]
+Name = Hooligan
+Description = Powers up recoil and sound moves by 30%.
 #-------------------------------
 [HUBRIS]
 Name = Hubris
@@ -939,7 +955,7 @@ Description = Raises Speed by four steps when a stat is lowered by a foe.
 #-------------------------------
 [IMPERVIOUS]
 Name = Impervious
-Description = Prevents the Pokémon's stat steps from being lowered (except when self-inflicted). Protects from critical hits.
+Description = Prevents stat steps from being lowered (except when self-inflicted). Protects from critical hits.
 Flags = CritImmunity,OtherStatDropImmunity
 #-------------------------------
 [IMPETUOUS]
@@ -1077,7 +1093,7 @@ Description = Boosts Speed by 50%, but the Pokémon is hurt for 1/10th HP each t
 #-------------------------------
 [LIVINGARMOR]
 Name = Living Armor
-Description = Heals 1/12th HP every turn. Protected against critical hits.
+Description = Heals 1/16th HP every turn. Protected against critical hits.
 Flags = CritImmunity
 #-------------------------------
 [LONGODDS]
@@ -1108,7 +1124,7 @@ Flags = MoonglowSynergy
 #-------------------------------
 [LUXURYTASTE]
 Name = Luxury Taste
-Description = At end of turn, heals 1/8th HP if holding a clothing item.
+Description = At end of turn, heals 1/12th HP if holding a clothing item.
 #-------------------------------
 [LYCANTHROPE]
 Name = Lycanthrope
@@ -1144,14 +1160,13 @@ Description = Physical moves have a 30% chance to waterlog targets.
 Name = Marine Menace
 Description = Dive and Depth Charge deal 50% more damage.
 #-------------------------------
+[MARTIALDISCIPLINE]
+Name = Martial Discipline
+Description = Repeats another Pokémon's punch and kick moves immediately at 75% power.
+#-------------------------------
 [MASSATTACK]
 Name = Mass Attack
 Description = All Pokémon's damage is decreased proportional to their health remaining.
-#-------------------------------
-[MASTERPLAN]
-Name = Master Plan
-Description = Raises each stat by two steps when a total eclipse happens.
-Flags = EclipseSynergy
 #-------------------------------
 [MENTALBLOCK]
 Name = Mental Block
@@ -1303,7 +1318,7 @@ Description = Sets a Tailwind for four turns upon entering the battle, increasin
 #-------------------------------
 [OPTIMIZEDALLOY]
 Name = Optimized Alloy
-Description = Prevents the Pokémon's stat steps from being lowered (except when self-inflicted). The Pokémon's weight is doubled.
+Description = Prevents stat steps from being lowered (except when self-inflicted). The Pokémon's weight is doubled.
 Flags = OtherStatDropImmunity
 #-------------------------------
 [OUTRIDER]
@@ -1546,6 +1561,10 @@ Description = Immune to Rock-type moves and to Stealth Rock, and raises Speed wh
 Name = Rooted
 Description = Gets 50% more healing from all sources.
 #-------------------------------
+[RUGGED]
+Name = Rugged
+Description = Immune to Fighting-type and Rock-type moves. Prevents Stealth Rock damage.
+#-------------------------------
 [RUGGEDSCALES]
 Name = Rugged Scales
 Description = Protected from random added effects. Takes 30% less damage from moves with random added effects.
@@ -1635,7 +1654,7 @@ Description = Boosts one defending stat by two steps according to the foe's atta
 #-------------------------------
 [SELFSUFFICIENT]
 Name = Self-Sufficient
-Description = Heals 1/12th HP every turn. Protected from being burned or frostbitten.
+Description = Heals 1/16th HP every turn. Protected from being burned or frostbitten.
 #-------------------------------
 [SENTRY]
 Name = Sentry
@@ -1648,11 +1667,6 @@ Description = Boosts Attack by 20% in hail, or 40% if also below half health.
 [SEVERE]
 Name = Severe
 Description = Its attacks are critical against numbed targets.
-#-------------------------------
-[SHAKYCODE]
-Name = Shaky Code
-Description = During eclipse, changes the Pokémon's type to the type of the move it's using.
-Flags = EclipseSynergy
 #-------------------------------
 [SHELLCRACKER]
 Name = Shellcracker
@@ -1793,7 +1807,7 @@ Description = Has a 30% chance to dizzy targets when using physical moves.
 #-------------------------------
 [STAINLESSSTEEL]
 Name = Stainless Steel
-Description = Prevents the Pokémon's stat steps from being lowered (except when self-inflicted). Immune to weather downsides.
+Description = Prevents stat steps from being lowered (except when self-inflicted). Immune to weather downsides.
 Flags = AllWeatherSynergy,OtherStatDropImmunity
 #-------------------------------
 [STAMPEDE]
@@ -1851,7 +1865,7 @@ Description = Upon entry, summons a Turbulent Sky on the Pokémon's side for 6 t
 [STRAIGHTAHEAD]
 Name = Straight Ahead
 Description = Ignores Abilities that would affect its moves. Its attacks can't be redirected to new targets.
-Flags = MoldBreaking
+Flags = MoldBreaking,RedirectionImmunity
 #-------------------------------
 [STRATAGEM]
 Name = Stratagem
@@ -1992,11 +2006,6 @@ Description = Between each turn there's another turn where no one moves.
 Name = Toil and Trouble
 Description = Foes suffer 50% more stat reduction from burn, frostbite, and numb.
 #-------------------------------
-[TOLLDANGER]
-Name = Toll Danger
-Description = When a total eclipse occurs, heals for 50% max HP and uses Heal Bell.
-Flags = EclipseSynergy
-#-------------------------------
 [TOLLTHEBELLS]
 Name = Toll the Bells
 Description = Upon entry during eclipse, heals the lowest HP ally or self by 50%.
@@ -2004,7 +2013,7 @@ Flags = EclipseSynergy
 #-------------------------------
 [TORPORSAP]
 Name = Torpor Sap
-Description = Restores its HP by 25% of the damage it deals to sleeping targets.
+Description = Restores its HP by 50% of the damage it deals to sleeping targets.
 #-------------------------------
 [TOUGH]
 Name = Tough
@@ -2033,6 +2042,10 @@ Description = Foes whose stats are lowered by the Pokémon keep those lowered st
 [TRENCHCARVER]
 Name = Trench Carver
 Description = The user's Speed is doubled while using recoil moves.
+#-------------------------------
+[TUNEDOUT]
+Name = Tuned Out
+Description = Boosts the power of sound moves by 30%. Sound moves ignore the target's defensive stat changes.
 #-------------------------------
 [TUNNELMAKER]
 Name = Tunnel Maker

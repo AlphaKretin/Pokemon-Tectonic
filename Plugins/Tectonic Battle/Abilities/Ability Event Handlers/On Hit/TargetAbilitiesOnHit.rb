@@ -283,7 +283,7 @@ BattleHandlers::TargetAbilityOnHit.add(:SPINTENSITY,
             next 0
         end
         battle.pbShowAbilitySplash(target, ability)
-        battle.pbDisplay(_INTL("#{user.pbThis} catches the full force of #{target.pbThis(true)}'s Speed!"))
+        battle.pbDisplay(_INTL("{1} catches the full force of {2}'s Speed!", user.pbThis, target.pbThis(true)))
         oldStep = target.steps[:SPEED]
         user.applyFractionalDamage(oldStep / 8.0)
         battle.pbCommonAnimation("StatDown", target)
@@ -328,8 +328,13 @@ BattleHandlers::TargetAbilityOnHit.add(:CONSTRICTOR,
   proc { |ability, user, target, move, battle, aiCheck, aiNumHits|
         next unless move.physicalMove?
         next if target.fainted?
-        next -(10 + 20 * aiNumHits) if aiCheck
-        battle.forceUseMove(target, :BIND, user.index, ability: ability)
+        next -30 if aiCheck
+        next if user.effectActive?(:Trapping)
+        next if user.effectActive?(:Constricted)
+        battle.pbShowAbilitySplash(target, ability)
+        user.applyEffect(:Constricted, 3)
+        user.pointAt(:TrappingUser, target)
+        battle.pbHideAbilitySplash(target)
   }
 )
 

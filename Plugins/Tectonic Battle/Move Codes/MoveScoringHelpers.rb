@@ -670,6 +670,7 @@ end
 
 def getCriticalRateBuffEffectScore(user, steps = 1)
     return 0 if user.effectAtMax?(:RaisedCritChance)
+    return 0 unless user.hasRandomCritAttack?
     score = 20
     score += 15 if user.firstTurn?
     score += 30 if user.hasActiveAbilityAI?(%i[SUPERLUCK SNIPER])
@@ -816,7 +817,7 @@ def predictedEOTHealing(battle,battler)
 
     # Aqua Ring, Ingrain
     healing += battler.getFractionalHealingAmount(aquaRingHealingFraction(battler)) if battler.effectActive?(:AquaRing)
-    healing += battler.getFractionalHealingAmount(ingrainHealingFraction(battler)) if battler.effectActive?(:Ingrain)
+    healing += battler.getFractionalHealingAmount(ingrainHealingFraction(battler)) if battler.effectActive?(:Ingrain) || battler.effectActive?(:EvilRoots)
     
     # Wish
     if battler.position.effectActive?(:Wish) && battler.position.effects[:Wish] == 1

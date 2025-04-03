@@ -132,27 +132,27 @@ class PokeBattle_Battle
         when :HarshSun
             if !pbCheckGlobalAbility(:DESOLATELAND) && @field.defaultWeather != :HarshSun
                 @field.weatherDuration = PRIMORDIAL_WEATHER_LINGER_TURNS
-                pbDisplay("The harsh sunlight began to fade!")
+                pbDisplay(_INTL("The harsh sunlight began to fade!"))
             end
         when :HeavyRain
             if !pbCheckGlobalAbility(:PRIMORDIALSEA) && @field.defaultWeather != :HeavyRain
                 @field.weatherDuration = PRIMORDIAL_WEATHER_LINGER_TURNS
-                pbDisplay("The heavy rain began to lift!")
+                pbDisplay(_INTL("The heavy rain began to lift!"))
             end
         when :StrongWinds
             if !pbCheckGlobalAbility(:DELTASTREAM) && @field.defaultWeather != :StrongWinds
                 @field.weatherDuration = PRIMORDIAL_WEATHER_LINGER_TURNS
-                pbDisplay("The mysterious air current began to dissipate!")
+                pbDisplay(_INTL("The mysterious air current began to dissipate!"))
             end
         when :RingEclipse
             if !pbCheckGlobalAbility(:SATURNALSKY) && @field.defaultWeather != :RingEclipse
                 @field.weatherDuration = PRIMORDIAL_WEATHER_LINGER_TURNS
-                pbDisplay("The planetary ring begins to lose its grip!")
+                pbDisplay(_INTL("The planetary ring begins to lose its grip!"))
             end
         when :BloodMoon
             if !pbCheckGlobalAbility(:STYGIANNIGHT) && @field.defaultWeather != :BloodMoon
                 @field.weatherDuration = PRIMORDIAL_WEATHER_LINGER_TURNS
-                pbDisplay("The nightmare moon begins to retreat!")
+                pbDisplay(_INTL("The nightmare moon begins to retreat!"))
             end
         end
 
@@ -164,12 +164,12 @@ class PokeBattle_Battle
 
     def extendWeather(numTurns = 1)
         return if pbWeather == :None
+        weatherName = GameData::BattleWeather.get(pbWeather).name
         if @field.weatherDuration < 0
             pbDisplay(_INTL("The {1} would be extended, but it's already indefinite!",weatherName))
             return
         end
         @field.weatherDuration += numTurns
-        weatherName = GameData::BattleWeather.get(pbWeather).name
         if numTurns == 1
             pbDisplay(_INTL("The {1} extends by a turn!",weatherName))
         else

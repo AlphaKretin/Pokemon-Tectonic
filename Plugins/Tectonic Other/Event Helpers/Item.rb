@@ -2,7 +2,6 @@
 # Picking up an item found on the ground
 #===============================================================================
 def pbItemBall(item, quantity = 1)
-    item = randomizeItem(item)
     item = GameData::Item.get(item)
     return false if !item || quantity < 1
     itemname = (quantity > 1) ? item.name_plural : item.name
@@ -85,7 +84,7 @@ end
 
 def combineSigil
     if pbHasItem?(:SIGILLEFTHALF) && pbHasItem?(:SIGILRIGHTHALF)
-        pbMessage(_INTL("You combine the #{getItemName(:SIGILLEFTHALF)} and the #{getItemName(:SIGILRIGHTHALF)}."))
+        pbMessage(_INTL("You combine the {1} and the {2}.", getItemName(:SIGILLEFTHALF), getItemName(:SIGILRIGHTHALF)))
         pbReceiveItem(:CARNATIONSIGIL)
         $PokemonBag.pbDeleteItem(:SIGILLEFTHALF)
         $PokemonBag.pbDeleteItem(:SIGILRIGHTHALF)

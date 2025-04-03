@@ -223,13 +223,13 @@ class NewDexNav
 				end
 				if debugControl
 					pbAddPokemonSilent(highlightedSpeciesData.species,getLevelCap)
-					pbMessage(_INTL("Added #{highlightedSpeciesData.species}"))
+					pbMessage(_INTL("Added {1}", highlightedSpeciesData.species))
 					next
 				end
 				searchTime = 20 + rand(60)
 				searchTime = 0 if $DEBUG
-				pbMessage(_INTL("Searching\\ts[15]...\\wtnp[#{searchTime}]"))
-				pbMessage(_INTL("Oh! A #{highlightedSpeciesData.real_name} was found nearby!"))
+				pbMessage(_INTL("Searching\\ts[15]...\\wtnp[{1}]", searchTime))
+				pbMessage(_INTL("Oh! A {1} was found nearby!", highlightedSpeciesData.real_name))
 				pbFadeOutAndHide(@sprites)
 				generateSearch(highlightedSpeciesData)
 				$search_overlay.dispose if $search_overlay
@@ -250,7 +250,7 @@ class NewDexNav
 		  if prevNavCol != @navigationColumn || prevNavRow != @navigationRow
 			speciesFormName =  highlightedSpeciesData.real_name 
 			speciesFormName += "(#{highlightedSpeciesData.form_name})" if highlightedSpeciesData.form != 0
-			@displayedName = $Trainer.pokedex.seen?(highlightedSpecies) ? speciesFormName : "Unknown"
+			@displayedName = $Trainer.pokedex.seen?(highlightedSpecies) ? speciesFormName : _INTL("Unknown")
 			drawSprites
 		  end
 		end
@@ -361,7 +361,7 @@ class NewDexNav
     shadow     = MessageConfig.pbDefaultTextShadowColor
 	
 	xLeft = 40
-	textpos = [[_INTL("DexNav: #{$game_map.name}"),40,-4,0,Color.new(248, 248, 248),Color.new(0, 0, 0)]]
+	textpos = [[_INTL("DexNav: {1}", $game_map.name),40,-4,0,Color.new(248, 248, 248),Color.new(0, 0, 0)]]
 
 	# caughtCount = 0
 	# if $PokemonGlobal.caughtCountsPerMap && $PokemonGlobal.caughtCountsPerMap.has_key?($game_map.map_id)

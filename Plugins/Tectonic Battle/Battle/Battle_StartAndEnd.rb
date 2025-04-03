@@ -336,10 +336,10 @@ class PokeBattle_Battle
                     wasOnStreak = pkmn.onHotStreak?
                     if pkmn.fainted? || [2, 3].include?(@decision)
                         pkmn.battlingStreak = 0
-                        pbMessage(_INTL("#{pkmn.name}'s Hot Streak is now over.")) if wasOnStreak
+                        pbMessage(_INTL("{1}'s Hot Streak is now over.", pkmn.name)) if wasOnStreak
                     elsif @usedInBattle[0][i]
                         pkmn.battlingStreak += 1
-                        pbMessage(_INTL("#{pkmn.name} is on a Hot Streak!")) if pkmn.onHotStreak? && !wasOnStreak
+                        pbMessage(_INTL("{1} is on a Hot Streak!", pkmn.name)) if pkmn.onHotStreak? && !wasOnStreak
                     end
                 end
             end
@@ -370,7 +370,6 @@ class PokeBattle_Battle
         if $Options.color_shifts == 0 && !$PokemonGlobal.colorationDifferencesTutorialized
             eachOtherSideBattler do |b|
                 totalColorationDiff = b.pokemon.hueShift.abs + (b.pokemon.shadeShift.abs) / 4
-                echoln("Total coloration diff: #{totalColorationDiff}")
                 next unless totalColorationDiff >= 16
                 playColorationDifferencesTutorial
                 break
@@ -482,7 +481,7 @@ class PokeBattle_Battle
                         next unless b.extraMovesPerTurn >= 1
                         next unless b.hasActiveAbility?(:HEAVENSCROWN) && totalEclipse?
                         pbShowAbilitySplash(b,:HEAVENSCROWN)
-                        pbDisplay(_INTL("#{b.pbThis} is blessed by the shattered sky!"))
+                        pbDisplay(_INTL("{1} is blessed by the shattered sky!", b.pbThis))
                         pbHideAbilitySplash(b)
                     end
 
@@ -512,7 +511,7 @@ class PokeBattle_Battle
             stretcher = pbCheckGlobalAbility(:TIMESKIP)
             if stretcher
                 pbShowAbilitySplash(stretcher, :TIMESKIP)
-                pbDisplay(_INTL("Time is dancing to #{stretcher.pbThis}'s tune! This turn is being skipped!"))
+                pbDisplay(_INTL("Time is dancing to {1}'s tune! This turn is being skipped!", stretcher.pbThis))
                 pbHideAbilitySplash(stretcher)
                 # Start of round phase
                 PBDebug.logonerr { pbStartOfRoundPhase }

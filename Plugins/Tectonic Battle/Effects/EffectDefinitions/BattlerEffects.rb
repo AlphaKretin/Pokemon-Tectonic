@@ -149,6 +149,7 @@ GameData::BattleEffect.register_effect(:Battler, {
     :avatars_purge => true,
     :apply_proc => proc do |battle, battler, _value|
         battle.pbDisplay(_INTL("{1} is cursed!", battler.pbThis))
+        battle.pbDisplay(_INTL("It'll lose a quarter of its health each turn!"))
     end,
     :eor_proc => proc do |battle, battler, _value|
         if battler.takesIndirectDamage?
@@ -165,6 +166,11 @@ GameData::BattleEffect.register_effect(:Battler, {
 GameData::BattleEffect.register_effect(:Battler, {
     :id => :Dancer,
     :real_name => "Dancer",
+})
+
+GameData::BattleEffect.register_effect(:Battler, {
+    :id => :MartialDiscipline,
+    :real_name => "MartialDiscipline",
 })
 
 GameData::BattleEffect.register_effect(:Battler, {
@@ -249,7 +255,7 @@ GameData::BattleEffect.register_effect(:Battler, {
     :apply_proc => proc do |battle, battler, value|
         battler.applyEffect(:EncoreMove, battler.lastRegularMoveUsed)
         battle.pbDisplay(_INTL("{1} received an encore!", battler.pbThis))
-        battle.pbDisplay(_INTL("It will repeat its move for the next #{value - 1} turns!"))
+        battle.pbDisplay(_INTL("It will repeat its move for the next {1} turns!", value - 1))
     end,
     :eor_proc => proc do |_battle, battler, _value|
         next if battler.fainted?
@@ -305,7 +311,7 @@ GameData::BattleEffect.register_effect(:Battler, {
     :maximum => 4,
     :baton_passed => true,
     :critical_rate_buff => true,
-    :increment_proc => proc do |battle, battler, _value, increment|
+    :increment_proc => proc do |battle, battler, value, increment|
         case increment
         when 1
             battle.pbDisplay(_INTL("{1}'s critical hit chance was doubled!", battler.pbThis))
@@ -315,6 +321,10 @@ GameData::BattleEffect.register_effect(:Battler, {
             battle.pbDisplay(_INTL("{1}'s is now 8 times more likely to get a crticial hit!", battler.pbThis))
         when 4
             battle.pbDisplay(_INTL("{1}'s is now 16 times more likely to get a crticial hit!", battler.pbThis))
+        end
+
+        if value == increment
+            battle.pbDisplay(_INTL("Also, critical hits are now possible on all of {1}'s attacks!", battler.pbThis(true)))
         end
     end,
 })
@@ -507,7 +517,7 @@ GameData::BattleEffect.register_effect(:Battler, {
 })
 
 def ingrainHealingFraction(battler)
-    fraction = 1.0 / 6.0
+    fraction = 1.0 / 8.0
     fraction *= 1.3 if battler.hasActiveItem?(:BIGROOT)
     return fraction
 end
@@ -525,6 +535,28 @@ GameData::BattleEffect.register_effect(:Battler, {
         fraction = ingrainHealingFraction(battler)
         healMessage = _INTL("{1} absorbed nutrients with its roots!", battler.pbThis)
         battler.applyFractionalHealing(fraction, customMessage: healMessage)
+    end,
+})
+
+GameData::BattleEffect.register_effect(:Battler, {
+    :id => :EvilRoots,
+    :real_name => "Evil Roots",
+    :baton_passed => true,
+    :trapping => true,
+    :apply_proc => proc do |battle, battler, _value|
+        battle.pbDisplay(_INTL("{1} firmly planted its evil roots! It can't be moved!", battler.pbThis))
+        battle.pbDisplay(_INTL("The evil roots will sap foe health each turn!", battler.pbThis))
+    end,
+    :eor_proc => proc do |battle, battler, _value|
+        next unless battler.canHeal?
+
+        battler.eachOpposing do |b|
+            if b.takesIndirectDamage?(true)
+                battle.pbDisplay(_INTL("{1} is sapped by the evil roots!", b.pbThis))
+                damageDealt = b.applyFractionalDamage(1.0 / 8.0, false)
+                battler.pbRecoverHPFromDrain(damageDealt, b)
+            end 
+        end
     end,
 })
 
@@ -741,6 +773,7 @@ GameData::BattleEffect.register_effect(:Battler, {
     :id => :MoveNext,
     :real_name => "Will Move Next",
     :resets_battlers_sot => true,
+    :resets_eor => true,
     :apply_proc => proc do |_battle, battler, _value|
         battler.disableEffect(:Quash)
     end,
@@ -938,6 +971,7 @@ GameData::BattleEffect.register_effect(:Battler, {
     :real_name => "Quash",
     :type => :Integer,
     :resets_battlers_sot => true,
+    :resets_eor => true,
     :apply_proc => proc do |_battle, battler, _value|
         battler.disableEffect(:MoveNext)
     end,
@@ -1019,6 +1053,7 @@ GameData::BattleEffect.register_effect(:Battler, {
     :id => :Snatch,
     :real_name => "Snatch",
     :type => :Integer,
+    :resets_eor	=> true,
     :apply_proc => proc do |battle, battler, _value|
         battle.pbDisplay(_INTL("{1} waits for a move to steal!", battler.pbThis))
     end,
@@ -1142,7 +1177,7 @@ GameData::BattleEffect.register_effect(:Battler, {
     :type => :Integer,
     :ticks_down => true,
     :apply_proc => proc do |battle, battler, value|
-        battle.pbDisplay(_INTL("{1} can't use sound-based moves for the next #{value - 1} turns!", battler.pbThis))
+        battle.pbDisplay(_INTL("{1} can't use sound-based moves for the next {2} turns!", battler.pbThis, value - 1))
     end,
 })
 
@@ -1152,7 +1187,7 @@ GameData::BattleEffect.register_effect(:Battler, {
     :type => :Integer,
     :ticks_down => true,
     :apply_proc => proc do |battle, battler, value|
-        battle.pbDisplay(_INTL("{1} can't use blade-based moves for the next #{value - 1} turns!", battler.pbThis))
+        battle.pbDisplay(_INTL("{1} can't use blade-based moves for the next {2} turns!", battler.pbThis, value - 1))
     end,
 })
 
@@ -1235,8 +1270,35 @@ GameData::BattleEffect.register_effect(:Battler, {
     :id => :TrappingUser,
     :real_name => "Trapped By",
     :type => :Position,
-    :disable_effects_on_other_exit => [:Trapping],
+    :disable_effects_on_other_exit => [:Trapping, :Constricted],
     :deep_teeth => true,
+})
+
+GameData::BattleEffect.register_effect(:Battler, {
+    :id => :Constricted,
+    :real_name => "Constricted Turns",
+    :type => :Integer,
+    :ticks_down => true,
+    :trapping => true,
+    :swaps_with_battlers => true,
+    :apply_proc => proc do |battle, battler, value|
+        battle.pbDisplay(_INTL("{1} is being constricted!",battler.pbThis))
+    end,
+    :disable_proc => proc do |battle, battler|
+        battle.pbDisplay(_INTL("{1} was freed from constriction!", battler.pbThis))
+    end,
+    :expire_proc => proc do |battle, battler|
+        battle.pbDisplay(_INTL("{1} is no longer constricted by {2}.", battler.pbThis))
+    end,
+    :remain_proc => proc do |battle, battler, _value|
+        battle.pbCommonAnimation("Wrap", battler)
+        if battler.takesIndirectDamage?
+            fraction = trappingDamageFraction(battler)
+            battle.pbDisplay(_INTL("{1} is hurt by constriction!", battler.pbThis))
+            battler.applyFractionalDamage(fraction)
+        end
+    end,
+    :sub_effects => %i[TrappingUser],
 })
 
 GameData::BattleEffect.register_effect(:Battler, {
@@ -1664,7 +1726,7 @@ GameData::BattleEffect.register_effect(:Battler, {
     :type => :Integer,
     :apply_proc => proc do |battle, battler, value|
         battle.pbDisplay(_INTL("{1} braced itself!", battler.pbThis))
-        battle.pbDisplay(_INTL("It will endure the next #{value} hits which would faint it!", battler.pbThis))
+        battle.pbDisplay(_INTL("It will endure the next {1} hits which would faint it!", value))
     end,
 })
 
@@ -1743,7 +1805,7 @@ GameData::BattleEffect.register_effect(:Battler, {
     :ticks_down => true,
     :apply_proc => proc do |battle, battler, value|
         battle.pbDisplay(_INTL("{1} sees everything!", battler.pbThis))
-        battle.pbDisplay(_INTL("It's protected from half of all attack damage for #{value} turns!", battler.pbThis))
+        battle.pbDisplay(_INTL("It's protected from half of all attack damage for {1} turns!", value))
     end,
     :disable_proc => proc do |battle, battler|
         battle.pbDisplay(_INTL("{1}'s Primeval Detect wore off!", battler.pbThis))
@@ -2057,30 +2119,52 @@ GameData::BattleEffect.register_effect(:Battler, {
     end,
 })
 
+DEFAULT_JINX_DURATION = 4
+
 GameData::BattleEffect.register_effect(:Battler, {
     :id => :Jinxed,
     :real_name => "Jinxed",
+    :type => :Integer,
+    :ticks_down => true,
     :baton_passed => true,
     :avatars_purge => true,
-    :apply_proc => proc do |battle, battler, _value|
+    :apply_proc => proc do |battle, battler, value|
         battle.pbDisplay(_INTL("{1} is jinxed!", battler.pbThis))
+        battle.pbDisplay(_INTL("Attacks against it crit and bypass protection for the next {1} turns!", value - 1))
+    end,
+    :disable_proc => proc do |battle, battler|
+        battle.pbDisplay(_INTL("{1} is no longer being jinxed!", battler.pbThis))
+    end,
+    :expire_proc => proc do |battle, battler|
+        battle.pbDisplay(_INTL("{1} recovered from the jinx!", battler.pbThis))
     end,
     :stay_in_rating_proc => proc do |battle, battler, value, stay_in_rating|
-        stay_in_rating -= 20 unless battler.hasActiveAbilityAI?(GameData::Ability.getByFlag("CritImmunity"))
+        stay_in_rating -= 5 * value unless battler.hasActiveAbilityAI?(GameData::Ability.getByFlag("CritImmunity"))
         next stay_in_rating
     end
 })
 
+DEFAULT_FRACTURE_DURATION = 4
+
 GameData::BattleEffect.register_effect(:Battler, {
     :id => :Fracture,
     :real_name => "Fractured",
+    :type => :Integer,
+    :ticks_down => true,
     :baton_passed => true,
     :avatars_purge => true,
-    :apply_proc => proc do |battle, battler, _value|
+    :apply_proc => proc do |battle, battler, value|
         battle.pbDisplay(_INTL("{1} is fractured!", battler.pbThis))
+        battle.pbDisplay(_INTL("It'll deal a third less move damage for the next {1} turns!", value - 1))
+    end,
+    :disable_proc => proc do |battle, battler|
+        battle.pbDisplay(_INTL("{1} is no longer fractured!", battler.pbThis))
+    end,
+    :expire_proc => proc do |battle, battler|
+        battle.pbDisplay(_INTL("{1} healed from the fracture!", battler.pbThis))
     end,
     :stay_in_rating_proc => proc do |battle, battler, value, stay_in_rating|
-        stay_in_rating -= 20
+        stay_in_rating -= 5 * value if battler.hasDamagingAttack?
         next stay_in_rating
     end
 })

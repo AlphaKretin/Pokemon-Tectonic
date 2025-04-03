@@ -13,7 +13,7 @@ class PokeBattle_Move_EmpoweredHowl < PokeBattle_Move_RaiseUserAndAlliesAtk2
     include EmpoweredMove
 
     def pbEffectGeneral(user)
-        summonAvatar(user, :POOCHYENA, _INTL("#{user.pbThis} calls out to the pack!"))
+        summonAvatar(user, :POOCHYENA, _INTL("{1} calls out to the pack!", user.pbThis))
         super
         transformType(user, :DARK)
     end
@@ -41,21 +41,21 @@ class PokeBattle_Move_RaiseUserAndAlliesAtk2StartMoonglow8 < PokeBattle_Move_Rai
 end
 
 #===============================================================================
-# Raises Defense of user and allies by 3 steps. (Stand Together)
+# Raises Defense of user and allies by 2 steps. (Stand Together)
 #===============================================================================
-class PokeBattle_Move_RaiseUserAndAlliesDef3 < PokeBattle_TeamStatBuffMove
+class PokeBattle_Move_RaiseUserAndAlliesDef2 < PokeBattle_TeamStatBuffMove
     def initialize(battle, move)
         super
-        @statUp = [:DEFENSE, 3]
+        @statUp = [:DEFENSE, 2]
     end
 end
 
 # Empowered Stand Together
-class PokeBattle_Move_EmpoweredStandTogether < PokeBattle_Move_RaiseUserAndAlliesDef3
+class PokeBattle_Move_EmpoweredStandTogether < PokeBattle_Move_RaiseUserAndAlliesDef2
     include EmpoweredMove
 
     def pbEffectGeneral(user)
-        summonAvatar(user, :TYROGUE, _INTL("#{user.pbThis} joins with an ally!"))
+        summonAvatar(user, :TYROGUE, _INTL("{1} joins with an ally!", user.pbThis))
         super
         transformType(user, :FIGHTING)
     end
@@ -76,28 +76,28 @@ class PokeBattle_Move_EmpoweredMindLink < PokeBattle_Move_RaiseUserAndAlliesSpAt
     include EmpoweredMove
 
     def pbEffectGeneral(user)
-        summonAvatar(user, :ABRA, _INTL("#{user.pbThis} gathers an new mind!"))
+        summonAvatar(user, :ABRA, _INTL("{1} gathers an new mind!", user.pbThis))
         super
         transformType(user, :PSYCHIC)
     end
 end
 
 #===============================================================================
-# Raises Sp. Def of user and allies by 3 steps. (Symbiosis)
+# Raises Sp. Def of user and allies by 2 steps. (Symbiosis)
 #===============================================================================
-class PokeBattle_Move_RaiseUserAndAlliesSpDef3 < PokeBattle_TeamStatBuffMove
+class PokeBattle_Move_RaiseUserAndAlliesSpDef2 < PokeBattle_TeamStatBuffMove
     def initialize(battle, move)
         super
-        @statUp = [:SPECIAL_DEFENSE, 3]
+        @statUp = [:SPECIAL_DEFENSE, 2]
     end
 end
 
 # Empowered Symbiosis
-class PokeBattle_Move_EmpoweredSymbiosis < PokeBattle_Move_RaiseUserAndAlliesSpDef3
+class PokeBattle_Move_EmpoweredSymbiosis < PokeBattle_Move_RaiseUserAndAlliesSpDef2
     include EmpoweredMove
 
     def pbEffectGeneral(user)
-        summonAvatar(user, :GOSSIFLEUR, _INTL("#{user.pbThis} connects with their friend!"))
+        summonAvatar(user, :GOSSIFLEUR, _INTL("{1} connects with their friend!", user.pbThis))
         super
         transformType(user, :GRASS)
     end

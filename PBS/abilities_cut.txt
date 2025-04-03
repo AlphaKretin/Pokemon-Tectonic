@@ -44,6 +44,10 @@ Description = Boosts Sp. Atk and Speed by 25% in rain.
 Name = Breaking Wave
 Description = Slips past hazards. On the first turn, its attacks are always critical.
 #-------------------------------
+[ARCANE]
+Name = Arcane
+Description = Increases Sp. Atk by 30%.
+#-------------------------------
 [AROMAVEIL]
 Name = Aroma Veil
 Description = Protects against attacks that limit move choices.
@@ -339,13 +343,14 @@ Description = The Pokémon and its allies are protected from flinching, Intimida
 Name = Heatproof
 Description = Takes 50% less damage from Fire-type moves.
 #-------------------------------
+[HEAVENSCROWN]
+Name = Heaven's Crown
+Description = If the Pokémon witnesses a total eclipse, it gets to move twice that turn.
+Flags = EclipseSynergy
+#-------------------------------
 [HONORAURA]
 Name = Honorable
 Description = Lowers priority of status moves used by any Pokémon.
-#-------------------------------
-[HOOLIGAN]
-Name = Hooligan
-Description = Powers up recoil and sound moves by 30%.
 #-------------------------------
 [HUGEPOWER]
 Name = Huge Power
@@ -479,6 +484,11 @@ Description = Boosts Defense by 50% if has a status condition. Ignores dizzy def
 [MARVELSKIN]
 Name = Marvel Skin
 Description = Boosts Sp. Def by 50% if has a status condition. Ignores dizzy defenses reduction.
+#-------------------------------
+[MASTERPLAN]
+Name = Master Plan
+Description = Raises each stat by two steps when a total eclipse happens.
+Flags = EclipseSynergy
 #-------------------------------
 [MENDINGTONES]
 Name = Mending Tones
@@ -621,6 +631,7 @@ Description = Becomes charged upon entry, doubling the power of its next Electri
 [PROPELLERTAIL]
 Name = Propeller Tail
 Description = Ignores effects changing the target of a move.
+Flags = RedirectionImmunity
 #-------------------------------
 [PROVING]
 Name = Outrider
@@ -751,6 +762,11 @@ Description = Sets Grassy Terrain for five turns when hit by an attack.
 Name = Perennial Payload
 Description = After fainting from exploding, revives after three turns.
 #-------------------------------
+[SHAKYCODE]
+Name = Shaky Code
+Description = During eclipse, changes the Pokémon's type to the type of the move it's using.
+Flags = EclipseSynergy
+#-------------------------------
 [SHARPNESS]
 Name = Swordplay
 Description = Boosts the power of blade moves by 30%.
@@ -803,6 +819,11 @@ Description = Deals double damage to a target's replacement.
 [STALL]
 Name = Stall
 Description = The Pokémon moves after all other Pokémon do.
+#-------------------------------
+[STALWART]
+Name = Stalwart
+Description = Ignores effects changing the target of a move.
+Flags = RedirectionImmunity
 #-------------------------------
 [STEADFAST]
 Name = Steadfast
@@ -885,6 +906,11 @@ Description = Moves can be used regardless of Abilities.
 [TIMESTRETCH]
 Name = Time Stretch
 Description = Between each turn there's another turn where no one moves.
+#-------------------------------
+[TOLLDANGER]
+Name = Toll Danger
+Description = When a total eclipse occurs, heals for 50% max HP and uses Heal Bell.
+Flags = EclipseSynergy
 #-------------------------------
 [TORRENT]
 Name = Torrent

@@ -187,7 +187,7 @@ class PokEstate
 			
 			if newAwards.length == 1
 				awardDescription = newAwards[0][:description]
-				pbMessage(_INTL("For collecting #{awardDescription}, please take this."))
+				pbMessage(_INTL("For collecting {1}, please take this.", awardDescription))
 			elsif newAwards.length <= 5
 				pbMessage(_INTL("I'll list the feats you've accomplished:"))
 				newAwards.each_with_index do |newAwardInfo, index|
@@ -195,11 +195,11 @@ class PokEstate
 					awardDescription = newAwardInfo[:description]
 					
 					if index == 0
-						pbMessage(_INTL("You've collected #{awardDescription}..."))
+						pbMessage(_INTL("You've collected {1}...", awardDescription))
 					elsif index == newAwards.length - 1
-						pbMessage(_INTL("...and #{awardDescription}."))
+						pbMessage(_INTL("...and {1}.", awardDescription))
 					else
-						pbMessage(_INTL("...#{awardDescription}..."))
+						pbMessage(_INTL("...{1}...", awardDescription))
 					end
 				end
 			else
@@ -218,14 +218,12 @@ class PokEstate
 				awardDescription = newAwardInfo[:description]
 
 				# Tally the items to give out
-				itemCount = 1
-				if awardReward.is_a?(Array)
-					itemGrant = awardReward[0]
-					itemCount = awardReward[1]
-				else
-					itemGrant = awardReward
+				itemGrant = awardReward[0]
+				itemCount = awardReward[1]
+				if itemCount.nil? || itemCount <= 1
+					itemCount = 1
 				end
-
+			  
 				if !itemsToGrantHash.has_key?(itemGrant)
 					itemsToGrantHash[itemGrant] = itemCount
 				else
@@ -452,7 +450,7 @@ class PokEstate
 		form = pokemon.form
 
 		while true
-			command = pbMessage(_INTL("What would you like to do with #{pokemon.name}?"),commands,commands.length,nil,command)
+			command = pbMessage(_INTL("What would you like to do with {1}?", pokemon.name),commands,commands.length,nil,command)
 			if cmdSummary > -1 && command == cmdSummary
 				pbFadeOutIn {
 					scene = PokemonSummary_Scene.new
@@ -470,14 +468,14 @@ class PokEstate
 					chosenPokemon.heal
 					$PokemonStorage[currentBox][currentSlot] = chosenPokemon
 					$Trainer.party[chosenIndex] = pokemon
-					pbMessage(_INTL("You pick #{pokemon.name} up and add it to your party."))
-					pbMessage(_INTL("And place #{chosenPokemon.name} down into the Estate."))
+					pbMessage(_INTL("You pick {1} up and add it to your party.", pokemon.name))
+					pbMessage(_INTL("And place {1} down into the Estate.", chosenPokemon.name))
 					convertEventToPokemon(eventCalling,chosenPokemon)
 					break
 				else  
 					$PokemonStorage[currentBox][currentSlot] = nil
 					$Trainer.party[$Trainer.party.length] = pokemon
-					pbMessage(_INTL("You pick #{pokemon.name} up and add it to your party."))
+					pbMessage(_INTL("You pick {1} up and add it to your party.", pokemon.name))
 					eventCalling.event.pages[0] = RPG::Event::Page.new
 					eventCalling.refresh()
 					break
@@ -537,7 +535,7 @@ class PokEstate
 		modifyCommand = pbMessage(_INTL("Do what with {1}?", pokemon.name),commands,commands.length,nil,modifyCommand)
 		if cmdRename > -1 && modifyCommand == cmdRename
 			currentName = pokemon.name
-			pbTextEntry("#{currentName}'s nickname?",0,Pokemon::MAX_NAME_SIZE,5)
+			pbTextEntry(_INTL("{1}'s nickname?", currentName),0,Pokemon::MAX_NAME_SIZE,5)
 			if pbGet(5)=="" || pbGet(5) == currentName
 			  pokemon.name = currentName
 			else
@@ -586,7 +584,7 @@ class PokEstate
 	
 		box = $PokemonStorage[@estate_box]
 		if box.full?
-			pbMessage(_INTL("Can't set #{pokemon.name} down into the current Estate plot because it is full."))
+			pbMessage(_INTL("Can't set {1} down into the current Estate plot because it is full.", pokemon.name))
 			return false
 		end
 		
@@ -605,7 +603,7 @@ class PokEstate
 		end
 		
 		if !$game_map.passableStrict?(x,y,dir)
-			pbMessage(_INTL("Can't set #{pokemon.name} down, the spot in front of you is blocked."))
+			pbMessage(_INTL("Can't set {1} down, the spot in front of you is blocked.", pokemon.name))
 			return false
 		end
 		
@@ -702,7 +700,7 @@ Events.onMapSceneChange += proc { |_sender, e|
 	next unless $PokEstate.isInEstate?
 	$PokEstate.load_estate_box
 	boxName = $PokemonStorage[$PokEstate.estate_box].name
-	label = _INTL("PokÉstate #{$PokEstate.estate_box +  1}")
+	label = _INTL("PokÉstate {1}", $PokEstate.estate_box +  1)
 	label += " - #{boxName}" if !boxName.eql?("Box #{$PokEstate.estate_box +  1}")
 	scene.spriteset.addUserSprite(LocationWindow.new(label))
 }

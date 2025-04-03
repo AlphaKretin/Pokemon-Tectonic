@@ -221,7 +221,7 @@ def styleFurfrou
 	pbMessage(_INTL("What style would you like me to give it?"))
 	choice = pbShowCommands(nil,possibleFormNames,possibleFormNames.length+1)
 	if choice < possibleForms.length
-		pbMessage(_INTL("#{pkmn.name} swapped to #{possibleFormNames[choice]}!"))
+		pbMessage(_INTL("{1} swapped to {2}!", pkmn.name, possibleFormNames[choice]))
 		
 		pkmn.form = possibleForms[choice].form
 		pkmn.changeHappiness("groom")
@@ -243,7 +243,7 @@ def styleVivillon
 	pbMessage(_INTL("What pattern would you like me to give it?"))
 	choice = pbShowCommands(nil,possibleFormNames,possibleFormNames.length+1)
 	if choice < possibleForms.length
-		pbMessage(_INTL("#{pkmn.name} swapped to #{possibleFormNames[choice]}!"))
+		pbMessage(_INTL("{1} swapped to {2}!", pkmn.name, possibleFormNames[choice]))
 		
 		pkmn.form = possibleForms[choice].form
 		#pkmn.changeHappiness("groom")
@@ -327,14 +327,14 @@ def shinifyPokemonVendor
 	end
 
 	gleamPowderRealName = GameData::Item.get(:GLEAMPOWDER).name
-	pbMessage(_INTL("\\PN hands over the #{gleamPowderRealName}, $30,000, and #{pkmn.name}."))
+	pbMessage(_INTL("\\PN hands over the {1}, $30,000, and {2}.", gleamPowderRealName, pkmn.name))
 
 	pbMessage(_INTL("And so my work begins!"))
 	blackFadeOutIn(30) {
 		$PokemonBag.pbDeleteItem(:GLEAMPOWDER)
 		pkmn.shiny = true
 	}
-	pbMessage(_INTL("Now, bask in the beautiful glow of your shiny #{pkmn.speciesName}!"))
+	pbMessage(_INTL("Now, bask in the beautiful glow of your shiny {1}!", pkmn.speciesName))
 	pbMessage(_INTL("No need to thank me, its beauty is reward enough."))
 	pbMessage(_INTL("The money isn't bad either..."))
 
@@ -364,7 +364,7 @@ def cloneMinorLegend
 	
 	item_data = GameData::Item.get(:ORIGINORE)
 	removeSpeaker
-	pbMessage(_INTL("\\PN hands over the #{item_data.name}."))
+	pbMessage(_INTL("\\PN hands over the {1}.", item_data.name))
 	setSpeaker(HISUIAN_WITCH)
 	pbMessage(_INTL("Now just to work my magicks..."))
 	blackFadeOutIn(30) {
@@ -524,6 +524,7 @@ def hackedTMShop
 		TMHYDROCANNON
 		TMROCKWRECKER
 		TMMETEORASSAULT
+		TMRAILCANNON
 		TMEXPLOSION
 		TMMEMENTO
 		TMRAPIDSPIN
@@ -595,6 +596,7 @@ def heldItemShop
 		REINFORCINGROD
 		LOADEDDICE
 		PROXYFIST COVERTCLOAK
+		COURAGEBADGE CLEARAMULET
 	]	
 
 	pbPokemonMart(

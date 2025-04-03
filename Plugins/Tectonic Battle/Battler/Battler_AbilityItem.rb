@@ -78,8 +78,8 @@ class PokeBattle_Battler
         trainerGroup&.each do |trainer|
             trainerName = trainer.name
             if trainer.tribalBonus.hasTribeBonus?(:SCOURGE)
-                healingMessage = _INTL("#{trainerName}'s team takes joy in #{pbThis(true)}'s pain!")
-                healingMessage = "The opposing #{healingMessage}" if opposingIndex == 1
+                healingMessage = _INTL("{1}'s team takes joy in {2}'s pain!", trainerName, pbThis(true))
+                healingMessage = _INTL("The opposing {1}", healingMessage) if opposingIndex == 1
                 @battle.pbShowTribeSplash(opposingSide, :SCOURGE, trainerName: trainerName)
                 @battle.pbDisplay(healingMessage)
                 trainer.party.each_with_index do |partyMember, index|
@@ -349,6 +349,7 @@ class PokeBattle_Battler
         # Check for berry filching
         unless item_to_use
             eachActiveItem do |item|
+                next if items_to_skip.include?(item)
                 next unless GameData::Item.get(item).is_berry?
                 filcher = nil
 
@@ -360,7 +361,7 @@ class PokeBattle_Battler
                 }
     
                 # If the berry is being filched
-                if filcher && BattleHandlers.triggerHPHealItem(item, filcher, @battle, false, self, :EXTORTER)
+                if filcher && BattleHandlers.triggerHPHealItem(item, filcher, @battle, false, self, :EXTORTER, items_to_skip)
                     filcher.pbHeldItemTriggered(item, false)
                     consumeItem(item)
                 end

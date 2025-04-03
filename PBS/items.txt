@@ -588,7 +588,7 @@ Name = Lumber Axe
 NamePlural = Lumber Axes
 Pocket = 5
 Price = 8000
-Description = Held item which boosts move damage by 25%, but lowers the user's Speed by 1 step on entry.
+Description = Held item which boosts move damage by 25%, but lowers the user's Speed by 15%.
 #-------------------------------
 [HEATROCK]
 Name = Heat Rock
@@ -678,7 +678,7 @@ Name = Fragile Locket
 NamePlural = Fragile Lockets
 Pocket = 5
 Price = 12000
-Description = An item to be held by a Pokémon. The user get both of its legal abilities, but its stats are cut by 10%.
+Description = An item to be held by a Pokémon. The user gets both of its legal abilities, but its stats are cut by 10%.
 #-------------------------------
 [BIGROOT]
 Name = Big Root
@@ -2486,7 +2486,7 @@ NamePlural = Figments
 Pocket = 1
 Price = 8000
 FieldUse = OnPokemon
-Description = A wisp of ideas with infinite potential. Use it on a Pokemon to teach any one of their legal moves.
+Description = A wisp of ideas with infinite potential. Use it on a Pokémon to teach any one of their legal moves.
 #-------------------------------
 [SACCHARITEPICK]
 Name = Saccharite Pick
@@ -2564,12 +2564,12 @@ Flags = KeyItem
 Description = Use on a Pokémon to switch it into another one of its forms.
 #-------------------------------
 [SPANNINGBAND]
-Name = Spanning Band
+Name = Spanning Bands
 NamePlural = Spanning Bands
 Pocket = 8
 Price = 0
 Flags = KeyItem
-Description = An ancient ceramic ring. Unlocks the ability to teleport between Avatar Totems.
+Description = An ancient pair of interlocking ceramic rings. Unlocks the ability to teleport between Avatar Totems.
 #-------------------------------
 [POCKETTOTEM]
 Name = Pocket Totem
@@ -2648,7 +2648,7 @@ NamePlural = Magnetic Gauntlets
 Pocket = 8
 Price = 0
 Flags = KeyItem
-Description = An electrified glove with a claw-like shape. Allows you to recover the first failed Poké Ball thrown in a wild battle.
+Description = An electrified glove with a claw-like shape. Recovers the first failed Poké Ball thrown in a wild battle.
 #-------------------------------
 [CHROMACLARION]
 Name = Chroma Clarion
@@ -3036,7 +3036,7 @@ NamePlural = VIP Cards
 Pocket = 7
 Price = 0
 Flags = KeyItem,SkipPocketMessage
-Description = A glamorous steel card. While holding it, all vendors cost 10% less and Poké Marts have extra items.
+Description = A glamorous steel card. While holding it, all vendors cost 10% less and Pokécenter Marts have extra items.
 #-------------------------------
 [OMINOUSEGG]
 Name = Ominous Egg

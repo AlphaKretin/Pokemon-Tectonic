@@ -940,7 +940,7 @@ class PokemonPokedex_Scene
                         pbMessage(_INTL("Added every species on the current list!"))
                     else
                         pbAddPokemonSilent(@sprites["pokedex"].species, getLevelCap)
-                        pbMessage(_INTL("Added #{@sprites['pokedex'].species}"))
+                        pbMessage(_INTL("Added {1}", @sprites['pokedex'].species))
                     end
                 elsif Input.pressex?(0x57) && $DEBUG # W, for Wild Pokemon
                     pbWildBattle(@sprites["pokedex"].species, getLevelCap)
@@ -1022,7 +1022,7 @@ class PokemonPokedex_Scene
                     next
                 end
 
-                tutorActionSelection = pbMessage("Do what with #{actualMoveID}?",
+                tutorActionSelection = pbMessage(_INTL("Do what with {1}?", actualMoveID),
 [_INTL("Teach"), _INTL("Remove"), _INTL("Replace"), _INTL("Cancel")], 4)
                 return if tutorActionSelection == 3
 
@@ -1078,7 +1078,7 @@ class PokemonPokedex_Scene
                     echoln("Adding #{actualMoveID} to tutorable movesets:")
                     speciesToEdit.each do |species|
                         speciesData = GameData::Species.get(species)
-                        movesList = [speciesData.egg_moves, speciesData.tutor_moves][lineBehaviourSelection]
+                        movesList = [speciesData.line_moves, speciesData.tutor_moves][lineBehaviourSelection]
                         movesList = speciesData.tutor_moves if speciesData.is_solitary?
                         next if movesList.include?(actualMoveID)
                         movesList.push(actualMoveID)
@@ -1089,7 +1089,7 @@ class PokemonPokedex_Scene
                     echoln("Deleting #{actualMoveID} from tutorable movesets:")
                     speciesToEdit.each do |species|
                         speciesData = GameData::Species.get(species)
-                        movesList = [speciesData.egg_moves, speciesData.tutor_moves][lineBehaviourSelection]
+                        movesList = [speciesData.line_moves, speciesData.tutor_moves][lineBehaviourSelection]
                         movesList = speciesData.tutor_moves if speciesData.is_solitary?
                         next unless movesList.include?(actualMoveID)
                         movesList.delete(actualMoveID)
@@ -1100,7 +1100,7 @@ class PokemonPokedex_Scene
                     echoln("Replacing #{actualMoveID} in tutorable movesets with #{replacementActualMoveID}:")
                     speciesToEdit.each do |species|
                         speciesData = GameData::Species.get(species)
-                        movesList = [speciesData.egg_moves, speciesData.tutor_moves][lineBehaviourSelection]
+                        movesList = [speciesData.line_moves, speciesData.tutor_moves][lineBehaviourSelection]
                         movesList = speciesData.tutor_moves if speciesData.is_solitary?
                         next unless movesList.include?(actualMoveID)
                         next if movesList.include?(replacementActualMoveID)
@@ -1110,7 +1110,7 @@ class PokemonPokedex_Scene
                         speciesEdited += 1
                     end
                 end
-                pbMessage(_INTL("#{speciesEdited} species tutorable movesets edited!"))
+                pbMessage(_INTL("{1} species tutorable movesets edited!", speciesEdited))
 
                 GameData::Species.save
                 Compiler.write_pokemon

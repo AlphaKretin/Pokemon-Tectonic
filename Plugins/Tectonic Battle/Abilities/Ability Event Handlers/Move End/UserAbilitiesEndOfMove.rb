@@ -307,6 +307,15 @@ BattleHandlers::UserAbilityEndOfMove.add(:ICEQUEEN,
   }
 )
 
+BattleHandlers::UserAbilityEndOfMove.add(:ASTRALHARVEST,
+  proc { |ability, user, targets, move, battle, _switchedBattlers|
+      next if battle.futureSight
+      next unless move.damagingMove?
+      next unless battle.eclipsed?
+      user.pbRecoverHPFromMultiDrain(targets, 0.50, ability: ability)
+  }
+)
+
 BattleHandlers::UserAbilityEndOfMove.add(:SILVERSENSE,
   proc { |ability, user, targets, move, battle, _switchedBattlers|
       next if battle.futureSight
@@ -325,7 +334,7 @@ BattleHandlers::UserAbilityEndOfMove.add(:TORPORSAP,
         asleepTargets.push(target)
       end
       next if asleepTargets.length == 0
-      user.pbRecoverHPFromMultiDrain(asleepTargets, 0.25, ability: ability)
+      user.pbRecoverHPFromMultiDrain(asleepTargets, 0.50, ability: ability)
   }
 )
 

@@ -294,6 +294,9 @@ sp.form) && !Settings::DEX_SHOWS_ALL_FORMS
         formname = ""
         base   = MessageConfig.pbDefaultTextMainColor
         shadow = MessageConfig.pbDefaultTextShadowColor
+
+        mutabilityLabelsX = Graphics.width/2 - 60
+
         for i in @available
             next unless i[2] == @form
             fSpecies = GameData::Species.get_species_form(@species, i[2])
@@ -301,7 +304,7 @@ sp.form) && !Settings::DEX_SHOWS_ALL_FORMS
             # ability 1
             abilityTextX = 30
             abilityIDLabelX = 380
-            ability1Y = 76
+            ability1Y = 52
             drawTextEx(overlay, abilityIDLabelX, ability1Y, 450, 1, _INTL("Ability 1"), base, shadow)
             if abilities[0]
                 ability1 = GameData::Ability.get(abilities[0])
@@ -317,12 +320,19 @@ sp.form) && !Settings::DEX_SHOWS_ALL_FORMS
               abilityNameShadow)
 
                 ability1Description = addBattleKeywordHighlighting(ability1.description)
-                drawFormattedTextEx(overlay, abilityTextX, ability1Y + 32, 450, ability1Description, base, shadow)
+                drawFormattedTextEx(overlay, abilityTextX, ability1Y + 34, 450, ability1Description, base, shadow)
+                
+                # add mutability labels
+                if ability1.is_immutable_ability?
+                    drawFormattedTextEx(overlay, mutabilityLabelsX, ability1Y + 134, 450, "Immutable", base, shadow)
+                elsif ability1.is_uncopyable_ability?
+                    drawFormattedTextEx(overlay, mutabilityLabelsX, ability1Y + 134, 450, "Uncopyable", base, shadow)
+                end
             else
                 drawTextEx(overlay, abilityTextX, 128, 450, 1, _INTL("None"), base, shadow)
             end
             # ability 2
-            ability2Y = 236
+            ability2Y = 219
             drawTextEx(overlay, abilityIDLabelX, ability2Y, 450, 1, _INTL("Ability 2"), base, shadow)
             if abilities[1]
                 ability2 = GameData::Ability.get(abilities[1])
@@ -338,7 +348,14 @@ sp.form) && !Settings::DEX_SHOWS_ALL_FORMS
               abilityNameShadow)
 
                 ability2Description = addBattleKeywordHighlighting(ability2.description)
-                drawFormattedTextEx(overlay, abilityTextX, ability2Y + 32, 450, ability2Description, base, shadow)
+                drawFormattedTextEx(overlay, abilityTextX, ability2Y + 34, 450, ability2Description, base, shadow)
+                
+                # add mutability labels
+                if ability2.is_immutable_ability?
+                    drawFormattedTextEx(overlay, mutabilityLabelsX, ability2Y + 134, 450, "Immutable", base, shadow)
+                elsif ability2.is_uncopyable_ability?
+                    drawFormattedTextEx(overlay, mutabilityLabelsX, ability2Y + 134, 450, "Uncopyable", base, shadow)
+                end
             else
                 drawTextEx(overlay, abilityTextX, ability2Y, 450, 1, _INTL("None"), base, shadow)
             end
@@ -711,7 +728,7 @@ sp.form) && !Settings::DEX_SHOWS_ALL_FORMS
         for i in @available
             next unless i[2] == @form
             fSpecies = GameData::Species.get_species_form(@species, i[2])
-            learnset = fSpecies.moves
+            learnset = fSpecies.level_moves
             displayIndex = 0
             @scrollableLists = [learnset]
             learnset.each_with_index do |learnsetEntry, listIndex|
@@ -929,9 +946,12 @@ sp.form) && !Settings::DEX_SHOWS_ALL_FORMS
     def getEncounterableAreas(species)
         areas = []
         GameData::Encounter.each_of_version($PokemonGlobal.encounter_version) do |enc_data|
+            map_is_hidden = false
             if hidden_map_encounter_switch_hash.key?(enc_data.map)
                 switchID = hidden_map_encounter_switch_hash[enc_data.map]
-                next unless $game_switches[switchID]
+                if !$game_switches[switchID] then
+                    map_is_hidden = true
+                end
             end
 
             enc_data.types.each do |type, slots|
@@ -948,7 +968,15 @@ sp.form) && !Settings::DEX_SHOWS_ALL_FORMS
                         pbGetMessage(MessageTypes::MapNames, enc_data.map)
                     rescue StandardError
                         nil
-                    end || "???"
+                    end || "???" # This line doesn't seem to work as intended but I don't want to mess with it unnecessarily
+                    # Handle errors with missing maps
+                    if mapName == nil || mapName == "" then
+                        mapName = _INTL("Unknown Map")
+                    end
+                    # Obscure map name if secret map is undiscovered
+                    if map_is_hidden then
+                        mapName = "???"
+                    end
                     encounterTypeName = getNameForEncounterType(type)
 
                     encounterChance = "%g" % (100 * (slot[0] / totalEncounterWeight.to_f)).round(1)
@@ -1289,11 +1317,11 @@ sp.form) && !Settings::DEX_SHOWS_ALL_FORMS
 
             # Use count
             useCount = @speciesUseData[entry[:species]]
-            drawTextEx(overlay, xLeft, coordinateY, 450, 1, _INTL("Use count: #{useCount[0]}, #{useCount[1]}"), base, shadow)
+            drawTextEx(overlay, xLeft, coordinateY, 450, 1, _INTL("Use count: {1}, {2}", useCount[0], useCount[1]), base, shadow)
             coordinateY += 32
 
             # Earliest level accessible
-            drawTextEx(overlay, xLeft, coordinateY, 450, 1, _INTL("Earliest level: #{fSpecies.earliest_available}"), base, shadow)
+            drawTextEx(overlay, xLeft, coordinateY, 450, 1, _INTL("Earliest level: {1}", fSpecies.earliest_available), base, shadow)
             coordinateY += 32
 
             # Speed tier
@@ -1311,7 +1339,7 @@ sp.form) && !Settings::DEX_SHOWS_ALL_FORMS
 
             fasterThanPercentOfMetaGame = numberFaster.to_f / total.to_f
             fasterThanPercentOfMetaGame = (fasterThanPercentOfMetaGame * 10_000).floor / 100.0
-            drawTextEx(overlay, xLeft, coordinateY, 450, 1, _INTL("Faster than #{fasterThanPercentOfMetaGame}% of final evos"), base,
+            drawTextEx(overlay, xLeft, coordinateY, 450, 1, _INTL("Faster than {1}% of final evos", fasterThanPercentOfMetaGame), base,
               shadow)
             coordinateY += 32
 
@@ -1320,7 +1348,7 @@ sp.form) && !Settings::DEX_SHOWS_ALL_FORMS
             currentHP = (totalHP * 0.15).floor
             chanceToCatch = theoreticalCaptureChance(:NONE, currentHP, totalHP, fSpecies.catch_rate)
             chanceToCatch = (chanceToCatch * 10_000).floor / 100.0
-            drawTextEx(overlay, xLeft, coordinateY, 450, 1, _INTL("#{chanceToCatch}% chance to catch at level 40, %15 health"), base,
+            drawTextEx(overlay, xLeft, coordinateY, 450, 1, _INTL("{1}% chance to catch at level 40, %15 health", chanceToCatch), base,
               shadow)
             coordinateY += 32
 
@@ -1329,7 +1357,7 @@ sp.form) && !Settings::DEX_SHOWS_ALL_FORMS
             typesOfCoverage = get_bnb_coverage(fSpecies)
 
             drawTextEx(overlay, xLeft, coordinateY, 450, 1,
-                _INTL("BnB coverage #{typesOfCoverage.length}: #{typesOfCoverage[0..[2, typesOfCoverage.length].min]}"), base, shadow)
+                _INTL("BnB coverage {1}: {2}", typesOfCoverage.length, typesOfCoverage[0..[2, typesOfCoverage.length].min]), base, shadow)
             coordinateY += 32
             if typesOfCoverage.length > 2
                 for index in 1..10
@@ -1362,11 +1390,11 @@ sp.form) && !Settings::DEX_SHOWS_ALL_FORMS
 
             coversPercentOfMetaGame = numberCovered.to_f / total.to_f
             coversPercentOfMetaGame = (coversPercentOfMetaGame * 10_000).floor / 100.0
-            drawTextEx(overlay, xLeft, coordinateY, 450, 1, _INTL("Covers #{coversPercentOfMetaGame}% of final evos"), base,
+            drawTextEx(overlay, xLeft, coordinateY, 450, 1, _INTL("Covers {1}% of final evos", coversPercentOfMetaGame), base,
               shadow)
             coordinateY += 32
 
-            drawTextEx(overlay, xLeft, coordinateY, 450, 6, _INTL("Notes: #{fSpecies.notes}"), base, shadow)
+            drawTextEx(overlay, xLeft, coordinateY, 450, 6, _INTL("Notes: {1}", fSpecies.notes), base, shadow)
             coordinateY += 32
         end
     end

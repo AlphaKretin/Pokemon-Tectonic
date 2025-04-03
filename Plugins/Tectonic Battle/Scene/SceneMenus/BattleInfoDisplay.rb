@@ -130,7 +130,7 @@ class BattleInfoDisplay < SpriteWrapper
 
         # Draw the turn count
         turnCountX = battleInfoTitleX + 152
-        turnCountMessage = _INTL("Turn #{@battle.turnCount + 1}")
+        turnCountMessage = _INTL("Turn {1}", @battle.turnCount + 1)
         textToDraw.push([turnCountMessage, turnCountX, 0, 2, base, shadow])
 
         # Draw the weather name with duration
@@ -347,7 +347,7 @@ class BattleInfoDisplay < SpriteWrapper
 
         # List abilities that were added by effects
         battler.addedAbilities.each do |abilityID|
-            battlerEffects.push(_INTL("Ability: #{getAbilityName(abilityID)}"))
+            battlerEffects.push(_INTL("Ability: {1}", getAbilityName(abilityID)))
         end
 
         scrolling = true if battlerEffects.length > 8

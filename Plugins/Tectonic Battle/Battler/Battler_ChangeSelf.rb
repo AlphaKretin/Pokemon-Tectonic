@@ -162,6 +162,10 @@ class PokeBattle_Battler
         # Nerve Break, Bad Influence
         if healingReversed?(showMessage && !aiCheck)
             amt *= -1
+        elsif boss?
+            if @hp <= avatarPhaseLowerHealthBound && @hp + amt > avatarPhaseLowerHealthBound # Cap boss healing at the next health boundary
+                amt = avatarPhaseLowerHealthBound - @hp
+            end
         end
 
         # Actually perform the HP change
@@ -335,7 +339,7 @@ class PokeBattle_Battler
                     reviver = faintedPartyMembers.sample
                     reviver.heal_HP
                     reviver.heal_status
-                    pbDisplay(_INTL("Its allied #{reviver.name} was revived to full health!"))
+                    pbDisplay(_INTL("Its allied {1} was revived to full health!", reviver.name))
                 end
             end
 
@@ -483,6 +487,8 @@ class PokeBattle_Battler
                 when :Rainstorm, :HeavyRain then newForm = 2
                 when :Hail             then newForm = 3
                 when :Sandstorm        then newForm = 4
+                when :Moonglow, :BloodMoon  then newForm = 5
+                when :Eclipse, :RingEclipse then newForm = 6    
                 end
                 if @form != newForm
                     showMyAbilitySplash(:FORECAST, true)
