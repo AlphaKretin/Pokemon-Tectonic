@@ -159,7 +159,7 @@ Flags = NoPerfect
 Pokemon = DELPHOX,70
     Name = Freya
     Gender = female
-    Moves = FLAREWITCH,MYSTICALFIRE,MINDWARP,SUNSHINE
+    Moves = FLAREWITCH,MYSTICALFIRE,PIERCINGDOUBT,SUNSHINE
     AbilityIndex = 0 # Blinding Light
     Item = WISEGLASSES
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
@@ -610,7 +610,7 @@ Pokemon = METAGROSS,70
 [LEGACYCYRUS,Cyrus]
 Flags = NoPerfect
 Pokemon = HOUNDOMINUS,70
-    Moves = MASSDESTRUCTION,HEATWAVE,SLUDGEBOMB,DARKPULSE
+    Moves = MASSDESTRUCTION,HEATWAVE,SLUDGEWAVE,DARKPULSE
     AbilityIndex = 1 # Berserk
     Item = FOCUSSASH
     # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
