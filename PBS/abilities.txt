@@ -44,7 +44,7 @@ Description = Powers up ally Pokémon's special moves by 30%.
 #-------------------------------
 [BERSERK]
 Name = Berserk
-Description = Raises Attack and Sp. Atk by two steps each when its HP is lowered below half.
+Description = Raises Attack and Sp. Atk by two steps when its HP is lowered below half.
 #-------------------------------
 [CHEEKPOUCH]
 Name = Cheek Pouch
@@ -130,7 +130,7 @@ Flags = Immutable
 #-------------------------------
 [DOWNLOAD]
 Name = Download
-Description = Boosts one Attacking stat by two steps according to the foe's defenses.
+Description = Boosts either Attack or Sp. Atk by two steps according to the foe's defenses.
 #-------------------------------
 [DRAGONSMAW]
 Name = Dragon's Maw
@@ -183,7 +183,7 @@ Description = Doubles Defense. The Pokémon takes double damage from Fire-type m
 [FORECAST]
 Name = Forecast
 Description = Castform transforms with the weather.
-Flags = Immutable
+Flags = Immutable,AllWeatherSynergy
 #-------------------------------
 [FRIENDGUARD]
 Name = Friend Guard
@@ -275,7 +275,7 @@ Flags = Immutable
 #-------------------------------
 [INFILTRATOR]
 Name = Infiltrator
-Description = Ignores screens and other barriers, Substitute, and boosted defensive stats.
+Description = Ignores screens and other barriers, Substitute, and boosted Defense and Sp. Def.
 #-------------------------------
 [INNARDSOUT]
 Name = Innards Out
@@ -285,6 +285,10 @@ Description = Damages an attacker that lands the finishing hit.
 Name = Inner Focus
 Description = The Pokémon is protected from flinching, Intimidate, Fascinate, and Frustrate.
 Flags = FlinchImmunity
+#-------------------------------
+[INSOMNIA]
+Name = Insomnia
+Description = Prevents the Pokémon from falling asleep.
 #-------------------------------
 [INTIMIDATE]
 Name = Intimidate
@@ -388,7 +392,7 @@ Description = Child attacks after the parent, for 25% of the previous damage.
 #-------------------------------
 [PERISHBODY]
 Name = Perish Body
-Description = When it takes a hit, both Pokémon faint after 3 turns.
+Description = When it takes a hit, the Pokémon and the attacker both faint after 3 turns.
 Flags = SetupCounterAI
 #-------------------------------
 [POISONPOINT]
@@ -468,10 +472,6 @@ Description = Protects the Pokémon from recoil damage.
 Name = Rough Skin
 Description = Physical moves against it inflict 1/8th max HP damage to the foe.
 #-------------------------------
-[ROYALMAJESTY]
-Name = Royal Majesty
-Description = Makes foes unable to use priority moves.
-#-------------------------------
 [SANDPOWER]
 Name = Sand Power
 Description = Boosts Sp. Atk by 30% in sandstorm.
@@ -484,7 +484,7 @@ Flags = SandstormSynergy
 #-------------------------------
 [SANDSHROUD]
 Name = Sand Shroud
-Description = Takes 25% less damage in a sandstorm.
+Description = Takes 30% less damage in a sandstorm.
 Flags = SandstormSynergy
 #-------------------------------
 [SANDSTREAM]
@@ -494,7 +494,7 @@ Flags = SandstormSynergy
 #-------------------------------
 [SAPSIPPER]
 Name = Sap Sipper
-Description = Immune to Grass-type moves, and raises both attacking stats when hit by one.
+Description = Immune to Grass-type moves, and raises Attack and Sp. Atk when hit by one.
 #-------------------------------
 [SCHOOLING]
 Name = Schooling
@@ -557,7 +557,7 @@ Flags = HailSynergy
 #-------------------------------
 [SNIPER]
 Name = Sniper
-Description = Doubles critical hit chance. Powers up critical hits by another 50%.
+Description = Doubles the critical hit chance of random crit moves. Powers up critical hits by another 50%.
 #-------------------------------
 [SNOWWARNING]
 Name = Snow Warning
@@ -612,7 +612,8 @@ Description = It can't be knocked out with one hit.
 #-------------------------------
 [SUPERLUCK]
 Name = Super Luck
-Description = Four times more likely for moves to be critical.
+Description = Quadruples the critical hit chance of random crit moves.
+Flags = EnablesRandomCrits
 #-------------------------------
 [SWIFTSWIM]
 Name = Swift Swim
@@ -661,7 +662,7 @@ Description = Every other turn, the Pokémon can't use any move but Slack Off.
 #-------------------------------
 [UNAWARE]
 Name = Unaware
-Description = Ignores defensive stat changes in opponents it's hitting, and offensive stat steps in foes hitting it.
+Description = Ignores modified Defense and Sp. Def while attacking, and ignores modified Attack and Sp. Atk while being attacked.
 #-------------------------------
 [UNBURDEN]
 Name = Unburden

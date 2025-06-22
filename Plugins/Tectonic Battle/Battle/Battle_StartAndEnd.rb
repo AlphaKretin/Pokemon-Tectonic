@@ -588,20 +588,24 @@ class PokeBattle_Battle
         priority = pbPriority(true)   # in order of fastest -> slowest speeds only
         
         pbSORWeather(priority) unless @turnCount == 0
+
+        # Switch Pokémon in if possible
+        pbEORSwitch
     end
 
     #=============================================================================
     # End of battle
     #=============================================================================
+    def moneyMult
+        moneyMult = 1
+        moneyMult *= 1.5 if @field.effectActive?(:AmuletCoin)
+        moneyMult *= 1.5 if @field.effectActive?(:HardWorker)
+        moneyMult *= 1.1 if playerTribalBonus.hasTribeBonus?(:INDUSTRIOUS)
+        return moneyMult
+    end
+
     def pbGainMoney
         return if !@internalBattle || !@moneyGain
-
-        moneyMult = 1
-        moneyMult *= 2 if @field.effectActive?(:AmuletCoin)
-        moneyMult *= 2 if @field.effectActive?(:HappyHour)
-        moneyMult *= 2 if @field.effectActive?(:Fortune)
-        moneyMult *= 1.1 if playerTribalBonus.hasTribeBonus?(:INDUSTRIOUS)
-
         # Money rewarded from opposing trainers
         if trainerBattle?
             tMoney = 0
@@ -619,7 +623,6 @@ class PokeBattle_Battle
         # Pick up money scattered by Pay Day
         if @field.effectActive?(:PayDay)
             paydayMoney = @field.effects[:PayDay]
-            paydayMoney = (paydayMoney * moneyMult).floor
             oldMoney = pbPlayer.money
             pbPlayer.money += paydayMoney
             moneyGained = pbPlayer.money - oldMoney
@@ -764,6 +767,9 @@ class PokeBattle_Battle
             pkmn.boss?
         }
         pbParty(0).compact!
+
+        # Reset max PPs
+        setMaxPPs(false)
 
         return @decision
     end

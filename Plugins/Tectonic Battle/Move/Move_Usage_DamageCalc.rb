@@ -113,8 +113,7 @@ class PokeBattle_Move
         end
 
         attack_step = attacking_stat_holder.steps[attacking_stat]
-        critical = target.damageState.critical
-        critical = false if aiCheck
+        critical = aiCheck ? pbIsCritical?(user,target,true) : target.damageState.critical
         attack_step = 0 if critical && attack_step < 0
         attack_step = 0 if targetIsUnaware?(target) && !@battle.moldBreaker
         attack = attacking_stat_holder.getFinalStat(attacking_stat, aiCheck, attack_step)
@@ -405,17 +404,7 @@ class PokeBattle_Move
         # Mystic tribe
         if user.hasTribeBonus?(:MYSTIC) && user.lastRoundMoveCategory == 2 # Status
             multipliers[:final_damage_multiplier] *= 1.25
-        end
-
-        # Warrior tribe
-        if user.hasTribeBonus?(:WARRIOR)
-            if checkingForAI
-                expectedTypeMod = @battle.battleAI.pbCalcTypeModAI(type, user, target, self)
-                multipliers[:final_damage_multiplier] *= 1.12 if Effectiveness.super_effective?(expectedTypeMod)
-            else
-                multipliers[:final_damage_multiplier] *= 1.12 if Effectiveness.super_effective?(target.damageState.typeMod)
-            end
-        end      
+        end    
 
         # Scavenger tribe
         if user.hasTribeBonus?(:SCAVENGER)
@@ -424,6 +413,16 @@ class PokeBattle_Move
             else
                 multipliers[:final_damage_multiplier] *= 1.25 if user.effectActive?(:GemConsumed)
             end
+        end
+
+        # Tactician tribe
+        if user.hasTribeBonus?(:TACTICIAN)
+            if checkingForAI
+                multipliers[:final_damage_multiplier] *= 1.15 if @battle.battleAI.userMovesFirst?(self, user, target)
+            elsif !target.movedThisRound?  
+                echoln("TACTICIAN ACTIVATING!!!")
+                multipliers[:final_damage_multiplier] *= 1.15
+            end    
         end
 
         # Harmonic tribe
@@ -436,14 +435,14 @@ class PokeBattle_Move
             multipliers[:final_damage_multiplier] *= 0.8
         end
 
-        # Stampede tribe
-        if target.hasTribeBonus?(:STAMPEDE) && target.effectActive?(:ChoseAttack)
-            multipliers[:final_damage_multiplier] *= 0.88
+        # Warrior tribe
+        if target.hasTribeBonus?(:WARRIOR) && target.effectActive?(:ChoseAttack)
+            multipliers[:final_damage_multiplier] *= 0.85
         end
 
         # Noble tribe
         if target.hasTribeBonus?(:NOBLE) && target.effectActive?(:ChoseStatus)
-            multipliers[:final_damage_multiplier] *= 0.88
+            multipliers[:final_damage_multiplier] *= 0.85
         end
     end
       
@@ -495,11 +494,11 @@ class PokeBattle_Move
             end
             # Echo
             if user.effectActive?(:Echo)
-                multipliers[:final_damage_multiplier] *= 0.75
+                multipliers[:final_damage_multiplier] *= 0.50
             end
             # Martial Discipline
             if user.effectActive?(:MartialDiscipline)
-                multipliers[:final_damage_multiplier] *= 0.75
+                multipliers[:final_damage_multiplier] *= 0.50
             end
             # Refuge
             if target.effectActive?(:RefugeDamageReduction)
@@ -527,16 +526,9 @@ class PokeBattle_Move
         multipliers[:base_damage_multiplier] *= [0,(1.0 - target.dmgResist.to_f)].max
 
         # Critical hits
-        if aiCheck
-            rate = pbIsCritical?(user,target,true)
-
-            if rate >= 5
-                multipliers[:final_damage_multiplier] *= criticalHitMultiplier(user,target)
-            end
-        else
-            if target.damageState.critical
-                multipliers[:final_damage_multiplier] *= criticalHitMultiplier(user,target)
-            end
+        if (aiCheck && pbIsCritical?(user,target,true)) || (!aiCheck && target.damageState.critical)
+            echoln("[CRITICAL CALC] #{user.pbThis}'s #{self.name} is predicted to critical hit against target #{target.pbThis(true)}") if aiCheck
+            multipliers[:final_damage_multiplier] *= criticalHitMultiplier(user,target)
         end
 
         # Random variance (What used to be for that)

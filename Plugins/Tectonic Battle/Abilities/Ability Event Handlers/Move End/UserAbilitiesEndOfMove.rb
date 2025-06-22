@@ -162,6 +162,19 @@ BattleHandlers::UserAbilityEndOfMove.add(:ASONEGHOST,
   }
 )
 
+BattleHandlers::UserAbilityEndOfMove.add(:RECLAMATION,
+  proc { |ability, user, targets, _move, battle, _switchedBattlers|
+      next if battle.pbAllFainted?(user.idxOpposingSide)
+      numFainted = 0
+      targets.each { |b| numFainted += 1 if b.damageState.fainted }
+      next if numFainted == 0
+      next unless user.recyclableItem
+      next if user.hasItem?(user.recyclableItem)
+      recyclingMsg = _INTL("{1} reclaims its {2}!", user.pbThis, getItemName(user.recyclableItem))
+      user.recycleItem(recyclingMsg: recyclingMsg, ability: ability)
+  }
+)
+
 ########################################################################
 # Other abilities
 ########################################################################
@@ -204,7 +217,7 @@ BattleHandlers::UserAbilityEndOfMove.add(:GILD,
           next unless b.hasAnyItem?
           next unless move.knockOffItems(user, b, ability: ability) do |itemRemoved, itemName|
             battle.pbDisplay(_INTL("{1} turned {2}'s {3} into gold!", user.pbThis, b.pbThis(true), itemName))
-            battle.field.incrementEffect(:PayDay, 5 * user.level) if user.pbOwnedByPlayer?
+            user.generateMoney(8)
           end
           break
       end
@@ -220,21 +233,21 @@ BattleHandlers::UserAbilityEndOfMove.add(:SPACEINTERLOPER,
 BattleHandlers::UserAbilityEndOfMove.add(:SOUNDBARRIER,
   proc { |ability, user, _targets, move, _battle, _switchedBattlers|
       next unless move.soundMove?
-      user.pbRaiseMultipleStatSteps(DEFENDING_STATS_1, user, ability: ability)
+      defenseStatStackingAbility(ability, user)
   }
 )
 
 BattleHandlers::UserAbilityEndOfMove.add(:AEROSHELL,
   proc { |ability, user, _targets, move, _battle, _switchedBattlers|
-    next unless move.windMove?
-    user.pbRaiseMultipleStatSteps(DEFENDING_STATS_1, user, ability: ability)
+      next unless move.windMove?
+      defenseStatStackingAbility(ability, user)
   }
 )
 
-BattleHandlers::UserAbilityEndOfMove.add(:COSMICCONTACT,
+BattleHandlers::UserAbilityEndOfMove.add(:SPARESCALES,
   proc { |ability, user, _targets, move, _battle, _switchedBattlers|
-    next unless move.statusMove?
-    user.pbRaiseMultipleStatSteps(DEFENDING_STATS_1, user, ability: ability)
+      next unless %i[GRASS GROUND STEEL].include?(move.calcType)
+      defenseStatStackingAbility(ability, user)
   }
 )
 
@@ -467,13 +480,6 @@ BattleHandlers::UserAbilityEndOfMove.add(:BELLOWER,
         b.applyEffect(:Torment)
       end
       battle.pbHideAbilitySplash(user)
-  }
-)
-
-BattleHandlers::UserAbilityEndOfMove.add(:SPARESCALES,
-  proc { |ability, user, _targets, move, _battle, _switchedBattlers|
-      next unless %i[GRASS GROUND STEEL].include?(move.calcType)
-      user.pbRaiseMultipleStatSteps(DEFENDING_STATS_1, user, ability: ability)
   }
 )
 

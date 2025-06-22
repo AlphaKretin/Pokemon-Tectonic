@@ -192,6 +192,15 @@ GameData::Move.get(@effects[:GorillaTactics]).name)
             return false
         end
 
+        if effectActive?(:IceSculpture)
+            if aiCheck
+                echoln("\t\t[AI FAILURE CHECK] #{pbThis} rejects the move #{move.id} due to being an ice sculpture.")  
+            else
+                @battle.pbDisplay(_INTL("{1} is an ice sculpture! It can't move!", pbThis))
+            end
+            return false
+        end
+
         if effectActive?(:HyperBeam) # Intentionally before Truant
             if aiCheck
                 echoln("\t\t[AI FAILURE CHECK] #{pbThis} rejects the move #{move.id} due to exhaustion failure (Hyperbeam, etc.)")
@@ -230,6 +239,20 @@ GameData::Move.get(@effects[:GorillaTactics]).name)
                         return false
                     end
                 end
+            end
+        end
+
+        # Pacifist
+        if hasActiveAbility?(:PACIFIST)
+            if aiCheck
+                echoln("\t\t[AI FAILURE CHECK] #{pbThis} rejects the move #{move.id} due to it being predicted to refuse to move (Pacifist)")
+                return false
+            else
+                showMyAbilitySplash(:PACIFIST)
+                @battle.pbDisplay(_INTL("{1} refuses to battle!", pbThis))
+                onMoveFailed(move)
+                hideMyAbilitySplash
+                return false
             end
         end
 
@@ -367,12 +390,20 @@ animationName, show_message) do
 
         # Magic Coat/Magic Bounce/Magic Shield
         if move.canMagicCoat? && !target.semiInvulnerable? && target.opposes?(user)
-            if target.effectActive?(:MagicCoat)
-                unless aiCheck
+            if aiCheck
+                if target.canChooseMagicCoat? || target.effectActive?(:EmpoweredMagicCoat)
+                    return false              
+                end
+            else
+                if target.effectActive?(:EmpoweredMagicCoat)
+                    target.damageState.magicCoat = true
+                    return false
+                end
+                if target.effectActive?(:MagicCoat)
                     target.damageState.magicCoat = true
                     target.disableEffect(:MagicCoat)
+                    return false
                 end
-                return false
             end
             if target.hasActiveAbility?(:MAGICBOUNCE) && !@battle.moldBreaker
                 unless aiCheck
@@ -402,7 +433,8 @@ animationName, show_message) do
             return false
         elsif targetTypeModImmune?(user, target, move, typeMod, show_message, aiCheck)
             if !aiCheck && target.effectActive?(:Illusion)
-                target.aiLearnsAbility(:ILLUSION)
+                target.aiLearnsAbility(:ILLUSION) if target.hasActiveAbility?(:ILLUSION)
+                target.aiLearnsAbility(:INCOGNITO) if target.hasActiveAbility?(:INCOGNITO)
             end
             return false
         end

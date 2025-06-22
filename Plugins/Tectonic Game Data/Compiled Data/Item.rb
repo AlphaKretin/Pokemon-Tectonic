@@ -51,10 +51,9 @@ module GameData
         return "Graphics/Items/000" if item_data.nil?
         itemID = item_data.id
         # Check for files
-        ret = sprintf("Graphics/Items/%s", itemID)
-        if itemID == :TAROTAMULET && $PokemonGlobal.tarot_amulet_active
-            ret += "_ACTIVE"
-        end
+        ret = itemID.to_s
+        ret = ItemIconEvents::triggerModifyItemIconFileName(item, ret)
+        ret = sprintf("Graphics/Items/%s", ret)
         return ret if pbResolveBitmap(ret)
         # Check for TM/HM type icons
         if item_data.is_machine?
@@ -111,6 +110,7 @@ module GameData
         @battle_use       = hash[:battle_use]  || 0
         @type             = hash[:type]        || 0
         @flags            = hash[:flags]       || []
+        @flags.uniq!
         @consumable       = hash[:consumable]
         @consumable       = !is_important? if @consumable.nil?
         @move             = hash[:move]
@@ -413,6 +413,7 @@ module Compiler
           property_value = pbGetCsvRecord($~[2], line_no, line_schema)
           # Record XXX=YYY setting
           item_hash[line_schema[0]] = property_value
+          next if path == "PBS/items_cut.txt"
           case property_name
           when "Name"
             item_names.push(item_hash[:name])

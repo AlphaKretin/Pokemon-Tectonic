@@ -185,6 +185,28 @@ class PokeBattle_Move_SmellingSalts < PokeBattle_Move
 end
 
 #===============================================================================
+# Power is doubled if the target is waterlogged. Cures the target of waterlog.
+# (Drainage)
+#===============================================================================
+class PokeBattle_Move_Drainage < PokeBattle_Move
+    def pbBaseDamage(baseDmg, _user, target)
+        baseDmg *= 2 if target.waterlogged?
+        return baseDmg
+    end
+
+    def pbEffectAfterAllHits(_user, target)
+        return if target.fainted?
+        return if target.damageState.unaffected || target.damageState.substitute
+        target.pbCureStatus(true, :WATERLOG)
+    end
+
+    def getTargetAffectingEffectScore(_user, target)
+        return -30 if target.waterlogged?
+        return 0
+    end
+end
+
+#===============================================================================
 # Power is doubled if the target is asleep. Wakes the target up. (Wake-Up Slap)
 #===============================================================================
 class PokeBattle_Move_WakeUpSlap < PokeBattle_Move
@@ -226,6 +248,10 @@ class PokeBattle_Move_DoubleDamageTargetStatused < PokeBattle_Move
         baseDmg *= 2 if target.pbHasAnyStatus?
         return baseDmg
     end
+end
+
+class PokeBattle_Move_EmpoweredCruelty < PokeBattle_Move_DoubleDamageTargetStatused
+    include EmpoweredMove
 end
 
 #===============================================================================
@@ -534,7 +560,7 @@ class PokeBattle_Move_PowerBoostTargetMoved25Percent < PokeBattle_Move
 end
 
 #===============================================================================
-# Always critical hit vs Opponents with raised stats (Humble)
+# Always critical hit vs Opponents with raised stats (Humble, Piercing doubt)
 #===============================================================================
 class PokeBattle_Move_CritsAgainstRaisedStats < PokeBattle_Move
     def pbCriticalOverride(_user, target)

@@ -1,61 +1,5 @@
 ﻿# See the documentation on the wiki to learn how to edit this file.
 #-------------------------------
-[PIKACHU,3]
-FormName = Cosplay
-Pokedex = Whenever Pikachu comes across something new, it blasts it with a jolt of electricity. If you come across a blackened berry, it's evidence that this Pokémon mistook the intensity of its charge.
-#-------------------------------
-[PIKACHU,4]
-FormName = Cosplay - Belle
-Pokedex = Whenever Pikachu comes across something new, it blasts it with a jolt of electricity. If you come across a blackened berry, it's evidence that this Pokémon mistook the intensity of its charge.
-#-------------------------------
-[PIKACHU,5]
-FormName = Cosplay - Libre
-Pokedex = Whenever Pikachu comes across something new, it blasts it with a jolt of electricity. If you come across a blackened berry, it's evidence that this Pokémon mistook the intensity of its charge.
-#-------------------------------
-[PIKACHU,6]
-FormName = Cosplay - Ph.D.
-Pokedex = Whenever Pikachu comes across something new, it blasts it with a jolt of electricity. If you come across a blackened berry, it's evidence that this Pokémon mistook the intensity of its charge.
-#-------------------------------
-[PIKACHU,7]
-FormName = Cosplay - Pop Star
-Pokedex = Whenever Pikachu comes across something new, it blasts it with a jolt of electricity. If you come across a blackened berry, it's evidence that this Pokémon mistook the intensity of its charge.
-#-------------------------------
-[PIKACHU,8]
-FormName = Cosplay - Rock Star
-Pokedex = Whenever Pikachu comes across something new, it blasts it with a jolt of electricity. If you come across a blackened berry, it's evidence that this Pokémon mistook the intensity of its charge.
-#-------------------------------
-[PIKACHU,9]
-FormName = Original Cap
-Pokedex = This Pikachu wears its partner's cap, which is brimming with memories of traveling through many different regions.
-#-------------------------------
-[PIKACHU,10]
-FormName = Hoenn Cap
-Pokedex = This Pikachu wears its partner's cap, which is brimming with memories of traveling through the Hoenn region.
-#-------------------------------
-[PIKACHU,11]
-FormName = Sinnoh Cap
-Pokedex = This Pikachu wears its partner's cap, which is brimming with memories of traveling through the Sinnoh region.
-#-------------------------------
-[PIKACHU,12]
-FormName = Unova Cap
-Pokedex = This Pikachu wears its partner's cap, which is brimming with memories of traveling through the Unova region.
-#-------------------------------
-[PIKACHU,13]
-FormName = Kalos Cap
-Pokedex = This Pikachu wears its partner's cap, which is brimming with memories of traveling through the Kalos region.
-#-------------------------------
-[PIKACHU,14]
-FormName = Alola Cap
-Pokedex = This Pikachu wears its partner's cap, which is brimming with memories of traveling through the Alola region.
-#-------------------------------
-[PIKACHU,15]
-FormName = Partner Cap
-Pokedex = This Pikachu wears its partner's cap, which is brimming with memories of when they first met.
-#-------------------------------
-[PIKACHU,16]
-FormName = World Cap
-Pokedex = This Pikachu is wearing its Trainer's cap. The cap is a precious symbol that travels across different regions with Pikachu.
-#-------------------------------
 [UNOWN,1]
 FormName = B
 #-------------------------------
@@ -170,17 +114,17 @@ Pokedex = This is the form Castform takes when an eclipse covers the sky. It mov
 [DEOXYS,1]
 FormName = Attack
 BaseStats = 50,180,20,150,180,20
-Moves = 1,GRAVITY,1,LEER,5,RETREAT,10,PULSAR,15,TAUNT,20,PURSUIT,25,PSYCHIC,30,SUPERPOWER,35,PSYCHOSHIFT,40,ZENHEADBUTT,45,WORKUP,50,ZAPCANNON,55,PSYCHOBOOST,60,HYPERBEAM
+Moves = 1,GRAVITY,1,LEER,5,RETREAT,10,PULSAR,15,TAUNT,20,PURSUIT,25,PSYCHIC,30,SUPERPOWER,35,PSYCHESWITCH,40,ZENHEADBUTT,45,WORKUP,50,ZAPCANNON,55,PSYCHOBOOST,60,HYPERBEAM
 #-------------------------------
 [DEOXYS,2]
 FormName = Defense
 BaseStats = 50,70,160,90,70,160
-Moves = 1,GRAVITY,1,LEER,5,RETREAT,10,PULSAR,15,KNOCKOFF,20,SPIKES,25,PSYCHIC,30,SNATCH,35,PSYCHOSHIFT,40,ZENHEADBUTT,45,COSMICPOWER,50,AMNESIA,55,RECOVER,60,PSYCHOBOOST,65,COUNTER,65,MIRRORCOAT
+Moves = 1,GRAVITY,1,LEER,5,RETREAT,10,PULSAR,15,KNOCKOFF,20,SPIKES,25,PSYCHIC,30,SNATCH,35,PSYCHESWITCH,40,ZENHEADBUTT,45,COSMICPOWER,50,AMNESIA,55,RECOVER,60,PSYCHOBOOST,65,COUNTER,65,MIRRORCOAT
 #-------------------------------
 [DEOXYS,3]
 FormName = Speed
 BaseStats = 50,95,90,180,95,90
-Moves = 1,GRAVITY,1,LEER,5,RETREAT,10,PULSAR,15,KNOCKOFF,20,PURSUIT,25,PSYCHIC,30,SWIFT,35,PSYCHOSHIFT,40,ZENHEADBUTT,45,AGILITY,50,RECOVER,55,PSYCHOBOOST,60,EXTREMESPEED
+Moves = 1,GRAVITY,1,LEER,5,RETREAT,10,PULSAR,15,KNOCKOFF,20,PURSUIT,25,PSYCHIC,30,SWIFT,35,PSYCHESWITCH,40,ZENHEADBUTT,45,AGILITY,50,RECOVER,55,PSYCHOBOOST,60,EXTREMESPEED
 #-------------------------------
 [BURMY,1]
 FormName = Sand
@@ -409,12 +353,14 @@ Height = 3.3
 Pokedex = It's said that this Pokémon battles in order to protect the ideal world that will exist in the future for people and Pokémon.
 #-------------------------------
 [KYUREM,3]
+FormName = White
 BaseStats = 125,120,90,95,170,100
 Abilities = JUGGERNAUT
 Moves = 1,CLASH,1,ICYWIND,8,BAR,15,ANCIENTPOWER,22,ICEBEAM,29,DRAGONBREATH,36,SLASH,43,FUSIONFLARE,50,ICEBURN,57,DRAGONPULSE,64,NOBLEROAR,71,ENDEAVOR,78,BLIZZARD,85,OUTRAGE,92,HYPERVOICE
 Height = 3.6
 #-------------------------------
 [KYUREM,4]
+FormName = Black
 BaseStats = 125,170,100,95,120,90
 Abilities = JUGGERNAUT
 Moves = 1,CLASH,1,ICYWIND,8,BAR,15,ANCIENTPOWER,22,ICEBEAM,29,DRAGONBREATH,36,SLASH,43,FUSIONBOLT,50,FREEZESHOCK,57,DRAGONPULSE,64,NOBLEROAR,71,ENDEAVOR,78,BLIZZARD,85,OUTRAGE,92,HYPERVOICE
@@ -587,9 +533,6 @@ BaseStats = 77,70,77,49,84,77
 Height = 0.8
 Weight = 15.0
 Pokedex = Massive Pumpkaboo are said to be the product of areas where a great number of lost souls lingered.
-WildItemCommon = MIRACLESEED
-WildItemUncommon = MIRACLESEED
-WildItemRare = MIRACLESEED
 #-------------------------------
 [GOURGEIST,1]
 FormName = Average Size
@@ -629,6 +572,7 @@ Weight = 610.0
 Pokedex = This is Zygarde's perfected form. From the orifice on its chest, it radiates high-powered energy that eliminates everything.
 #-------------------------------
 [ZYGARDE,3]
+FormName = 50%
 Abilities = POWERCONSTRUCT
 #-------------------------------
 [HOOPA,1]
@@ -636,7 +580,7 @@ FormName = Unbound
 Type1 = PSYCHIC
 Type2 = DARK
 BaseStats = 80,160,60,80,170,130
-Abilities = SUBSPACESCHISM
+Abilities = SUBSPACESCHISM,UNBOUND
 Moves = 1,HELPINGHAND,1,MINDWAVES,4,ASTONISH,8,MAGICCOAT,12,LIGHTSCREEN,16,PSYBEAM,20,SKILLSWAP,24,POWERSPLIT,28,GUARDSPLIT,32,PHANTOMFORCE,36,ZENHEADBUTT,40,SHADOWBALL,44,TRICK,48,DESTINYBOND,52,DREAMDANCE,56,PSYCHIC,60,HYPERSPACEFURY
 Height = 6.5
 Weight = 490.0
@@ -800,7 +744,7 @@ Pokedex = Sad that its true identity may be exposed, Mimikyu will mercilessly se
 #-------------------------------
 [NECROZMA,1]
 FormName = Dusk Mane
-Type1 = PSYCHIC
+Type1 = ROCK
 Type2 = STEEL
 BaseStats = 97,157,127,77,113,109
 Height = 3.8
@@ -809,7 +753,7 @@ Pokedex = This is Necrozma's form while it's absorbing the power of Solgaleo, ma
 #-------------------------------
 [NECROZMA,2]
 FormName = Dawn Wings
-Type1 = PSYCHIC
+Type1 = ROCK
 Type2 = GHOST
 BaseStats = 97,113,109,77,157,127
 Height = 4.2
@@ -818,7 +762,7 @@ Pokedex = Lunala no longer has a will of its own. Now under the control of Necro
 #-------------------------------
 [NECROZMA,3]
 FormName = Ultra
-Type1 = PSYCHIC
+Type1 = ROCK
 Type2 = DRAGON
 BaseStats = 97,167,97,129,167,97
 Abilities = NEUROFORCE
@@ -826,15 +770,12 @@ Height = 7.5
 Pokedex = The light pouring out from all over its body affects living things and nature, impacting them in various ways.
 #-------------------------------
 [NECROZMA,4]
+FormName = Ultra
 Type1 = PSYCHIC
 Type2 = DRAGON
 BaseStats = 97,167,97,129,167,97
 Abilities = NEUROFORCE
 Height = 7.5
-#-------------------------------
-[MAGEARNA,1]
-FormName = Original Color
-Pokedex = This gorgeous Magearna looks as it did at the time of its invention. Its luxurious decoration pleased the king's daughter.
 #-------------------------------
 [CRAMORANT,1]
 FormName = Gulping
@@ -848,15 +789,6 @@ Pokedex = The half-swallowed Pikachu is so startled that it isn't struggling yet
 FormName = Noice Face
 BaseStats = 85,90,105,100,90,50
 Pokedex = The hair on its head connects to the surface of its brain. When this Pokémon has something on its mind, its hair chills the air around it.
-#-------------------------------
-[SINISTEA,1]
-FormName = Antique
-Pokedex = It absorbs the life-force of those who drink it. It waits patiently, but opportunities are fleeting—it tastes so bad that it gets spat out immediately.
-Evolutions = POLTEAGEIST,Item,CHIPPEDPOT
-#-------------------------------
-[POLTEAGEIST,1]
-FormName = Antique
-Pokedex = Trainers Polteageist trusts will be allowed to experience its distinctive flavor and aroma firsthand by sampling just a tiny bit of its tea.
 #-------------------------------
 [INDEEDEE,1]
 FormName = Female
@@ -897,7 +829,7 @@ Type1 = PSYCHIC
 Type2 = ICE
 BaseStats = 100,165,150,50,85,130
 Abilities = ASONEICE
-Moves = 1,AVALANCHE,1,BODYSLAM,1,DOUBLEEDGE,1,DOUBLEKICK,1,GLACIALLANCE,1,GREYMIST,1,ICECALIBUR,1,IRONDEFENSE,1,LEER,1,MEGADRAIN,1,POUND,1,SCRUTINIZE,1,SWORDSDANCE,1,TACKLE,1,TAKEDOWN,1,TAUNT,1,THRASH,1,TORMENT,5,GROWTH,10,LIFEDEW,15,GIGADRAIN,20,EXPLOIT,25,HELPINGHAND,30,AROMATHERAPY,35,ENERGYBALL,40,TOTALCONTROL,45,LEECHSEED,50,HEALPULSE,55,SOLARBEAM,60,FUTURESIGHT
+Moves = 1,BODYSLAM,1,DOUBLEEDGE,1,DOUBLEKICK,1,GLACIALLANCE,1,GREYMIST,1,ICECALIBUR,1,IRONDEFENSE,1,LEER,1,MEGADRAIN,1,POUND,1,SCRUTINIZE,1,SUPERCOOL,1,SWORDSDANCE,1,TACKLE,1,TAKEDOWN,1,TAUNT,1,THRASH,1,TORMENT,5,GROWTH,10,LIFEDEW,15,GIGADRAIN,20,EXPLOIT,25,HELPINGHAND,30,AROMATHERAPY,35,ENERGYBALL,40,TOTALCONTROL,45,LEECHSEED,50,HEALPULSE,55,SOLARBEAM,60,FUTURESIGHT
 Kind = High King
 Pokedex = It's said that this Pokémon once moved a large forest—and all the Pokémon living there—to a new location overnight.
 #-------------------------------
@@ -954,7 +886,7 @@ Pokedex = Darmanitan takes this form when enraged. It won't stop spewing flames 
 #-------------------------------
 [AMPHAROS,1]
 FormName = Ascended
-BaseStats = 110,100,165,80,210,165
+BaseStats = 110,100,165,80,190,165
 #-------------------------------
 [GARCHOMP,1]
 FormName = Reaper

@@ -493,7 +493,7 @@ NamePlural = Rocky Helmets
 Pocket = 5
 Price = 6000
 Flags = Clothing,AttackerRecoil
-Description = Damages attackers for 1/6th of their HP when they hit the holder with physical attacks.
+Description = Damages attackers for 1/8th of their HP when they hit the holder with physical attacks.
 #-------------------------------
 [HIVISJACKET]
 Name = Hi-Viz Jacket
@@ -501,7 +501,7 @@ NamePlural = Hi-Viz Jackets
 Pocket = 5
 Price = 6000
 Flags = Clothing,AttackerRecoil
-Description = Damages attackers for 1/6th of their HP when they hit the holder with special attacks.
+Description = Damages attackers for 1/8th of their HP when they hit the holder with special attacks.
 #-------------------------------
 [EJECTBUTTON]
 Name = Eject Button
@@ -543,7 +543,7 @@ Name = Amulet Coin
 NamePlural = Amulet Coins
 Pocket = 5
 Price = 10000
-Description = An item to be held by a Pokémon. It doubles a battle's prize money if the holding Pokémon joins in.
+Description = A held item. After the weilder enters a battle, money generated in that battle is increased by 50%.
 #-------------------------------
 [SOOTHEBELL]
 Name = Soothe Bell
@@ -754,7 +754,7 @@ NamePlural = Strength Herbs
 Pocket = 5
 Price = 4000
 Flags = Herb
-Description = An item to be held by a Pokémon. Boosts the power of a physical move by 30% once per battle.
+Description = An item to be held by a Pokémon. Boosts the power of a physical move by 33% once per battle.
 #-------------------------------
 [INTELLECTHERB]
 Name = Intellect Herb
@@ -762,7 +762,7 @@ NamePlural = Intellect Herbs
 Pocket = 5
 Price = 4000
 Flags = Herb
-Description = An item to be held by a Pokémon. Boosts the power of a special move by 30% once per battle.
+Description = An item to be held by a Pokémon. Boosts the power of a special move by 33% once per battle.
 #-------------------------------
 [POWERHERB]
 Name = Power Herb
@@ -802,7 +802,7 @@ NamePlural = Luck Herbs
 Pocket = 5
 Price = 4000
 Flags = Herb
-Description = An item to be held by a Pokémon. Ensures a random additional affect activates once per battle.
+Description = An item to be held by a Pokémon. Ensures a random additional effect activates once per battle.
 #-------------------------------
 [SKILLHERB]
 Name = Skill Herb
@@ -1618,7 +1618,7 @@ Description = A somewhat rare Poké Ball that has been specially made to commemo
 Name = Heal Ball
 NamePlural = Heal Balls
 Pocket = 3
-Price = 400
+Price = 300
 BattleUse = OnFoe
 Flags = PokeBall,SnagBall,SkipPocketMessage
 Description = A remedial Poké Ball that restores the caught Pokémon's HP and eliminates any status problem.
@@ -1630,7 +1630,7 @@ Pocket = 3
 Price = 800
 BattleUse = OnFoe
 Flags = PokeBall,SnagBall,SkipPocketMessage
-Description = A somewhat different Poké Ball which has 5x strength on the first turn of a wild encounter.
+Description = A somewhat different Poké Ball which has 3x strength on the first turn of a wild encounter.
 #-------------------------------
 [CHERISHBALL]
 Name = Cherish Ball
@@ -1666,13 +1666,13 @@ Pocket = 3
 Price = 1000
 BattleUse = OnFoe
 Flags = PokeBall,SnagBall,SkipPocketMessage,NoBallSwap
-Description = A special Poké Ball designed to catch Ultra Beasts. It has a low success rate for catching others.
+Description = A special Poké Ball with 5x strength against Ultra Beasts.
 #-------------------------------
 [SLICEBALL]
 Name = Slice Ball
 NamePlural = Slice Balls
 Pocket = 3
-Price = 200
+Price = 400
 BattleUse = OnFoe
 Flags = PokeBall,SnagBall,SkipPocketMessage
 Description = A sharp Poké Ball that damages the Pokémon for 1/4th of its HP if it fails to catch it.
@@ -1681,7 +1681,7 @@ Description = A sharp Poké Ball that damages the Pokémon for 1/4th of its HP i
 Name = Leech Ball
 NamePlural = Leech Balls
 Pocket = 3
-Price = 200
+Price = 400
 BattleUse = OnFoe
 Flags = PokeBall,SnagBall,SkipPocketMessage
 Description = A parasitic Poké Ball that leeches the Pokémon if it fails to catch it.
@@ -1690,7 +1690,7 @@ Description = A parasitic Poké Ball that leeches the Pokémon if it fails to ca
 Name = Potion Ball
 NamePlural = Potion Balls
 Pocket = 3
-Price = 200
+Price = 300
 BattleUse = OnFoe
 Flags = PokeBall,SnagBall,SkipPocketMessage
 Description = A medicinal Poké Ball that heals the Pokémon for 1/4th of its HP if it fails to catch it.
@@ -1699,7 +1699,7 @@ Description = A medicinal Poké Ball that heals the Pokémon for 1/4th of its HP
 Name = Disable Ball
 NamePlural = Disable Balls
 Pocket = 3
-Price = 200
+Price = 300
 BattleUse = OnFoe
 Flags = PokeBall,SnagBall,SkipPocketMessage
 Description = A mentally disrupting Poké Ball that disables the Pokémon's last used move for 10 turns if it fails to catch it.
@@ -2630,8 +2630,9 @@ Name = Cell Booster
 NamePlural = Cell Boosters
 Pocket = 8
 Price = 0
+FieldUse = Direct
 Flags = KeyItem
-Description = Condensed essence of life. Holding it allows you to run, bike, and surf faster.
+Description = Condensed essence of life. Holding it allows you to run, bike, and surf faster. Can be toggled on or off.
 #-------------------------------
 [RUSTEDCOMPASS]
 Name = Rusted Compass

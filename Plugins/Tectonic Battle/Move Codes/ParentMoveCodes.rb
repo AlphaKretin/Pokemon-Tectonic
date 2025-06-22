@@ -818,7 +818,7 @@ class PokeBattle_WeatherMove < PokeBattle_Move
     def initialize(battle, move)
         super
         @weatherType = :None
-        @durationSet = 8
+        @durationSet = 6
     end
 
     def pbMoveFailed?(_user, _targets, show_message)
@@ -1032,7 +1032,7 @@ class PokeBattle_RoomMove < PokeBattle_Move
     end
 
     def getEffectScore(user, _target)
-        return @battle.pbStartRoom(@roomEffect, user, true)
+        return @battle.pbStartRoom(@roomEffect, user, nil, true)
     end
 end
 
@@ -1234,13 +1234,8 @@ class PokeBattle_TeamStatBuffMove < PokeBattle_Move
         return false if damagingMove?
         failed = true
         @battle.eachSameSideBattler(user) do |b|
-            for i in 0...@statUp.length / 2 do
-                statSym = @statUp[i * 2]
-                next unless b.pbCanRaiseStatStep?(statSym, user, self)
-                failed = false
-                break
-            end
-            break unless failed
+            next unless b.pbCanRaiseStatStep?(@statToRaise, user, self)
+            failed = false
         end
         if failed
             @battle.pbDisplay(_INTL("But it failed, since neither {1} nor any of its allies can receive the stat improvements!", user.pbThis(true))) if show_message
@@ -1249,16 +1244,23 @@ class PokeBattle_TeamStatBuffMove < PokeBattle_Move
         return false
     end
 
+    def getStatArrayForBattler(user, battler)
+        increment = battler.index == user.index ? 3 : 1
+        return [@statToRaise, increment]
+    end
+
     def pbEffectGeneral(user)
+        user.pbRaiseMultipleStatSteps(getStatArrayForBattler(user, user), user, move: self, showFailMsg: true)
         @battle.eachSameSideBattler(user) do |b|
-            b.pbRaiseMultipleStatSteps(@statUp, user, move: self, showFailMsg: true)
+            next if b.index == user.index
+            b.pbRaiseMultipleStatSteps(getStatArrayForBattler(user, b), user, move: self, showFailMsg: true)
         end
     end
 
     def getEffectScore(user, _target)
         score = 0
         @battle.eachSameSideBattler(user) do |b|
-            score += getMultiStatUpEffectScore(@statUp, user, b)
+            score += getMultiStatUpEffectScore(getStatArrayForBattler(user, b), user, b)
         end
         return score
     end
@@ -1501,12 +1503,28 @@ module EmpoweredMove
     # There must be 2 turns without using a primeval attack to then be able to use it again
     def turnsBetweenUses(); return 2; end
 
-    def transformType(user, type)
-        user.pbChangeTypes(type)
+    def transformType(user, newType)
         typeName = GameData::Type.get(type).name
+
+        addType = user.effectActive?(:AvatarTransformedTypeThisTurn) # This is the 2nd+ time this turn
+        
+        type = addType ? user.pbTypes.push(newType) : newType
+
+        user.pbChangeTypes(type)
         @battle.pbAnimation(:CONVERSION, user, [user])
-        user.bossType = type if user.boss?
-        @battle.pbDisplay(_INTL("{1} transformed into the {2} type!", user.pbThis, typeName))
+        if user.boss?
+            if addType
+                user.bossType = [user.bossType, newType]
+            else
+                user.bossType = newType
+            end
+        end
+        if addType
+            @battle.pbDisplay(_INTL("{1} transformed further, gaining the {2} type!", user.pbThis, typeName))
+        else
+            @battle.pbDisplay(_INTL("{1} transformed into the {2} type!", user.pbThis, typeName))  
+        end
+        user.applyEffect(:AvatarTransformedTypeThisTurn)
     end
 
     def summonAvatar(user,species,summonMessage = nil)
@@ -1519,5 +1537,40 @@ module EmpoweredMove
             @battle.pbDisplay(summonMessage)
             @battle.summonAvatarBattler(species, user.level, 0, user.index % 2)
         end
+    end
+end
+
+#===============================================================================
+# User turns some of their of max HP into a substitute.
+# All sub-classes must define @subFraction.
+#===============================================================================
+class PokeBattle_Move_UserMakesSubstitute < PokeBattle_Move
+    def initialize(battle, move)
+        super
+        @subFraction = 0.25
+    end
+
+    def pbMoveFailed?(user, _targets, show_message)
+        if user.substituted?
+            @battle.pbDisplay(_INTL("{1} already has a substitute!", user.pbThis)) if show_message
+            return true
+        end
+        if user.hp <= user.getSubLife(@subFraction)
+            if show_message
+                @battle.pbDisplay(_INTL("But it failed, since {1} does not have enough HP left to make a substitute!", user.pbThis(true)))
+            end
+            return true
+        end
+        return false
+    end
+
+    def pbEffectGeneral(user)
+        user.createSubstitute(@subFraction)
+    end
+
+    def getEffectScore(user, _target)
+        score = getSubstituteEffectScore(user)
+        score += getHPLossEffectScore(user, @subFraction)
+        return score
     end
 end

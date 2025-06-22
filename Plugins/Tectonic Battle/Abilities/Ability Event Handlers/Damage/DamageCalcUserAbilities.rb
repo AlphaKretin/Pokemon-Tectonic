@@ -60,6 +60,15 @@ BattleHandlers::DamageCalcUserAbility.add(:MEGALAUNCHER,
   }
 )
 
+BattleHandlers::DamageCalcUserAbility.add(:REFRACTIVE,
+  proc { |ability, user, target, move, mults, _baseDmg, type, aiCheck|
+    if move.pulseMove?
+      mults[:base_damage_multiplier] *= 1.3
+      user.aiLearnsAbility(ability) unless aiCheck
+    end
+  }
+)
+
 BattleHandlers::DamageCalcUserAbility.add(:RECKLESS,
   proc { |ability, user, target, move, mults, _baseDmg, type, aiCheck|
     if move.recoilMove?
@@ -778,6 +787,15 @@ BattleHandlers::DamageCalcUserAbility.add(:WREAKHAVOC,
   proc { |ability, user, target, move, mults, _baseDmg, type, aiCheck|
     if move.rampagingMove?
       mults[:base_damage_multiplier] *= 1.3
+      user.aiLearnsAbility(ability) unless aiCheck
+    end
+  }
+)
+
+BattleHandlers::DamageCalcUserAbility.add(:SLINKY,
+  proc { |ability, user, target, move, mults, _baseDmg, type, aiCheck|
+    if move.is_a?(PokeBattle_Move_TwoTurnAttackInvulnerable)
+      mults[:base_damage_multiplier] *= 2.0
       user.aiLearnsAbility(ability) unless aiCheck
     end
   }

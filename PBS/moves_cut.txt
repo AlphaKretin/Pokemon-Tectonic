@@ -211,6 +211,30 @@ FunctionCode = Invalid
 Flags = CanSnatch
 Description = The user curls up to conceal weak spots and raise both of its defensive stats.
 #-------------------------------
+[DOUBLEDOWN]
+Name = Double Down
+Type = NORMAL
+Category = Physical
+Power = 45
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = Invalid
+Flags = CanProtect
+Description = The user punches the target twice in quick succession.
+#-------------------------------
+[DOUBLEHIT]
+Name = Double Hit
+Type = NORMAL
+Category = Physical
+Power = 35
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = Invalid
+Flags = CanProtect
+Description = The user slams the target with a long tail, vines, or tentacle. The target is hit twice in a row.
+#-------------------------------
 [DOUBLESLAP]
 Name = Double Slap
 Type = NORMAL
@@ -304,6 +328,18 @@ Target = NearOther
 FunctionCode = Invalid
 Flags = CanProtect,CanMagicCoat
 Description = Enables the user to hit a Ghost type with any kind of move. It also enables the user to hit an evasive foe.
+#-------------------------------
+[FRESHSTART]
+Name = Fresh Start
+Type = NORMAL
+Category = Status
+Accuracy = 0
+TotalPP = 12
+Target = NearOther
+FunctionCode = Invalid
+Flags = CanSnatch
+Description = The user reinvigorates itself, healing to full. Only works the first turn the user is in battle.
+Animation = RECOVER
 #-------------------------------
 [FRUSTRATION]
 Name = Frustration
@@ -1147,6 +1183,33 @@ FunctionCode = Invalid
 Flags = CanProtect,CanMagicCoat
 Description = The user scatters a cloud of poisonous dust on the target. It poisons the target.
 #-------------------------------
+[SLUDGEBOMB]
+Name = Sludge Bomb
+Type = POISON
+Category = Special
+Power = 80
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = Invalid
+Flags = CanProtect
+EffectChance = 30
+Description = Unsanitary sludge is hurled at the target. It has a 30% chance to poison.
+#-------------------------------
+[SMOGSTORM]
+Name = Smog Storm
+Type = POISON
+Category = Special
+Power = 80
+Accuracy = 100
+TotalPP = 5
+Target = AllNearFoes
+FunctionCode = Invalid
+Flags = CanProtect,Wind
+EffectChance = 30
+Description = Summons a storm of poisonous gas to hit all nearby Pokémon with a 30% chance to poison.
+Animation = SMOG
+#-------------------------------
 [TOXIC]
 Name = Toxic
 Type = POISON
@@ -1356,6 +1419,30 @@ Flags = CanProtect
 Description = The user spins a sandstorm around the target, trapping and damaging it for three turns.
 #-------------------------------
 #		ROCK MOVES
+#-------------------------------
+[HEADSMASH]
+Name = Head Smash
+Type = ROCK
+Category = Physical
+Power = 120
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = Invalid
+Flags = CanProtect
+Description = The user attacks the foe with a hazardous, full-power headbutt. The user also takes 50% recoil.
+#-------------------------------
+[INVITESAND]
+Name = Invite Sand
+Type = ROCK
+Category = Status
+Accuracy = 0
+TotalPP = 10
+Target = NearOther
+FunctionCode = Invalid
+Flags = CanProtect,CanMagicCoat
+Description = The user numbs the target, then summons sandstorm for eight turns.
+Animation = SANDSTORM
 #-------------------------------
 [ROCKSLIDE]
 Name = Rock Slide
@@ -1815,6 +1902,18 @@ Flags = CanProtect
 Description = Spins into the target while emitting heat, then summons sunshine for eight turns.
 Animation = FLAMEWHEEL
 #-------------------------------
+[INVITESUN]
+Name = Invite Sun
+Type = FIRE
+Category = Status
+Accuracy = 0
+TotalPP = 10
+Target = NearOther
+FunctionCode = Invalid
+Flags = CanProtect,CanMagicCoat
+Description = The user burns the target, then welcomes in sunshine for eight turns.
+Animation = SUNSHINE
+#-------------------------------
 [LAVAPLUME]
 Name = Lava Plume
 Type = FIRE
@@ -1885,6 +1984,30 @@ Target = NearOther
 FunctionCode = Invalid
 Flags = CanProtect
 Description = The user attacks by swinging its tail as if it were a vicious wave in a raging storm.
+#-------------------------------
+[CRABHAMMER]
+Name = Crabhammer
+Type = WATER
+Category = Physical
+Power = 95
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = Invalid
+Flags = CanProtect,CanRandomCrit
+Description = The target is hammered with a large pincer. Can random critical hit.
+#-------------------------------
+[INVITERAIN]
+Name = Invite Rain
+Type = WATER
+Category = Status
+Accuracy = 0
+TotalPP = 10
+Target = NearOther
+FunctionCode = Invalid
+Flags = CanProtect,CanMagicCoat
+Description = The user waterlogs the target, then welcomes in rainstorm for eight turns.
+Animation = RAINSTORM
 #-------------------------------
 [MUDDYWATER]
 Name = Muddy Water
@@ -2246,6 +2369,17 @@ EffectChance = 100
 Description = The user sends vines to ensnare all enemies, lowering the Speed of any that moved first by three steps.
 Animation = FRENZYPLANT
 #-------------------------------
+[WORRYSEED]
+Name = Worry Seed
+Type = GRASS
+Category = Status
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = Invalid
+Flags = CanProtect,CanMagicCoat
+Description = A seed that causes worry is planted on the foe. It prevents sleep by making its Ability Insomnia.
+#-------------------------------
 #		ELECTRIC MOVES
 #-------------------------------
 [AURAWHEEL]
@@ -2587,6 +2721,20 @@ FunctionCode = Invalid
 Flags = CanProtect
 Description = The user senses the foe's movements with its mind to ensure its next attack does not miss the foe.
 #-------------------------------
+[MINDWARP]
+Name = Mind Warp
+Type = PSYCHIC
+Category = Special
+Power = 80
+Accuracy = 100
+TotalPP = 12
+Target = NearOther
+FunctionCode = Invalid
+Flags = CanProtect
+EffectChance = 30
+Description = The target's psyche is attacked directly. It has a 30% chance to lower the target's Attack and Sp. Atk.
+Animation = PSYCHIC
+#-------------------------------
 [MIRACLEEYE]
 Name = Miracle Eye
 Type = PSYCHIC
@@ -2747,6 +2895,19 @@ FunctionCode = Invalid
 Description = The user creates a bizarre area in which Pokémon's Defense and Sp. Def stats are swapped for 5 turns.
 #-------------------------------
 #		ICE MOVES
+#-------------------------------
+[AVALANCHE]
+Name = Avalanche
+Type = ICE
+Category = Physical
+Power = 60
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+Priority = -4
+FunctionCode = Invalid
+Flags = CanProtect
+Description = An attack move that inflicts double the damage if the user has been hurt by the foe in the same turn.
 #-------------------------------
 [COLDSNOT]
 Name = Cold Snot
@@ -2960,6 +3121,28 @@ Target = AllNearOthers
 FunctionCode = Invalid
 Flags = CanProtect,CanMagicCoat
 Description = Darkness rolls over the field, damaging all other Pokémon, ending weather, and healing statuses.
+#-------------------------------
+[BULLY]
+Name = Bully
+Type = DARK
+Category = Status
+Accuracy = 100
+TotalPP = 10
+Target = NearFoe
+FunctionCode = Invalid
+Description = This attack deals 50 percent more damage if the target has any raised or lowered stat steps.
+#-------------------------------
+[DARKVOID]
+Name = Dark Void
+Type = DARK
+Category = Status
+Accuracy = 100
+TotalPP = 1
+Target = AllNearFoes
+Priority = -1
+FunctionCode = Invalid
+Flags = CanProtect,CanMagicCoat
+Description = Targets are dragged into a world of total darkness that makes them sleep. This move always goes last.
 #-------------------------------
 [EMBARGO]
 Name = Embargo
@@ -3206,3 +3389,16 @@ FunctionCode = Invalid
 Flags = CanProtect,CanMagicCoat
 Description = Dizzies the target by putting them under a magical spell.
 Animation = CHARM
+#-------------------------------
+[STRANGESTEAM]
+Name = Strange Steam
+Type = FAIRY
+Category = Special
+Power = 90
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = Invalid
+Flags = CanProtect,Wind
+EffectChance = 30
+Description = The user attacks the target by emitting steam. It has a 30% chance to dizzy.

@@ -145,6 +145,7 @@ BattleHandlers::TargetAbilityOnHit.add(:ADAPTIVESKIN,
         else
             statToRaise = :SPECIAL_DEFENSE
         end
+        next if target.steps[statToRaise] >= DEFENSE_STACKING_ABILITY_STEP_CAP
         if aiCheck
             ret = 0
             aiNumHits.times do |i|
@@ -152,7 +153,7 @@ BattleHandlers::TargetAbilityOnHit.add(:ADAPTIVESKIN,
             end
             next ret
         end
-        target.tryRaiseStat(statToRaise, target, ability: ability, increment: 2)
+        target.tryRaiseStat(statToRaise, target, ability: ability, increment: 1)
     }
 )
 
@@ -658,6 +659,8 @@ BattleHandlers::TargetAbilityOnHit.add(:ILLUSION,
         battle.pbSetSeen(target)
     }
 )
+
+BattleHandlers::TargetAbilityOnHit.copy(:ILLUSION,:INCOGNITO)
 
 BattleHandlers::TargetAbilityOnHit.add(:COREPROVENANCE,
     proc { |ability, user, target, move, battle, aiCheck, aiNumHits|

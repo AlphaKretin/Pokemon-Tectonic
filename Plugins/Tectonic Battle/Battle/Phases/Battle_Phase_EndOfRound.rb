@@ -26,6 +26,7 @@ class PokeBattle_Battle
                 possibleAbilitySwitches = []
                 b.legalAbilities.each do |abil|
                     next if b.hasAbility?(abil)
+                    next if GameData::Ability.get(abil).is_immutable_ability?
                     possibleAbilitySwitches.push(abil)
                 end
                 next unless possibleAbilitySwitches.length >= 1
@@ -110,8 +111,8 @@ class PokeBattle_Battle
 
     def damageFromDOTStatus(battler, status, aiCheck = false)
         if battler.takesIndirectDamage? && !battler.hasActiveAbility?(:PLACIDITY)
-            if %i[POISON LEECHED].include?(status)
-                fraction = 1.0 / 10.0
+            if status == :LEECHED || status == :POISON
+                fraction = 1.0 / 12.0
             else
                 fraction = 1.0 / 8.0
             end
@@ -201,9 +202,9 @@ class PokeBattle_Battle
             b.eachOpposing do |opposingBattler|
                 enemyCount += 1
             end
-            next if enemyCount == 0
             leechedHP = damageFromDOTStatus(b, :LEECHED)
             next if leechedHP <= 0
+            next if enemyCount == 0
             healthRestore = leechedHP / enemyCount.to_f
             b.eachOpposing do |opposingBattler|
                 opposingBattler.pbRecoverHPFromDrain(healthRestore, b)

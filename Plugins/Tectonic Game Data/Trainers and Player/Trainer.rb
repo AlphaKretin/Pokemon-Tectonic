@@ -71,7 +71,7 @@ class Trainer
     end
   
     def able_party
-      return @party.find_all { |p| p && !p.egg? && !p.fainted? }
+      return @party.find_all { |p| p && !p.egg? && p.able? }
     end
   
     def party_count
@@ -86,7 +86,7 @@ class Trainer
   
     def able_pokemon_count
       ret = 0
-      @party.each { |p| ret += 1 if p && !p.egg? && !p.fainted? }
+      @party.each { |p| ret += 1 if p && p.able? }
       return ret
     end
   
@@ -141,7 +141,7 @@ class Trainer
     # Or the last party member if the first candidate has Illusion
     def displayPokemonAtIndex(index)
       pokemonToDisplay = @party[index]
-      if pokemonToDisplay.hasAbility?(:ILLUSION)
+      if pokemonToDisplay.hasAbility?(%i[ILLUSION INCOGNITO])
         pokemonToDisplay = @party.last
       end
       return pokemonToDisplay

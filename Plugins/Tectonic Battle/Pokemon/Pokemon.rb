@@ -281,7 +281,8 @@ class Pokemon
     end
 
     # @return [Boolean] whether the Pokémon is not fainted and not an egg
-    def able?
+    def able?(ignorePacifist = false)
+        return false if hasAbility?(:PACIFIST) && !ignorePacifist
         return !egg? && @hp > 0 && !@afraid
     end
 
@@ -542,6 +543,11 @@ class Pokemon
         return !ability.nil? if check_ability.nil?
         if check_ability.is_a?(Symbol)
             return ability_id == check_ability
+        elsif check_ability.is_a?(Array)
+            check_ability.each do |abilityToCheck|
+                  return true if ability_id == abilityToCheck
+            end
+            return false
         else
             return ability == check_ability
         end
@@ -1381,15 +1387,12 @@ class Pokemon
         # Calculate stats
         stats = {}
         stylish = hasAbility?(:STYLISH)
+        accumulation = hasAbility?(:ACCUMULATION)
         GameData::Stat.each_main do |s|
-            if s.id == :HP
-                hpValue = calcHPGlobal(base_stats[s.id], this_level, @ev[s.id], stylish)
-                stats[s.id] = (hpValue * hpMult).ceil
-            elsif (s.id == :ATTACK) || (s.id == :SPECIAL_ATTACK)
-                stats[s.id] = calcStatGlobal(base_stats[s.id], this_level, @ev[s.id], stylish)
-            else
-                stats[s.id] = calcStatGlobal(base_stats[s.id], this_level, @ev[s.id], stylish)
-            end
+            isHP = s.id == :HP
+            statValue = calcStatGlobal(base_stats[s.id], this_level, @ev[s.id], hp: isHP, stylish: stylish, accumulation: accumulation)
+            statValue = (statValue * hpMult).ceil if isHP
+            stats[s.id] = statValue
         end
         return stats
     end

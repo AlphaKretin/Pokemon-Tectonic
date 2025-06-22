@@ -1,3 +1,5 @@
+CRITICAL_HIT_RATIOS = [16, 8, 4, 2, 1]
+
 class PokeBattle_Move
     #=============================================================================
     # Move's type calculation
@@ -198,15 +200,15 @@ class PokeBattle_Move
 
     # Returns whether the attack is critical, and whether it was forced to be so
     def pbIsCritical?(user, target, checkingForAI = false)
-        unless critsPossible?(user, target)
+        if critsPrevented?(user, target)
             if checkingForAI
-                return 0
+                return false
             else
                 return [false, false]
             end
         end
 
-        allowedToRandomCrit = canRandomCrit? || user.effectActive?(:RaisedCritChance)
+        allowedToRandomCrit = allowedToRandomCrit?(user, target)
 
         crit = false
         forced = false
@@ -236,41 +238,36 @@ class PokeBattle_Move
                     break
                 end
             end
-
-            # Tactician tribe prevents random crits
-            if target.hasTribeBonus?(:TACTICIAN)
-                unless checkingForAI
-                    battle.pbShowTribeSplash(target, :TACTICIAN)
-                    battle.pbDisplay(_INTL("{1} prevents the hit from being critical!", target.pbThis))
-                    battle.pbHideTribeSplash(target)
-                end
-                crit = false
-                forced = true
-            end
         end
 
         if checkingForAI
             if forced
-                return crit ? 5 : -1
+                return crit
             elsif allowedToRandomCrit
-                return rate
+                # If the rate is high enough,
+                # A "random" crit is actually guaranteed
+                return rate >= CRITICAL_HIT_RATIOS.length - 1
             else
-                return -1
+                return false
             end
         else
             return crit, forced
         end
     end
 
-    def isRandomCrit?(user, _target, rate)
+    def isRandomCrit?(user, target, rate)
         # Calculation
-        ratios = [8, 4, 2, 1]
-        rate = ratios.length - 1 if rate >= ratios.length
-        return @battle.pbRandom(ratios[rate]) == 0
+        rate = CRITICAL_HIT_RATIOS.length - 1 if rate >= CRITICAL_HIT_RATIOS.length
+        denom = CRITICAL_HIT_RATIOS[rate]
+        echoln("[CRITICAL HIT RATE] Critical hit rate for #{user.pbThis(true)}'s #{@id} against target #{target.pbThis(true)} is 1 in #{denom}")
+        return @battle.pbRandom(denom) == 0
     end
 
     def criticalHitRate(user, target)
         c = 0
+
+        c += 1 if canRandomCrit?
+
         # Ability effects that alter critical hit rate
         user.eachActiveAbility do |ability|
             c = BattleHandlers.triggerCriticalCalcUserAbility(ability, user, target, self, c)
@@ -299,12 +296,11 @@ class PokeBattle_Move
         return c
     end
 
-    def critsPossible?(user, target)
-        return false if target.pbOwnSide.effectActive?(:LuckyChant)
-        return false if target.pbOwnSide.effectActive?(:DiamondField) && !(user && user.hasActiveAbility?(:INFILTRATOR))
-        return false if applySunDebuff?(user, @calcType)
-        return false if pbCriticalOverride(user, target) < 0
-        return true
+    def critsPrevented?(user, target)
+        return true if target.pbOwnSide.effectActive?(:LuckyChant)
+        return true if target.pbOwnSide.effectActive?(:DiamondField) && !(user && user.hasActiveAbility?(:INFILTRATOR))
+        return true if pbCriticalOverride(user, target) < 0
+        return false
     end
 
     def guaranteedCrit?(user, target)
@@ -316,6 +312,13 @@ class PokeBattle_Move
             return true if BattleHandlers.triggerGuaranteedCriticalUserAbility(ability, user, target, @battle)
         end
         return false
+    end
+
+    def allowedToRandomCrit?(user, target)
+        return true if canRandomCrit?  
+        return true if user.effectActive?(:RaisedCritChance)
+        return true if user.hasActiveAbility?(GameData::Ability.getByFlag("EnablesRandomCrits")) 
+        return false 
     end
 
     #=============================================================================
@@ -369,7 +372,7 @@ showMessages)
         return 100 if !user.pbOwnedByPlayer? && @battle.curseActive?(:CURSE_PERFECT_LUCK)
         ret = effectChance > 0 ? effectChance : @effectChance
         return 100 if ret >= 100 || debugControl
-        ret += 20 if user.hasTribeBonus?(:FORTUNE)
+        ret += 30 if user.hasTribeBonus?(:FORTUNE)
 
         # User's abilities modify effect chance
         user.eachAbilityShouldApply(aiCheck) do |ability|
@@ -391,7 +394,6 @@ showMessages)
         end
 
         ret *= 2 if user.pbOwnSide.effectActive?(:Rainbow)
-        ret /= 2 if applyRainDebuff?(user, type)
         ret /= 2 if target.hasTribeBonus?(:SERENE)
         if ret < 100 && user.shouldItemApply?(:LUCKHERB, aiCheck)
             ret = 100

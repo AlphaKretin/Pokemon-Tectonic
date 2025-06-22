@@ -27,8 +27,29 @@ class PokeBattle_Move_RaiseUserAttack2 < PokeBattle_StatUpMove
 end
 
 # Empowered Meteor Mash
-class PokeBattle_Move_EmpoweredMetalClaw < PokeBattle_Move_RaiseUserAttack2
+class PokeBattle_Move_EmpoweredMeteorMash < PokeBattle_Move_RaiseUserAttack2
     include EmpoweredMove
+end
+
+#===============================================================================
+# Summons Moonglow for 8 turns. Raises the Attack of itself by 2 steps. (Midnight Hunt)
+#===============================================================================
+class PokeBattle_Move_RaiseUserAndAlliesAtk2StartMoonglow8 < PokeBattle_Move_RaiseUserAttack2
+    def pbMoveFailed?(user, _targets, show_message)
+        return false unless @battle.primevalWeatherPresent?(false)
+        super
+    end
+
+    def pbEffectGeneral(user)
+        @battle.pbStartWeather(user, :Moonglow, 8, false) unless @battle.primevalWeatherPresent?
+        super
+    end
+
+    def getEffectScore(user, _target)
+        score = super
+        score += getWeatherSettingEffectScore(:Moonglow, user, @battle, 8)
+        return score
+    end
 end
 
 #===============================================================================
@@ -301,7 +322,7 @@ end
 #===============================================================================
 # Increases the user's Sp. Def by 2 steps.
 #===============================================================================
-class PokeBattle_Move_RaiseSpDef2 < PokeBattle_StatUpMove
+class PokeBattle_Move_RaiseUserSpDef2 < PokeBattle_StatUpMove
     def initialize(battle, move)
         super
         @statUp = [:SPECIAL_DEFENSE, 2]

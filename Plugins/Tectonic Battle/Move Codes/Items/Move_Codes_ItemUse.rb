@@ -190,7 +190,10 @@ class PokeBattle_Move_Fling < PokeBattle_Move
 
     def pbBaseDamage(_baseDmg, user, _target)
         if @chosenItem
-            if %i[IRONBALL PEARLOFFATE].include?(@chosenItem)
+            if @chosenItem == :PEARLOFWISDOM
+                return 300
+            end
+            if @chosenItem == :IRONBALL
                 return 150
             end
             itemData = GameData::Item.get(@chosenItem)
@@ -217,6 +220,8 @@ class PokeBattle_Move_Fling < PokeBattle_Move
             target.applyLeeched(user) if target.canLeech?(user, false, self)
         when :BINDINGBAND
             target.applyLeeched(user) if target.canLeech?(user, false, self)
+        when :WATERBALLOON
+            target.applyWaterlog(user) if target.canWaterlog?(user, false, self)
         else
             target.pbHeldItemTriggerCheck(@chosenItem, true)
         end
@@ -235,13 +240,14 @@ class PokeBattle_Move_Fling < PokeBattle_Move
     end
 
     def getDetailsForMoveDex(detailsList = [])
-        detailsList << _INTL("<u>150 BP</u>: Pearl of Fate, Iron Ball")
+        detailsList << _INTL("<u>150 BP</u>: Iron Ball")
         detailsList << _INTL("<u>100 BP</u>: Choice Items, Weather Rocks, Life Orb")
         detailsList << _INTL("<u>75 BP</u>: Everything else")
         detailsList << _INTL("<u>Poison</u>: Poison Orb")
         detailsList << _INTL("<u>Burn</u>: Burn Orb")
         detailsList << _INTL("<u>Frostbite</u>: Frost Orb")
         detailsList << _INTL("<u>Leech</u>: Big Root, Binding Band")
+        detailsList << _INTL("<u>Waterlog</u>: Water Balloon")
     end
 end
 
@@ -406,7 +412,7 @@ class PokeBattle_Move_SwapItems < PokeBattle_Move
             @battle.pbDisplay(_INTL("But it failed!")) if show_message
             return true
         end
-        if user.firstItem == :PEARLOFFATE || target.firstItem == :PEARLOFFATE
+        if user.firstItem == :PEARLOFWISDOM
              @battle.pbDisplay(_INTL("But it failed, since the Pearl of Fate cannot be exchanged!")) if show_message
             return true
         end
@@ -535,5 +541,23 @@ class PokeBattle_Move_ForceAllEatBerry < PokeBattle_Move
 
     def getEffectScore(_user, _target)
         return 60 # TODO: I don't understand the utility of this move
+    end
+end
+
+#===============================================================================
+# The user equips a Pearl of Wisdom. (Ritual Rhythm)
+#===============================================================================
+class PokeBattle_Move_GrantUserPearlOfWisdom < PokeBattle_Move
+    def pbMoveFailed?(user, _targets, show_message)
+        return !user.canAddItem?(:PEARLOFWISDOM)
+    end
+
+    def pbEffectGeneral(user)
+        user.giveItem(:PEARLOFWISDOM)
+        @battle.pbDisplay(_INTL("{1} forms a {2}!", user.pbThis, getItemName(:PEARLOFWISDOM)))
+    end
+
+    def getEffectScore(_user, _target)
+        return 150
     end
 end

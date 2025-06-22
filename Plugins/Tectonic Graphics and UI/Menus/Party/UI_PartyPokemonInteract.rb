@@ -217,12 +217,14 @@ existingIndex)
         commands   = []
         cmdRename  = -1
         cmdSwapPokeBall = -1
+        cmdDeleteMove = -1
         cmdEvolve  = -1
         cmdStyle = -1
 
         # Build the commands
         commands[cmdRename = commands.length]       = _INTL("Rename")
         commands[cmdSwapPokeBall = commands.length]   = _INTL("Swap Ball")
+        commands[cmdDeleteMove = commands.length] = _INTL("Delete Move") if @pkmn.numMoves > 1
         commands[cmdStyle = commands.length]        = _INTL("Set Style") if pbHasItem?(:STYLINGKIT)
         newspecies = @pkmn.check_evolution_on_level_up(false)
         commands[cmdEvolve = commands.length]       = _INTL("Evolve") if newspecies
@@ -239,6 +241,8 @@ existingIndex)
             end
         elsif cmdSwapPokeBall >= 0 && modifyCommand == cmdSwapPokeBall
 			@pkmn.switchBall
+        elsif cmdDeleteMove >= 0 && modifyCommand == cmdDeleteMove
+            moveDeletion(@pkmn)
         elsif cmdEvolve >= 0 && modifyCommand == cmdEvolve
             newspecies = @pkmn.check_evolution_on_level_up(true)
             return false if newspecies.nil?

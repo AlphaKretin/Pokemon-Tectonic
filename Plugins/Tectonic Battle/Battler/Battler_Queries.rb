@@ -546,7 +546,7 @@ class PokeBattle_Battler
     end
 
     def initialItems
-        return @battle.initialItems[@index & 1][@pokemonIndex]
+        return @battle.initialItems[@index & 1][@pokemonIndex] || []
     end
 
     def setInitialItems(newItem)
@@ -689,7 +689,7 @@ class PokeBattle_Battler
         return shouldAbilityApply?(:BUNKERDOWN, checkingForAI) && @hp == @totalhp
     end
 
-    def getRoomDuration(baseDuration = 5, aiCheck: false)
+    def getRoomDuration(baseDuration = 8, aiCheck: false)
         ret = baseDuration
         ret *= 2 if shouldItemApply?(:REINFORCINGROD,aiCheck)
         return ret
@@ -882,6 +882,10 @@ class PokeBattle_Battler
         return @hp <= @totalhp / 2
     end
 
+    def maxOverhealingPossible
+        return (@totalhp * 2) - @hp  
+    end
+
     def overhealed?
         return @hp > @totalhp
     end
@@ -982,5 +986,35 @@ class PokeBattle_Battler
 
     def moveOutcomePredictor
         return @battle.scene.sprites["move_outcome_#{@index}"]
+    end
+
+    def hasEmpoweredStatusMove?
+        getMoves.each do |move|
+            next unless move
+            next if move.damagingMove?(true)
+            next unless move.empoweredMove?
+            return true
+        end
+        return false
+    end
+
+    def getEmpoweredStatusMoves
+        empoweredStatusMoves = []
+        getMoves.each do |move|
+            next unless move
+            next if move.damagingMove?(true)
+            next unless move.empoweredMove?
+            empoweredStatusMoves.push(move)
+        end
+        return empoweredStatusMoves
+    end
+
+    def eachEmpoweredStatusMove
+        getMoves.each_with_index do |move, index|
+            next unless move
+            next if move.damagingMove?(true)
+            next unless move.empoweredMove?
+            yield move, index
+        end
     end
 end

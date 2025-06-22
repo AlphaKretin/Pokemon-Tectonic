@@ -515,6 +515,7 @@ class PokEstate
 		commands   = []
 		cmdRename  = -1
 		cmdSwapPokeBall = -1
+		cmdDeleteMove = -1
 		cmdEvolve  = -1
 		cmdStyle = -1
 		cmdOmnitutor = -1
@@ -522,6 +523,7 @@ class PokEstate
 
 		commands[cmdRename = commands.length] 	= _INTL("Rename") unless donationBox
 		commands[cmdSwapPokeBall = commands.length]   = _INTL("Swap Ball")
+		commands[cmdDeleteMove = commands.length] = _INTL("Delete Move") if pokemon.numMoves > 1
 		newspecies = pokemon.check_evolution_on_level_up(false)
 		commands[cmdEvolve = commands.length]   = _INTL("Evolve") if newspecies
 		commands[cmdStyle = commands.length]  	= _INTL("Set Style") if pbHasItem?(:STYLINGKIT)
@@ -544,6 +546,8 @@ class PokEstate
 			convertEventToPokemon(eventCalling,pokemon)
 		elsif cmdSwapPokeBall >= 0 && modifyCommand == cmdSwapPokeBall
 			pokemon.switchBall
+		elsif cmdDeleteMove >= 0 && modifyCommand == cmdDeleteMove
+			moveDeletion(pokemon)
 		elsif cmdEvolve > -1 && modifyCommand == cmdEvolve
 			newspecies = pokemon.check_evolution_on_level_up(true)
 			return true if newspecies.nil?
@@ -577,7 +581,7 @@ class PokEstate
 	def setDownIntoEstate(pokemon)
 		return unless isInEstate?()
 		
-		if $Trainer.able_pokemon_count == 1 && !pokemon.fainted?
+		if $Trainer.able_pokemon_count == 1 && pokemon.able?
 			pbMessage(_INTL("Can't set down your last able Pokemon!"))
 			return false
 		end

@@ -189,6 +189,14 @@ class PokeBattle_Battler
                 @battle.pbSetSeen(self)
             end
         end
+        if illusion? && oldAbilities.include?(:INCOGNITO) && !hasAbility?(:INCOGNITO)
+            disableEffect(:Illusion)
+            unless effectActive?(:Transform)
+                @battle.scene.pbChangePokemon(self, @pokemon)
+                @battle.pbDisplay(_INTL("{1}'s {2} wore off!", pbThis, getAbilityName(:INCOGNITO)))
+                @battle.pbSetSeen(self)
+            end
+        end
         disableEffect(:AbilitySupressed) if immutableAbility?
         disableEffect(:SlowStart) unless hasAbility?(:SLOWSTART)
         
@@ -235,10 +243,11 @@ class PokeBattle_Battler
         itemToRecycle = recyclableItem
         return unless canAddItem?(itemToRecycle)
         showMyAbilitySplash(ability) if ability
+        @battle.pbAnimation(:RECYCLE, self, nil)
         giveItem(itemToRecycle)
         setRecycleItem(nil)
         recyclingMsg ||= _INTL("{1} recycled one {2}!", pbThis, getItemName(itemToRecycle))
-        battle.pbDisplay(recyclingMsg)
+        @battle.pbDisplay(recyclingMsg)
         hideMyAbilitySplash if ability
         pbHeldItemTriggerCheck
     end

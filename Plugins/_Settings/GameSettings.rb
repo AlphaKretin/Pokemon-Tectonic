@@ -1,6 +1,6 @@
 module Settings
     # The version of your game. It has to adhere to the MAJOR.MINOR.PATCH format.
-    GAME_VERSION = "3.3.0"
+    GAME_VERSION = "3.3.1"
     DEV_VERSION  = true
   
     #=============================================================================
@@ -15,7 +15,7 @@ module Settings
     #=============================================================================
   
     # The maximum level Pokémon can reach.
-    MAXIMUM_LEVEL        = 71
+    MAXIMUM_LEVEL        = 70
     # The level of newly hatched Pokémon.
     EGG_LEVEL            = 1
     # The odds of a newly generated Pokémon being shiny (out of 65536).
@@ -28,7 +28,7 @@ module Settings
     # The amount of money the player starts the game with.
     INITIAL_MONEY        = 3000
     # The maximum amount of money the player can have.
-    MAX_MONEY            = 999_999
+    MAX_MONEY            = 999_999_999
     # The maximum number of Game Corner coins the player can have.
     MAX_COINS            = 99_999
     # The maximum number of Battle Points the player can have.
@@ -299,7 +299,8 @@ module Settings
     LANGUAGES = [
       ["English", "english.dat"],
       ["Español", "spanish.dat"],
-      ["中文（简体)", "chinese.dat"],
+      ["Simplified Chinese", "chinese_simplified.dat"],
+      ["Traditional Chinese", "chinese_traditional.dat"],
     ]
   
     #=============================================================================

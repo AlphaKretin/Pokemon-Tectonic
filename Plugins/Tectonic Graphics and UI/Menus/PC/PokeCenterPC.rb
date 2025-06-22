@@ -59,12 +59,14 @@ def pbPokeCenterPC
         depositCommand = -1
         omniTutorCommand = -1
         visitEstateCommand = -1
+        teamCodeCommand = -1
         logOutCommand = -1
         commands[organizeCommand = commands.length] = _INTL("Organize Boxes")
         commands[widthdrawCommand = commands.length] = _INTL("Withdraw Pokémon") 
         commands[depositCommand = commands.length] = _INTL("Deposit Pokémon")
         commands[omniTutorCommand = commands.length] = _INTL("OmniTutor") if $PokemonGlobal.omnitutor_active 
         commands[visitEstateCommand = commands.length] = _INTL("Visit PokÉstate") unless getGlobalSwitch(ESTATE_DISABLED_SWITCH)
+        commands[teamCodeCommand = commands.length] =  _INTL("View Party Online")
         commands[logOutCommand = commands.length] = _INTL("Log Out") 
         command = pbShowCommands(nil,commands,-1)
         if command == organizeCommand || command == widthdrawCommand || command == depositCommand
@@ -76,7 +78,7 @@ def pbPokeCenterPC
                 elsif command==2   # Deposit
                     count=0
                     for p in $PokemonStorage.party
-                        count += 1 if p && !p.egg? && p.hp>0
+                        count += 1 if p && p.able?
                     end
                     if count<=1
                         pbMessage(_INTL("Can't deposit the last Pokémon!"))
@@ -92,6 +94,8 @@ def pbPokeCenterPC
             break if $PokEstate.transferToEstateOfChoice()
         elsif omniTutorCommand != -1 && command == omniTutorCommand
             useOmniTutor()
+        elsif teamCodeCommand != -1 && command == teamCodeCommand
+            load_team_code()
         else
             break
         end

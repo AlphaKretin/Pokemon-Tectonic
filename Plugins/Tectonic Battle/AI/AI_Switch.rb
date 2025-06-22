@@ -135,6 +135,7 @@ class PokeBattle_AI
         end
         return -1
     rescue StandardError => exception
+        pbPrintException($!) if $DEBUG
         echoln("FAILURE ENCOUNTERED IN pbDetermineSwitch FOR BATTLER INDEX #{idxBattler}")
         return -1
     end
@@ -252,8 +253,8 @@ class PokeBattle_AI
                 currentHP = battler.hp.to_f
                 currentHP += battler.totalhp * 0.25 if battler.hasActiveAbilityAI?(:REGENERATOR) || battler.hasActiveAbilityAI?(:HOLIDAYCHEER)
                 currentHP += battler.totalhp * 0.1 if battler.hasTribeBonus?(:CARETAKER)
-                currentHP += battler.totalhp * 0.5 if battler.hasActiveAbilityAI?(:REFRESHMENTS) && battler.ownersPolicies.include?(:SUN_TEAM)
-                currentHP += battler.totalhp * 0.5 if battler.hasActiveAbilityAI?(:TOLLTHEBELLS) && battler.ownersPolicies.include?(:ECLIPSE_TEAM)
+                currentHP += battler.totalhp * ENTRY_LOWEST_HEALING_ABILITY_FRACTION if battler.hasActiveAbilityAI?(:REFRESHMENTS) && battler.ownersPolicies.include?(:SUN_TEAM)
+                currentHP += battler.totalhp * ENTRY_LOWEST_HEALING_ABILITY_FRACTION if battler.hasActiveAbilityAI?(:TOLLTHEBELLS) && battler.ownersPolicies.include?(:ECLIPSE_TEAM)
                 if currentHP > battler.totalhp * 0.5
                     PBDebug.log("[STAY-IN RATING] #{battler.pbThis} (#{battler.index}) is bloodied but will regenerate, no penalty")
                     return stayInRating
@@ -471,16 +472,14 @@ class PokeBattle_AI
     EFFECT_SCORE_TO_SWITCH_SCORE_CONVERSION_RATIO = 2.5
 
     def switchRatingBestMoveScore(battler, opposingBattler: nil, killInfoArray: [])
-        maxScore, killInfo = highestMoveScoreForBattler(battler, opposingBattler: opposingBattler,
-killInfoArray: killInfoArray)
+        maxScore, killInfo = highestMoveScoreForBattler(battler, opposingBattler: opposingBattler, killInfoArray: killInfoArray)
         maxMoveScoreBiasChange = -40
         maxMoveScoreBiasChange += (maxScore / EFFECT_SCORE_TO_SWITCH_SCORE_CONVERSION_RATIO).round
         return maxMoveScoreBiasChange, killInfo
     end
 
     def highestMoveScoreForBattler(battler, opposingBattler: nil, killInfoArray: [])
-        choices, killInfo = pbGetBestTrainerMoveChoices(battler, opposingBattler: opposingBattler,
-killInfoArray: killInfoArray)
+        choices, killInfo = pbGetBestTrainerMoveChoices(battler, opposingBattler: opposingBattler, killInfoArray: killInfoArray)
 
         maxScore = 0
         bestMove = nil

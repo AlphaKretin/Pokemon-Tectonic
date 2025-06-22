@@ -187,7 +187,7 @@ Type = FLYING
 Category = Special
 Power = 200
 Accuracy = 0
-TotalPP = 1
+TotalPP = 10
 Target = AllNearFoes
 FunctionCode = RayquazaTargetLosesFlinchImmunity
 Flags = CanProtect,Sound,AvatarSignature
@@ -246,6 +246,18 @@ FunctionCode = EmpoweredPoisonGas
 Flags = CanProtect,Empowered
 Description = A cloud of poison gas is sprayed at all nearby foes, poisoning them. User becomes a Poison-type.
 Animation = POISONGAS
+#-------------------------------
+[PRIMEVALPOISONSPIKES]
+Name = Primeval Poison Spikes
+Type = POISON
+Category = Status
+Accuracy = 0
+TotalPP = 1
+Target = FoeSide
+FunctionCode = EmpoweredPoisonSpikes
+Flags = Empowered
+Description = The user lays 2 layers of poisonous spike traps at the foe's feet, and becomes Poison-type.
+Animation = TOXICSPIKES
 #-------------------------------
 #		GROUND MOVES
 #-------------------------------
@@ -491,7 +503,7 @@ Power = 180
 Accuracy = 100
 TotalPP = 1
 Target = NearOther
-FunctionCode = EmpoweredMetalClaw
+FunctionCode = EmpoweredMeteorMash
 Flags = CanProtect,Punch,Empowered
 EffectChance = 100
 Description = The target is obliterated by a meteoric strike, which raises the user's attack by two steps.
@@ -530,7 +542,7 @@ TotalPP = 1
 Target = User
 FunctionCode = EmpoweredPolarizedRoom
 Flags = Empowered
-Description = The user creates a Polarized Room for 5 turns, raises both of its Defensive stats, and becomes Steel-type.
+Description = The user creates a Polarized Room for 8 turns, raises both of its Defensive stats, and becomes Steel-type.
 Animation = POLARIZEDROOM
 #-------------------------------
 [PRIMEVALSWORDSDANCE]
@@ -543,6 +555,7 @@ Target = User
 FunctionCode = EmpoweredSwordsDance
 Flags = Dance,Empowered
 Description = The user raises their Attack by four steps and becomes Steel-type.
+Animation = SWORDSDANCE
 #-------------------------------
 #		FIRE MOVES
 #-------------------------------
@@ -738,6 +751,17 @@ Flags = CanProtect,Empowered
 Description = Plants seeds on all near foes, draining HP each turn. User becomes Grass-type.
 Animation = LEECHSEED
 #-------------------------------
+[PRIMEVALSPORE]
+Name = Primeval Spore
+Type = GRASS
+Category = Status
+Accuracy = 100
+TotalPP = 1
+Target = AllNearFoes
+FunctionCode = EmpoweredSpore
+Flags = CanProtect,Empowered
+Description = The user scatters bursts of spores to induce sleep on all foes, and then becomes Grass-type.
+#-------------------------------
 [PRIMEVALSYMBIOSIS]
 Name = Primeval Symbiosis
 Type = GRASS
@@ -840,6 +864,18 @@ Flags = Empowered
 Description = Summons eclipse for 5 turns, resets lowered stats, and user becomes Psychic-type.
 Animation = ECLIPSE
 #-------------------------------
+[PRIMEVALMAGICCOAT]
+Name = Primeval Magic Coat
+Type = PSYCHIC
+Category = Status
+Accuracy = 0
+TotalPP = 1
+Target = User
+FunctionCode = EmpoweredMagicCoat
+Flags = Empowered
+Description = Bounces back status moves for the next 3 turns, and user becomes Psychic-type.
+Animation = ECLIPSE
+#-------------------------------
 [PRIMEVALMINDLINK]
 Name = Primeval Mind Link
 Type = PSYCHIC
@@ -860,7 +896,7 @@ TotalPP = 1
 Target = User
 FunctionCode = EmpoweredOddRoom
 Flags = Empowered
-Description = The user creates an Odd Room for 5 turns, raises its Speed, and becomes Psychic-type.
+Description = The user creates an Odd Room for 8 turns, raises its Speed, and becomes Psychic-type.
 Animation = ODDROOM
 #-------------------------------
 #		ICE MOVES
@@ -916,6 +952,19 @@ Description = The user sharply boosts their Attack, Defense, and Speed, and beco
 Animation = SHIVERDANCE
 #-------------------------------
 #		DRAGON MOVES
+#-------------------------------
+[EMPOWEREDCRUELTY]
+Name = Empowered Cruelty
+Type = DRAGON
+Category = Physical
+Power = 130
+Accuracy = 100
+TotalPP = 1
+Target = AllNearOthers
+FunctionCode = EmpoweredCruelty
+Flags = CanProtect,Empowered
+Description = The user crushes all near foes with evil intent. This deals double damage to targets with a status condition.
+Animation = CRUSHCLAW
 #-------------------------------
 [EMPOWEREDDRAGONBREATH]
 Name = Empowered Dragon Breath
@@ -1013,5 +1062,5 @@ TotalPP = 1
 Target = User
 FunctionCode = EmpoweredPuzzleRoom
 Flags = Empowered
-Description = The user creates a Puzzle Room for 5 turns, raises both of its Attacking stats, and becomes Fairy-type.
+Description = The user creates a Puzzle Room for 8 turns, raises both of its Attacking stats, and becomes Fairy-type.
 Animation = PUZZLEROOM

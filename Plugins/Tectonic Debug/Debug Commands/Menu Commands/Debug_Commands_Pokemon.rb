@@ -158,3 +158,12 @@ DebugMenuCommands.register("addpokemon", {
       pbMessage(_INTL("Pokémon in storage written to {1}",filename))
     }
   })
+
+  DebugMenuCommands.register("exportcode", {
+    "parent"      => "pokemonmenu",
+    "name"        => _INTL("Export Current Team to Code"),
+    "description" => _INTL("Create a shareable team code for the current party."),
+    "effect"      => proc {
+      load_team_code()
+    }
+  })

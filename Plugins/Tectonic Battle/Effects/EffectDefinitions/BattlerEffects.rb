@@ -154,13 +154,27 @@ GameData::BattleEffect.register_effect(:Battler, {
     :eor_proc => proc do |battle, battler, _value|
         if battler.takesIndirectDamage?
             battle.pbDisplay(_INTL("{1} is afflicted by the curse!", battler.pbThis))
-            battler.applyFractionalDamage(CURSE_DAMAGE_FRACTION, false)
+            curseDamage = battler.applyFractionalDamage(CURSE_DAMAGE_FRACTION, false)
+            if battler.effectActive?(:PharaohsCurse) && !battler.pbOwnedByPlayer?
+                moneyEarned = curseDamage * 10
+                battle.field.incrementEffect(:PayDay, moneyEarned)
+            end
         end
     end,
     :stay_in_rating_proc => proc do |battle, battler, value, stay_in_rating|
         stay_in_rating -= 25
         next stay_in_rating
     end
+})
+
+GameData::BattleEffect.register_effect(:Battler, {
+    :id => :PharaohsCurse,
+    :real_name => "Pharoah's Curse",
+    :baton_passed => true,
+    :avatars_purge => true,
+    :apply_proc => proc do |battle, battler, _value|
+        battle.pbDisplay(_INTL("It's pain becomes golden coins!"))
+    end,
 })
 
 GameData::BattleEffect.register_effect(:Battler, {
@@ -270,6 +284,10 @@ GameData::BattleEffect.register_effect(:Battler, {
         battle.pbDisplay(_INTL("{1}'s encore ended!", battler.pbThis))
     end,
     :sub_effects => [:EncoreMove],
+    :stay_in_rating_proc => proc do |battle, battler, value, stay_in_rating|
+        stay_in_rating -= 10 * value
+        next stay_in_rating
+    end
 })
 
 GameData::BattleEffect.register_effect(:Battler, {
@@ -488,11 +506,12 @@ GameData::BattleEffect.register_effect(:Battler, {
     :real_name => "Illusion",
     :type => :Pokemon,
     :initialize_proc => proc do |battle, battler|
-        if battler.hasActiveAbility?(:ILLUSION)
+        if battler.hasActiveAbility?(%i[ILLUSION INCOGNITO])
             idxLastParty = battle.pbLastInTeam(battler.index)
             if idxLastParty >= 0 && idxLastParty != battler.pokemonIndex
                 toDisguiseAs = battle.pbParty(battler.index)[idxLastParty]
                 battler.applyEffect(:Illusion, toDisguiseAs)
+                battler.resetAbilities(true) if battler.hasActiveAbility?(:INCOGNITO)
             end
         end
 
@@ -504,6 +523,7 @@ GameData::BattleEffect.register_effect(:Battler, {
     end,
     :disable_proc => proc do |battle, battler|
         battle.pbDisplay(_INTL("{1}'s illusion wore off!", battler.pbThis))
+        battler.resetAbilities if battler.hasActiveAbility?(:INCOGNITO)
     end,
     :info_displayed => false,
 })
@@ -661,6 +681,21 @@ GameData::BattleEffect.register_effect(:Battler, {
     :resets_eor	=> true,
     :apply_proc => proc do |battle, battler, _value|
         battle.pbDisplay(_INTL("{1} was shrouded with Magic Coat!", battler.pbThis))
+    end,
+})
+
+GameData::BattleEffect.register_effect(:Battler, {
+    :id => :EmpoweredMagicCoat,
+    :real_name => "Primeval Magic Coat",
+    :type => :Integer,
+    :ticks_down => true,
+    :apply_proc => proc do |battle, battler, value|
+        battle.pbDisplay(_INTL("{1} was shrouded with Magic Coat!", battler.pbThis))
+        turnCount = value - 1
+        battle.pbDisplay(_INTL("It'll bounce back status moves for {1} more turns!", turnCount))
+    end,
+    :expire_proc => proc do |battle, battler|
+        battle.pbDisplay(_INTL("{1} is no longer shrouded with a Magic Coat.", battler.pbThis))
     end,
 })
 
@@ -825,6 +860,7 @@ GameData::BattleEffect.register_effect(:Battler, {
     :id => :PerishSong,
     :real_name => "Perish Song Turns",
     :type => :Integer,
+    :avatars_purge => true,
     :baton_passed => true,
     :apply_proc => proc do |battle, battler, value|
         if battler.boss?
@@ -852,6 +888,9 @@ GameData::BattleEffect.register_effect(:Battler, {
             battle.scene.reviveBattler(battler.index)
             battler.hideMyAbilitySplash
         end
+    end,
+    :disable_proc => proc do |battle, battler|
+        battle.pbDisplay(_INTL("{1} was freed from the memory of the Perish Song!", battler.pbThis))
     end,
 })
 
@@ -1253,7 +1292,15 @@ GameData::BattleEffect.register_effect(:Battler, {
         if battler.takesIndirectDamage?
             fraction = trappingDamageFraction(battler)
             battle.pbDisplay(_INTL("{1} is hurt by {2}!", battler.pbThis, moveName))
-            battler.applyFractionalDamage(fraction)
+            damage = battler.applyFractionalDamage(fraction)
+
+            battler.eachOpposing do |opp|
+                next unless opp.hasActiveAbility?(:BOTTOMFEEDER)
+                next unless battler.pointsAt?(:TrappingUser, opp)
+                opp.showMyAbilitySplash(:BOTTOMFEEDER)
+                opp.pbRecoverHPFromDrain(damage, battler)
+                opp.hideMyAbilitySplash
+            end
         end
     end,
     :sub_effects => %i[TrappingMove TrappingUser],
@@ -1517,6 +1564,16 @@ GameData::BattleEffect.register_effect(:Battler, {
     :info_displayed => false,
     :apply_proc => proc do |battle, battler, _value|
         echoln(_INTL("{1} is considered to have chosen an attacking move this turn.", battler.pbThis))
+    end,
+})
+
+GameData::BattleEffect.register_effect(:Battler, {
+    :id => :AvatarTransformedTypeThisTurn,
+    :real_name => "Transformed Type",
+    :resets_eor	=> true,
+    :info_displayed => false,
+    :apply_proc => proc do |battle, battler, _value|
+        echoln(_INTL("{1} is considered to have transformed its type this turn.", battler.pbThis))
     end,
 })
 
@@ -2174,3 +2231,13 @@ GameData::BattleEffect.register_effect(:Battler, {
     :real_name => "Refuge",
     :resets_battlers_eot => true,
 })
+
+GameData::BattleEffect.register_effect(:Battler, {
+    :id => :IceSculpture,
+    :real_name => "Frozen Sculpture",
+    :resets_battlers_eot => true,
+    :apply_proc => proc do |battle, battler, _value|
+        battle.pbDisplay(_INTL("{1} is frozen into a sculpture! It won't be able to move this turn!", battler.pbThis))
+    end,
+})
+

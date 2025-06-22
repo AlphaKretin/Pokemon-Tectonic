@@ -49,7 +49,7 @@ end
 ##########################################################
 
 def circuitTutorialBasic(eventIDs)
-    solved = circuitPuzzle(:TUTORIAL_BASIC)
+    solved, state = circuitPuzzle(:TUTORIAL_BASIC)
 
     if solved
         setSwitchesAll(eventIDs,'A',true)
@@ -61,7 +61,7 @@ def circuitTutorialBasic(eventIDs)
 end
 
 def circuitTutorialResistors(eventIDs)
-    solved = circuitPuzzle(:TUTORIAL_RESISTORS)
+    solved, state = circuitPuzzle(:TUTORIAL_RESISTORS)
 
     if solved
         setSwitchesAll(eventIDs,'A',true)
@@ -77,7 +77,7 @@ end
 ##########################################################
 
 def circuitWaveLengthExit(mapEventIDs,oasisEventIDs)
-    solved = circuitPuzzle(:WL_EXIT)
+    solved, state = circuitPuzzle(:WL_EXIT)
 
     if solved
         setSwitchesAll(mapEventIDs,'A',true)
@@ -88,7 +88,7 @@ def circuitWaveLengthExit(mapEventIDs,oasisEventIDs)
 end
 
 def circuitWaveLengthPrison(mapEventIDs,integrationEventIDs)
-    solved = circuitPuzzle(:WL_PRISON)
+    solved, state = circuitPuzzle(:WL_PRISON)
 
     if solved
         setSwitchesAll(mapEventIDs,'A',true)
@@ -102,7 +102,7 @@ end
 ##########################################################
 
 def circuitReadOnlyExit(mapEventIDs,oasisEventIDs)
-    solved = circuitPuzzle(:RO_EXIT)
+    solved, state = circuitPuzzle(:RO_EXIT)
 
     if solved
         setSwitchesAll(mapEventIDs,'A',true)
@@ -113,7 +113,7 @@ def circuitReadOnlyExit(mapEventIDs,oasisEventIDs)
 end
 
 def circuitReadOnlyPrison(mapEventIDs,integrationEventIDs)
-    solved = circuitPuzzle(:RO_PRISON)
+    solved, state = circuitPuzzle(:RO_PRISON)
 
     if solved
         setSwitchesAll(mapEventIDs,'A',true)
@@ -127,17 +127,19 @@ end
 ##########################################################
 
 def circuitTerminalConfusionExit(mapEventIDs,oasisEventIDs)
-    solved = circuitPuzzle(:TC_EXIT)
+    solved, state = circuitPuzzle(:TC_EXIT)
 
     if solved
         setSwitchesAll(mapEventIDs,'A',true)
         setSwitchesAll(oasisEventIDs,'A',true,OASIS_SYSTEM_MAP_ID)
         electricFenceDectivates
+    else
+        setSwitchesAll(mapEventIDs,'A',state>12)
     end
 end
 
 def circuitTerminalConfusionPrison(mapEventIDs,integrationEventIDs)
-    solved = circuitPuzzle(:TC_PRISON)
+    solved, state = circuitPuzzle(:TC_PRISON)
 
     if solved
         setSwitchesAll(mapEventIDs,'A',true)
@@ -149,26 +151,71 @@ end
 ##########################################################
 ### INTEGRATION CHAMBER
 ##########################################################
-def circuitIntegrationChamberWave
-    solved = circuitPuzzle(:IC_WAVE)
+def circuitIntegrationChamberWave(mapEventID)
+    solved, state = circuitPuzzle(:IC_WAVE)
 
-    if solved
-        # TODO
+    case state
+    when 0
+        pbSEPlay("GUI storage put down", 140, 70)
+        pbSetAllSwitches(mapEventID, false)
+    when 1
+        pbSEPlay("GUI storage put down", 140, 70)
+        pbSetOnlySwitch(mapEventID,'A')
+    when 2
+        pbSEPlay("GUI storage put down", 140, 70)
+        pbSetOnlySwitch(mapEventID,'B')
+    when 3
+        pbSEPlay("GUI storage put down", 140, 70)
+        pbSetOnlySwitch(mapEventID,'C')
     end
 end
 
-def circuitIntegrationChamberMaze
-    solved = circuitPuzzle(:IC_ELECTRIC_MAZE)
+def circuitIntegrationChamberCage(puzzleEventID,fenceEventID)
+    solved, state = circuitPuzzle(:IC_AVATAR_CAGE)
 
-    if solved
-        # TODO
+    # Enable or disable puzzle
+    pbSetSelfSwitch(puzzleEventID,'B',solved || state > 5)
+    pbSEPlay("GUI storage put down", 140, 70)
+
+    # Enable or disable barrier
+    if solved || [4,5,6].include?(state)
+        pbSetSelfSwitch(fenceEventID,'A',true)
+        electricFenceDectivates
+    else
+        pbSetSelfSwitch(fenceEventID,'A',false)
+        electricFenceActivates
     end
 end
 
-def circuitIntegrationChamberAvatarCage
-    solved = circuitPuzzle(:IC_AVATAR_CAGE)
+def circuitIntegrationChamberMaze(barrierEventIDs)
+    solved, state = circuitPuzzle(:IC_ELECTRIC_MAZE)
+
+    pbSetSelfSwitch(barrierEventIDs[0],'A',[0,1,2,3,4,7].include?(state))
+    pbSetSelfSwitch(barrierEventIDs[1],'A',[0,1,2,3,4,5,6].include?(state))
+    pbSetSelfSwitch(barrierEventIDs[2],'A',![7,8].include?(state))
+    pbSetSelfSwitch(barrierEventIDs[3],'A',![7,8].include?(state))
+
+    electricFenceActivates
+end
+
+def circuitIntegrationChamberExit(puzzleEventID,fenceEventID,signal1EventID,signal2EventID)
+    solved, state = circuitPuzzle(:IC_EXIT)
 
     if solved
-        # TODO
+        pbSetSelfSwitch(puzzleEventID,'B') # Enable puzzle
+        pbSetSelfSwitch(fenceEventID,'A') # Disable fence
+        pbSetSelfSwitch(signal1EventID,'A') # Enable signal 1
+        pbSetSelfSwitch(signal2EventID,'A',true,406) # Disable signal 2
+        electricFenceDectivates 
+    else
+        case state
+        when 0
+            pbSetSelfSwitch(puzzleEventID,'B') # Enable puzzle
+        when 2
+            pbSetSelfSwitch(fenceEventID,'A') # Disable fence
+            pbSetSelfSwitch(signal1EventID,'A') # Enable signal 1
+            pbSetSelfSwitch(signal2EventID,'A',true,406) # Disable signal 2
+            electricFenceDectivates
+        end
     end
 end

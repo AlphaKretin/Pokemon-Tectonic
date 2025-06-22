@@ -65,7 +65,9 @@ def getWaterlogEffectScore(user, target, ignoreCheck: false)
         score = 0
         score += 60 if user.hasDamagingAttack?
         score += 60 if user && target.pbSpeed(true) > user.pbSpeed(true)
-        score += STATUS_PUNISHMENT_BONUS if user && user.hasStatusPunishMove?
+        score += STATUS_PUNISHMENT_BONUS if user && (user.hasStatusPunishMove? ||
+        user.pbHasMoveFunction?("Drainage")) # Drainage
+        score += 60 if user&.hasActiveAbilityAI?(:SINKINGFEELING)
         score -= getNaturalCureScore(user, target, score) if target.hasActiveAbilityAI?(:NATURALCURE)
     else
         return 0
@@ -1038,4 +1040,13 @@ def getDisableEffectScore(target, duration)
     score = 15 * duration
     score *= 1.5 if target.battle.pbIsTrapped?(target.index)
     return score
+end
+
+def randomMovesEffectScore(user,move)
+    if user.ownersPolicies.include?(:ALLOW_RANDOM_MOVES)
+        return 100
+    else
+        echoln("The AI will never use #{move.name}")
+        return -1000  
+    end  
 end

@@ -59,6 +59,15 @@ class MoveDex_Entry_Scene
         @sprites["animation_black_bars"].setBitmap("Graphics/Pictures/Movedex/bg_move_animation_black_bars")
         @sprites["animation_black_bars"].z = 999_999
 
+        @ownedPokemonSpecies = {}
+        eachPokemonInPartyOrStorage do |pkmn|
+            @ownedPokemonSpecies[pkmn.species] = true;
+        end
+        @partyPokemonSpecies = {}
+        $Trainer.party.each do |pkmn|
+            @partyPokemonSpecies[pkmn.species] = true;
+        end
+
         drawPage
 
         navigateMoveEntry
@@ -293,37 +302,31 @@ class MoveDex_Entry_Scene
 
     def drawSpeciesColumn(overlay,speciesLabelList,speciesDataList,levelLabelsList,columnIndex)
         base   = MessageConfig.pbDefaultTextMainColor
-        
-        #store all caught species for coloring the results. might be faster to do it once per scene?
-        ownedPokemonSpecies = {}
-        eachPokemonInPartyOrStorage do |pkmn|
-            ownedPokemonSpecies[pkmn.species] = true;
-        end
-
-        base = MessageConfig.pbDefaultTextMainColor
         shadow = MessageConfig.pbDefaultTextShadowColor
+
+        ownedIconImagePositions = []
         
         displayIndex = 0
 		listIndex = -1
         speciesLabelList.each_with_index do |speciesLabel, index|
-
-            #determine text color. default for unowned, blue for box, light green for party
-            species_base = base
-            species_shadow = shadow
-
-            #species data can be empty for the "None" page. In this case skipping custom coloring is fine
-            if index < speciesDataList.length
-                speciesData = speciesDataList[index]
-                if ownedPokemonSpecies.include?speciesData.id
-                    species_base = darkMode? ? POKEMON_IN_BOX_COLOR_BASE : POKEMON_IN_BOX_COLOR_SHADOW
-                    species_shadow = darkMode? ? POKEMON_IN_BOX_COLOR_SHADOW : POKEMON_IN_BOX_COLOR_BASE
-                end                
-            end
-
             listIndex += 1
             next if listIndex < @scroll
+
             speciesDrawX, speciesDrawY = getSpeciesDisplayCoordinates(displayIndex,columnIndex)
-            drawFormattedTextEx(overlay, speciesDrawX , speciesDrawY, 450, speciesLabel, species_base, species_shadow)
+
+            ownedIconXOffset = levelLabelsList[index] ? 160 : 208
+
+            if index < speciesDataList.length
+                speciesID = speciesDataList[index].id
+                if @partyPokemonSpecies.include?(speciesID)
+                    icon = "Graphics/Pictures/Battle/icon_own_party"  
+                elsif @ownedPokemonSpecies.include?(speciesID)
+                    icon = "Graphics/Pictures/Battle/icon_own"
+                end
+                ownedIconImagePositions.push([icon,speciesDrawX+ownedIconXOffset,speciesDrawY+6]) if icon
+            end
+
+            drawFormattedTextEx(overlay, speciesDrawX , speciesDrawY, 450, speciesLabel, base, shadow)
             if levelLabelsList[index]
                 levelDrawX = 212 + (columnIndex * 260)
                 levelLabel = levelLabelsList[index]
@@ -332,6 +335,8 @@ class MoveDex_Entry_Scene
             displayIndex += 1
             break if displayIndex > MAX_LENGTH_SPECIES_LIST
         end
+
+        pbDrawImagePositions(@sprites["overlay"].bitmap, ownedIconImagePositions)
     end
 
     def getSpeciesDisplayCoordinates(displayIndex,columnIndex)
@@ -549,13 +554,22 @@ class MoveDex_Entry_Scene
             Input.update
             pbUpdate
             doRefresh = false
-            if Input.trigger?(Input::UP) && Input.press?(Input::CTRL)
+            if Input.trigger?(Input::USE)
+                selection = @currentSpeciesList[@columnSelected][@scroll]
+                if selection
+                    selection = selection[0] if selection.is_a?(Array)
+                    pbPlayDecisionSE 
+                    openSingleDexScreen(selection)
+                else
+                    pbPlayBuzzerSE
+                end
+            elsif Input.trigger?(Input::UP) && Input.press?(Input::CTRL)
                 if @scroll > 0
                     pbPlayCursorSE
                     @scroll = 0
                     doRefresh = true
                 else
-                    pbPlayCursorSE
+                    pbPlayBuzzerSE
                 end
             elsif Input.trigger?(Input::DOWN) && Input.press?(Input::CTRL)
                 if @scroll < @currentSpeciesList[@columnSelected].length - 1
@@ -563,27 +577,31 @@ class MoveDex_Entry_Scene
                     @scroll = @currentSpeciesList[@columnSelected].length - 1
                     doRefresh = true
                 else
-                    pbPlayCursorSE
+                    pbPlayBuzzerSE
                 end
             elsif Input.repeat?(Input::UP)
                 if @scroll > 0
                     pbPlayCursorSE
                     @scroll -= 1
                     doRefresh = true
-                elsif Input.trigger?(Input::UP)
+                elsif Input.trigger?(Input::UP) && @currentSpeciesList[@columnSelected].length > 1
                     pbPlayCursorSE
                     @scroll = @currentSpeciesList[@columnSelected].length - 1
                     doRefresh = true
+                else
+                    pbPlayBuzzerSE
                 end
             elsif Input.repeat?(Input::DOWN)
                 if @scroll < @currentSpeciesList[@columnSelected].length - 1
                     pbPlayCursorSE
                     @scroll += 1
                     doRefresh = true
-                elsif Input.trigger?(Input::DOWN)
+                elsif Input.trigger?(Input::DOWN) && @currentSpeciesList[@columnSelected].length > 1
                     pbPlayCursorSE
                     @scroll = 0
                     doRefresh = true
+                else
+                    pbPlayBuzzerSE
                 end
             elsif Input.repeat?(Input::JUMPUP) # Jump multiple lines
                 if @scroll > 0
@@ -606,27 +624,43 @@ class MoveDex_Entry_Scene
                 end
             elsif Input.repeat?(Input::LEFT)
                 if @columnSelected > 0
-                    pbPlayCursorSE
-                    @columnSelected -= 1
-                    fixScrollOnColumnChance
-                    doRefresh = true
+                    if @currentSpeciesList[@columnSelected-1].length > 0
+                        pbPlayCursorSE
+                        @columnSelected -= 1
+                        fixScrollOnColumnChange
+                        doRefresh = true
+                    else
+                        pbPlayBuzzerSE
+                    end
                 elsif Input.trigger?(Input::LEFT)
-                    pbPlayCursorSE
-                    @columnSelected = @currentSpeciesList.length - 1
-                    fixScrollOnColumnChance
-                    doRefresh = true
+                    if @currentSpeciesList[@currentSpeciesList.length - 1].length > 0
+                        pbPlayCursorSE
+                        @columnSelected = @currentSpeciesList.length - 1
+                        fixScrollOnColumnChange
+                        doRefresh = true
+                    else
+                        pbPlayBuzzerSE
+                    end
                 end
             elsif Input.repeat?(Input::RIGHT)
                 if @columnSelected < @currentSpeciesList.length - 1
-                    pbPlayCursorSE
-                    @columnSelected += 1
-                    fixScrollOnColumnChance
-                    doRefresh = true
+                    if @currentSpeciesList[@columnSelected+1].length > 0
+                        pbPlayCursorSE
+                        @columnSelected += 1
+                        fixScrollOnColumnChange
+                        doRefresh = true
+                    else
+                        pbPlayBuzzerSE
+                    end
                 elsif Input.trigger?(Input::RIGHT)
-                    pbPlayCursorSE
-                    @columnSelected = 0
-                    fixScrollOnColumnChance
-                    doRefresh = true
+                    if @currentSpeciesList[0].length > 0
+                        pbPlayCursorSE
+                        @columnSelected = 0
+                        fixScrollOnColumnChange
+                        doRefresh = true
+                    else
+                        pbPlayBuzzerSE
+                    end
                 end
             elsif Input.trigger?(Input::BACK)
                 pbPlayCancelSE
@@ -718,12 +752,12 @@ class MoveDex_Entry_Scene
         @sprites["selectionarrow"].y = speciesDrawY - 4
     end
 
-    def fixScrollOnColumnChance
+    def fixScrollOnColumnChange
         @scroll = [@scroll,@currentSpeciesList[@columnSelected].length-1].min
     end
 
     def canScrollSpeciesList?
-        @currentSpeciesList[0].length > @speciesLinesToShow + 1
+        return !@currentSpeciesList[0].empty?
     end
 
     def canScrollDetailsList?
@@ -740,12 +774,20 @@ class MoveDex_Entry_Scene
             dorefresh = false
 
             if Input.trigger?(Input::USE)
-                if @page == 1 || @page == 2 && canScrollSpeciesList?
-                    pbPlayDecisionSE
-                    pbScrollSpeciesList
-                elsif @page == 4 && canScrollDetailsList?
-                    pbPlayDecisionSE
-                    pbScrollDetailsList
+                if @page == 1 || @page == 2
+                    if canScrollSpeciesList?
+                        pbPlayDecisionSE
+                        pbScrollSpeciesList
+                    else
+                        pbPlayBuzzerSE
+                    end
+                elsif @page == 4 && 
+                    if canScrollDetailsList?
+                        pbPlayDecisionSE
+                        pbScrollDetailsList
+                    else
+                        pbPlayBuzzerSE
+                    end
                 elsif @page == 5
                     pbPlayDecisionSE
                     oppMove = Input.press?(Input::CTRL)

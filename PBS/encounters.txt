@@ -1,5 +1,18 @@
 ﻿# See the documentation on the wiki to learn how to edit this file.
 #-------------------------------
+[002] # Windborn Island
+Land,21
+    1,CRAMORANT,56,58
+    1,JUMPLUFF,56,58
+    1,PIDGEOT,56,58
+    1,SWELLOW,56,58
+    1,WORNET,56,58
+FloweryGrass,21
+    1,CHATOT,56,58
+    1,FEAROW,56,58
+    1,PAPELLUMEN,56,58
+    1,TROPIUS,56,58
+#-------------------------------
 [003] # Kilna Turf
 Land,20
     20,DODUO,17,19
@@ -57,10 +70,11 @@ Land,20
     25,DROWZEE,20,22
     25,GOSSIFLEUR,20,22
 Puddle,20
-    25,BIDOOF,20,22
-    25,BUIZEL,20,22
-    25,LUVDISC,20,22
-    25,SKRELP,20,22
+    20,BIDOOF,20,22
+    20,BUIZEL,20,22
+    20,GOLDEEN,20,22
+    20,LUVDISC,20,22
+    20,SKRELP,20,22
 #-------------------------------
 [019] # Reading Ribombee Café
 Special
@@ -111,6 +125,7 @@ LandTall,20
     20,STUNKY,8,10
     20,WOOLOO,8,10
 Special
+    1,EEVEE,15
     1,PIDOVE,15
 #-------------------------------
 [032] # Novo Apartments F1
@@ -156,10 +171,11 @@ Land,20
     16,SANDYGAST,9,11
     16,WINGULL,9,11
 Puddle,20
-    40,CLAMPERL,9,11
-    20,HORSEA,9,11
-    20,INKAY,9,11
-    20,MGOLDEEN,9,11
+    33,CLAMPERL,9,11
+    17,HORSEA,9,11
+    17,INKAY,9,11
+    17,MGOLDEEN,9,11
+    16,CLOBBOPUS,9,11
 #-------------------------------
 [039] # Casaba Center
 Special
@@ -276,11 +292,11 @@ Special
 #-------------------------------
 [067] # Old Ice Cream Shop
 LandSparse,20
-    20,AZURILL,9,11
-    20,CLOBBOPUS,9,11
-    20,HONEDGE,9,11
-    20,TOXEL,9,11
-    20,VANILLITE,9,11
+    33,SNORUNT,9,11
+    17,AZURILL,9,11
+    17,HONEDGE,9,11
+    17,TOXEL,9,11
+    16,VANILLITE,9,11
 #-------------------------------
 [071] # Room 103
 Special
@@ -288,7 +304,7 @@ Special
 #-------------------------------
 [085] # Worried Man's House
 Special
-    1,SHELLOS,15
+    1,FRILLISH,15
 #-------------------------------
 [086] # Zigzagoon Nest
 Special
@@ -325,11 +341,11 @@ Special
 #-------------------------------
 [117] # Ice Cave
 Land,20
-    28,BERGMITE,23,25
-    28,SNORUNT,23,25
-    14,PANCHAM,23,25
-    14,SNEASEL,23,25
-    14,SWINUB,23,25
+    33,BERGMITE,23,25
+    17,MMANTYKE,23,25
+    17,PANCHAM,23,25
+    17,SWINUB,23,25
+    16,SNEASEL,23,25
 #-------------------------------
 [120] # Hollowed Layer
 DarkCave,20
@@ -682,10 +698,11 @@ Mud,40
 #-------------------------------
 [214] # Team Chasm HQ
 DarkCave,20
-    25,CARBINK,18,20
-    25,DURALUDON,18,20
-    25,ELGYEM,18,20
-    25,MUNNA,18,20
+    20,CARBINK,18,20
+    20,DURALUDON,18,20
+    20,ELGYEM,18,20
+    20,GOLETT,18,20
+    20,MUNNA,18,20
 #-------------------------------
 [215] # Tempest Realm
 Cloud,20
@@ -730,11 +747,10 @@ DarkCave,20
 [219] # Stone Nest
 DarkCave,20
     20,AXEW,25,27
+    20,DRILBUR,25,27
     20,EKANS,25,27
-    20,GEODUDE,25,27
     20,MTANGELA,25,27
-    10,NIDORANfE,25,27
-    10,NIDORANmA,25,27
+    20,YAMASK,25,27
 #-------------------------------
 [220] # Ancient Sewers
 LandSparse,20
@@ -769,7 +785,6 @@ Special
 #-------------------------------
 [239] # Ocean Fishing Contest
 Puddle,10
-    5,BARBOACH,30,40
     5,BINACLE,30,40
     5,CLAMPERL,30,40
     5,CLAUNCHER,30,40
@@ -793,7 +808,6 @@ Puddle,10
     1,OCTILLERY,30,40
     1,SEADRA,30,40
     1,TENTACRUEL,30,40
-    1,WHISCASH,35,45
 ActiveWater,10
     5,ARROKUDA,30,40
     5,BASCULIN,30,40
@@ -803,7 +817,6 @@ ActiveWater,10
     5,FEEBAS,30,40
     5,FINNEON,30,40
     5,FRILLISH,30,40
-    5,GOLDEEN,30,40
     5,LUVDISC,30,40
     5,MAGIKARP,30,40
     5,MANTYKE,30,40
@@ -819,7 +832,6 @@ ActiveWater,10
     1,LUMINEON,35,45
     1,MANTINE,30,40
     1,MILOTIC,36,46
-    1,SEAKING,35,45
     1,SHARPEDO,30,40
     1,WAILORD,36,46
 Special
@@ -1070,6 +1082,10 @@ Special
 [392] # Turf-Grouz Gatehouse
 Special
     1,ELEKID,15
+#-------------------------------
+[396] # Crater-Shelf Gatehouse
+Special
+    1,MINCCINO,15
 #-------------------------------
 [403] # Frozen Lake
 LandTall,20

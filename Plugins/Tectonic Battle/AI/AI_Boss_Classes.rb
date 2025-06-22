@@ -202,6 +202,8 @@ class PokeBattle_AI_RAYQUAZA < PokeBattle_AI_Boss
                 _INTL("{1}'s rage is at its peak!",user.pbThis)
             },
         })
+
+        @requiredMoves.push(:FLING)
     end
 end
 
@@ -230,7 +232,7 @@ class PokeBattle_AI_XERNEAS < PokeBattle_AI_Boss
     def initialize(user, battle)
         super
         @useMoveIFF.add(:GEOMANCY, proc { |_move, user, _target, battle|
-            next user.hasItem?(:POWERHERB) && user.lastTurnThisRound?
+            next user.hasActiveItem?(:POWERHERB) && user.lastTurnThisRound?
         })
     end
 end
@@ -405,10 +407,15 @@ end
 class PokeBattle_AI_DARKRAI < PokeBattle_AI_Boss
     def initialize(user, battle)
         super
-        @dangerMoves.push(:DARKVOID)
-        @wholeRound.push(:DARKVOID)
-        everyOtherTurn(:DARKVOID)
-        @requiredMoves.push(:NIGHTMARE)
+        @warnedIFFMove.add(:CALLOFTHEVOID, {
+            :condition => proc { |_move, user, _target, battle|
+                next battle.turnCount % 3 == 0
+            },
+            :warning => proc { |_move, user, _targets, _battle|
+                _INTL("The air around {1} turns dark and distorted.",user.pbThis(true))
+            },
+        })
+        @requiredMoves.push(:LULLABY)
     end
 end
 
@@ -1041,6 +1048,20 @@ class PokeBattle_AI_ASANDSLASH < PokeBattle_AI_Boss
             },
             :warning => proc { |_move, user, targets, _battle|
                 _INTL("{1} is getting used to the harsh conditions!",user.pbThis)
+            },
+        })
+    end
+end
+
+class PokeBattle_AI_TOXTRICITY < PokeBattle_AI_Boss
+    def initialize(user, battle)
+        super
+        @warnedIFFMove.add(:WALLOFSOUND, {
+            :condition => proc { |_move, _user, _target, battle|
+                next true
+            },
+            :warning => proc { |_move, user, targets, _battle|
+                _INTL("{1} is gearing up for a big release!",user.pbThis)
             },
         })
     end

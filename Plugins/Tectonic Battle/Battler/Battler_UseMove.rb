@@ -283,6 +283,7 @@ class PokeBattle_Battler
         # Record move as having been used
         aiSeesMove(move) if pbOwnedByPlayer? && !boss? # Enemy trainers now know of this move's existence
         aiLearnsAbility(:ILLUSION) if hasActiveAbility?(:ILLUSION) && effectActive?(:Illusion)
+        aiLearnsAbility(:INCOGNITO) if hasActiveAbility?(:INCOGNITO) && effectActive?(:Illusion)
         increaseMoveUsageCount(move.id)
 
         trackMoveUsage(move: move,specialUsage: specialUsage, target: choice[3])
@@ -321,7 +322,7 @@ class PokeBattle_Battler
             @battle.pbPriority(true).each do |b|
                 next unless b
                 b.eachActiveAbility do |ability|
-                    next unless BattleHandlers.triggerMoveBlockingAbility(ability, b, user, targets, move, @battle)
+                    next unless BattleHandlers.triggerMoveBlockingAbility(ability, b, user, targets, move, @battle, false)
                     @battle.pbDisplayBrief(_INTL("{1} tried to use {2}!", user.pbThis, move.name))
                     @battle.pbShowAbilitySplash(b, ability)
                     @battle.pbDisplay(_INTL("But, {1} cannot use {2}!", user.pbThis, move.name))
@@ -432,6 +433,9 @@ class PokeBattle_Battler
                     if b.effectActive?(:MagicCoat)
                         magicCoater = b.index
                         b.disableEffect(:MagicCoat)
+                        break
+                    elsif b.effectActive?(:EmpoweredMagicCoat)
+                        magicCoater = b.index
                         break
                     elsif b.hasActiveAbility?(:MAGICBOUNCE) && !@battle.moldBreaker
                         magicBouncer = b.index
@@ -769,6 +773,11 @@ class PokeBattle_Battler
         all_targets = targets
         targets = move.pbDesignateTargetsForHit(targets, hitNum) # For Dragon Darts
         targets.each { |b| b.damageState.resetPerHit }
+        # Tracked whether the Pokemon is trapped
+        targets.each { |b|
+            next unless b.trapped?
+            b.damageState.trapped = true
+        }
         #---------------------------------------------------------------------------
         # Pre effects
         if move.damagingMove?
