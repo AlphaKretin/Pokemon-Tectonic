@@ -3153,9 +3153,9 @@ ShowArea = false
 Bicycle = true
 #-------------------------------
 [447]
-# Barren Island
+# Empty Island
 Outdoor = true
 ShowArea = true
 Bicycle = true
 Weather = Stillness,100
-MapPosition = 0,20,6
+MapPosition = 0,20,7

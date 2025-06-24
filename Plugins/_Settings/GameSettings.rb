@@ -1,7 +1,7 @@
 module Settings
     # The version of your game. It has to adhere to the MAJOR.MINOR.PATCH format.
-    GAME_VERSION = "3.3.1"
-    DEV_VERSION  = true
+    GAME_VERSION = "3.3.0"
+    DEV_VERSION  = false
   
     #=============================================================================
   
@@ -216,6 +216,8 @@ module Settings
             [0, TRI_ISLAND_VISITED_SWITCH, 0, 0, "Tri Island", false],
             [0, BATTLE_MONUMENT_VISITED_SWITCH, 0, 0, "Battle Monument", false],
             [0, SPIRIT_ATOLL_VISITED_SWITCH, 0, 0, "Spirit Atoll", false],
+            [0, BARREN_ISLAND_VISITED_SWITCH, 0, 0, "Barren Island", false],
+            [0, WINDBORN_ISLAND_VISITED_SWITCH, 0, 0, "Windborn Island", false],
         ]
     end
   
