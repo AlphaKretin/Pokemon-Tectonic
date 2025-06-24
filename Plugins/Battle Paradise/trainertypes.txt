@@ -1,0 +1,49 @@
+#-------------------------------
+[SELFINSERTJOAN]
+Name = Radar Technician
+Gender = Female
+BaseMoney = 100
+BattleBGM = Battle joan
+#-------------------------------
+[SELFINSERTLUNA]
+Name = Modder
+Gender = Female
+BaseMoney = 100
+BattleBGM = Battle luna
+#-------------------------------
+[SELFINSERTVICE]
+Name = Beast
+Gender = Unknown
+BaseMoney = 100
+BattleBGM = Battle vice
+#-------------------------------
+[SELFINSERTTESTUDA]
+Name = Lighthouse Keeper
+Gender = Female
+BaseMoney = 100
+BattleBGM = Battle testuda
+#-------------------------------
+[SELFINSERTENSISA]
+Name = Storm Chaser
+Gender = Female
+BaseMoney = 100
+BattleBGM = Battle ensisa
+#-------------------------------
+[LEGACYSTONE]
+Name = Champion
+Gender = Male
+BaseMoney = 100
+BattleBGM = Battle stone
+#-------------------------------
+[LEGACYCYRUS]
+Name = Galactic Boss
+Gender = Male
+BaseMoney = 100
+BattleBGM = Battle sang
+#-------------------------------
+[LEGACYCYNTHIA]
+Name = Champion
+Gender = Female
+BaseMoney = 100
+BattleBGM = Battle cynthia
+#-------------------------------

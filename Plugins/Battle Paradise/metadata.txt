@@ -1,0 +1,9 @@
+#-------------------------------
+[931]
+# Battle Paradise
+ImportName = Battle Paradise
+Outdoor = true
+ShowArea = true
+Bicycle = true
+MapPosition = 0,0,0
+#-------------------------------
