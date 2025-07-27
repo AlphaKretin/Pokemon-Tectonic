@@ -1,0 +1,9 @@
+#-------------------------------
+[932]
+# Fallen Moonshard
+ImportName = Fallen Moonshard
+Outdoor = true
+ShowArea = true
+Bicycle = true
+MapPosition = 0,0,0
+#-------------------------------

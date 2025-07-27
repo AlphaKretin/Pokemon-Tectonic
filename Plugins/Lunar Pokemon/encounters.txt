@@ -1,0 +1,7 @@
+﻿# See the documentation on the wiki to learn how to edit this file.
+#-------------------------------
+[932] # Windborn Island
+FloweryGrass2,21,25
+    1,LESPEON,30,40
+    1,LZANGOOSE,30,40
+#-------------------------------
