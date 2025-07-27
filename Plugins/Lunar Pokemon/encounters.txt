@@ -4,4 +4,6 @@
 FloweryGrass2,21,25
     1,LESPEON,30,40
     1,LZANGOOSE,30,40
+	1,LDRATINI,30,40
+	1,LSWABLU,30,40
 #-------------------------------
