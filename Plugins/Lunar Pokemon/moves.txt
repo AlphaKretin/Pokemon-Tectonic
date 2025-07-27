@@ -1,0 +1,15 @@
+﻿# See the documentation on the wiki to learn how to edit this file.
+#-------------------------------
+[RESENTMENT]
+Name = Resentment
+Type = DARK
+Category = Physical
+Power = 90
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = Burn
+Flags = CanProtect,Blade
+EffectChance = 50
+Description = The user lashes out with wrathful claws. It has a 50% chance to burn the target.
+#-------------------------------
